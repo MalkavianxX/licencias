@@ -21,9 +21,9 @@
 
     .B-choferB-anverso {
 
-        background-image: url("{% static 'licencias/img/img/B-choferB/anverso/anverso.jpg' %}");
+        background-image: url("{% static 'licencias/img/B-choferB/anverso/anverso.jpg' %}");
         background-size: cover;
-        /* Asegura que la imagen de fondo cubra todo el div */
+        /* Asegura que la imagen de fondo cubra todo el div */ 
         position: relative;
         width: 651px;
         height: 1004px;
@@ -346,7 +346,7 @@
                                 <div class="col-lg-8">
                                     <div class="mb-1">
                                         <label for="tipo_lic" class="form-label">Tipo de licencia</label>
-                                        <input type="text" readonly class="form-control" id="f_tipo_lic" value="E">
+                                        <input type="text" readonly class="form-control" id="f_tipo_lic" value="{{licencia.lic_tipo}}">
                                     </div>
                                     <div class="mb-1">
                                         <label for="tipo_lic" class="form-label">Numero de licencia</label>
