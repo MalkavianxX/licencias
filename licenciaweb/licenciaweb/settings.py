@@ -80,10 +80,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'licenciasweb',
-        'USER': 'postgres',
+        'USER': 'root',
         'PASSWORD': 'Rmpv54321',
-        'HOST': 'localhost',  # Puedes cambiar esto según tu configuración de PostgreSQL
-        'PORT': '5432',       # Puerto predeterminado de PostgreSQL
+        'HOST': 'postgresql-156478-0.cloudclusters.net',  # Puedes cambiar esto según tu configuración de PostgreSQL
+        'PORT': '19998',       # Puerto predeterminado de PostgreSQL
     }
 }
 
