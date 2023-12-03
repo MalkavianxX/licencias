@@ -10,7 +10,7 @@ window.onload = function() {
   });
   qr = new QRious({
     element: document.getElementById('qr-vs'),
-    value: 'http://35.175.211.73//get_licencia/' + id_licencia + '/STRMPVjgut87555mfptRULE.DDD-ART3LIC5RD',
+    value: 'http://35.175.211.73/get_licencia/' + id_licencia + '/STRMPVjgut87555mfptRULE.DDD-ART3LIC5RD',
     size: 330,
     background: 'transparent'
   });
