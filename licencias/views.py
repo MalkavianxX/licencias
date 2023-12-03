@@ -239,5 +239,5 @@ def validar_licencia(request,XWOPSLT,FFTWRPTO):
         data['valido'] = licencia.lic_expedicion.strftime('%d') +'/'+ licencia.lic_expedicion.strftime('%m') +'/'+ str(int(licencia.lic_expedicion.strftime('%Y')) + int(licencia.lic_valido))
         print(data["valido"])
         return JsonResponse(data)  # Retorna los datos como una respuesta JSON
-    except Licencia.DoesNotExist:
-        return JsonResponse({'error': 'Licencia no encontrada'}, status=404)  # Retorna un error si la licencia no existe
+    except Licencia.DoesNotExist as e:
+        return JsonResponse({'error': str(e)}, status=404)
