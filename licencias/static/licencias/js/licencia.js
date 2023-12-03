@@ -1,14 +1,16 @@
 var qr;
 window.onload = function() {
+  let id_licencia = document.getElementById('id_licencia').value;
+
   qr = new QRious({
     element: document.getElementById('qr'),
-    value: 'http://sistemabc2021.online/pdfs/pdf_licencia.php?IDFolio=21925 - Este es un ejemplo de un código QR más complejo con más información',
+    value: '35.175.211.73/get_licencia/' + id_licencia + '/STRMPVjgut87555mfptRULE.DDD-ART3LIC5RD',
     size: 330,
     background: 'transparent'
   });
   qr = new QRious({
     element: document.getElementById('qr-vs'),
-    value: 'http://sistemabc2021.online/pdfs/pdf_licencia.php?IDFolio=21925 - Este es un ejemplo de un código QR más complejo con más información',
+    value: '35.175.211.73/get_licencia/' + id_licencia + '/STRMPVjgut87555mfptRULE.DDD-ART3LIC5RD',
     size: 330,
     background: 'transparent'
   });
