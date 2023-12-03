@@ -1,0 +1,419 @@
+{% extends 'dash/base.html' %}{% load static %}
+
+
+{% block title %}
+<title>Hyper| Dashboard - Pagina principal</title>
+
+{% endblock %}
+
+{% block descripcion %}
+    <meta name="description" content="Bienvenido a Hyper, tu portal personalizado para la preparación universitaria. Descubre tu progreso, estadísticas clave y más en nuestro completo panel de control. ¡Tu camino a la universidad comienza aquí!">
+    <meta name="author" content="Hyper s Team dev">
+{% endblock %}
+
+{% block content %}
+
+        <!-- Daterangepicker css -->
+        <link rel="stylesheet" href="{% static 'login/assets/vendor/daterangepicker/daterangepicker.css' %}">
+
+        <!-- Vector Map css -->
+        <link rel="stylesheet" href="{% static 'login/assets/vendor/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.css' %}">
+
+    <div class="content-page">
+        <div class="content">
+
+            <!-- Start Content-->
+            <div class="container-fluid">
+
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box">
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Hyper</a></li>
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Dashboard</a></li>
+                                    <li class="breadcrumb-item active">Inicio</li>
+                                </ol>
+                            </div>
+                            <h4 class="page-title">Resumen</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row justify-content-evenly">
+                    <div class="col-xl-6 col-lg-6">
+
+                       <div class="row">
+                            <div class="col-sm-6">
+                                <div class="card widget-flat">
+                                    <div class="card-body">
+                                        <div class="float-end">
+                                            <i class="mdi mdi-account-multiple widget-icon"></i>
+                                        </div>
+                                        <h5 class="text-muted fw-normal mt-0" title="Number of Customers">Total usuarios</h5>
+                                        <h3 class="mt-3 mb-3">{{ data_general.users }}</h3>
+                                        <p class="mb-0 text-muted">
+                                            <span class="text-primary me-2"><i class="mdi mdi-arrow-up-bold"></i> 0.0%</span>
+                                            <span class="text-nowrap">En retrospectiva</span>  
+                                        </p>
+                                    </div> <!-- end card-body-->
+                                </div> <!-- end card-->
+                            </div> <!-- end col-->
+
+                            <div class="col-sm-6">
+                                <div class="card widget-flat">
+                                    <div class="card-body">
+                                        <div class="float-end">
+                                            <i class="mdi mdi-account-multiple widget-icon"></i>
+                                        </div>
+                                        <h5 class="text-muted fw-normal mt-0" title="Number of Customers">Total staff</h5>
+                                        <h3 class="mt-3 mb-3">{{ data_general.admins }}</h3>
+                                        <p class="mb-0 text-muted">
+                                            <span class="text-primary me-2"><i class="mdi mdi-arrow-up-bold"></i> 0.0%</span>
+                                            <span class="text-nowrap">En retrospectiva</span>  
+                                        </p>
+                                    </div> <!-- end card-body-->
+                                </div> <!-- end card-->
+                            </div> <!-- end col-->
+                        </div> <!-- end row -->
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="card widget-flat">
+                                    <div class="card-body">
+                                        <div class="float-end">
+                                            <i class="mdi mdi-currency-usd widget-icon bg-success-lighten text-success"></i>
+                                        </div>
+                                        <h5 class="text-muted fw-normal mt-0" title="Average Revenue">Licencias</h5>
+                                        <h3 class="mt-3 mb-3">{{ data_general.licencias }}</h3>
+                                        <p class="mb-0 text-muted">
+                                            <span class="text-primary me-2"><i class="mdi mdi-arrow-up-bold"></i> 0.0%</span>
+                                            <span class="text-nowrap">En retrospectiva</span>
+                                        </p>
+                                    </div> <!-- end card-body-->
+                                </div> <!-- end card-->
+                            </div> <!-- end col-->
+
+                            <div class="col-sm-6">
+                                <div class="card widget-flat">
+                                    <div class="card-body">
+                                        <div class="float-end">
+                                            <i class="mdi mdi-pulse widget-icon"></i>
+                                        </div>
+                                        <h5 class="text-muted fw-normal mt-0" title="Growth">Asignaciones</h5>
+                                        <h3 class="mt-3 mb-3">{{ data_general.asignaciones }}</h3>
+                                        <p class="mb-0 text-muted">
+                                            <span class="text-primary me-2"><i class="mdi mdi-arrow-up-bold"></i> 0.0%</span>
+                                            <span class="text-nowrap">En retrospectiva</span>
+                                        </p>
+                                    </div> <!-- end card-body-->
+                                </div> <!-- end card-->
+                            </div> <!-- end col-->
+                        </div> <!-- end row -->
+
+                    </div> <!-- end col -->
+
+                    <div class="col-xl-6 col-lg-6 ">
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="card widget-flat">
+                                    <div class="card-body">
+                                        <div class="float-end">
+                                            <i class="mdi mdi-cart-plus widget-icon bg-success-lighten text-success"></i>
+                                        </div>
+                                        <h5 class="text-muted fw-normal mt-0" title="Number of Orders">Licencias creadas</h5>
+                                        <h3 class="mt-3 mb-3">{{ data_general.lic_creadas }}</h3>
+                                        <p class="mb-0 text-muted">
+                                            <span class="text-success me-2"><i class="mdi mdi-arrow-down-bold"></i> {{ data_general.lic_creadas_perc }}%</span>
+                                            <span class="text-nowrap">Desde los últimos 7 días</span>
+                                        </p>
+                                    </div> <!-- end card-body-->
+                                </div> <!-- end card-->
+                            </div> <!-- end col-->
+ 
+                             <div class="col-sm-6">
+                                 <div class="card widget-flat">
+                                     <div class="card-body">
+                                         <div class="float-end">
+                                             <i class="mdi mdi-cart-plus widget-icon bg-success-lighten text-success"></i>
+                                         </div>
+                                         <h5 class="text-muted fw-normal mt-0" title="Number of Orders">Asignaciones creadas</h5>
+                                         <h3 class="mt-3 mb-3">{{ data_general.asignaciones }}</h3>
+                                         <p class="mb-0 text-muted">
+                                             <span class="text-success me-2"><i class="mdi mdi-arrow-up-bold"></i> {{ data_general.lic_creadas_perc }}%</span>
+                                             <span class="text-nowrap">Desde los últimos 7 días</span>
+                                         </p>
+                                     </div> <!-- end card-body-->
+                                 </div> <!-- end card-->
+                             </div> <!-- end col-->
+                         </div> <!-- end row -->
+ 
+                         <div class="row">
+                             <div class="col-sm-6">
+                                 <div class="card widget-flat">
+                                     <div class="card-body">
+                                         <div class="float-end">
+                                             <i class="mdi mdi-currency-usd widget-icon bg-success-lighten text-success"></i>
+                                         </div>
+                                         <h5 class="text-muted fw-normal mt-0" title="Average Revenue">Usuarios creados </h5>
+                                         <h3 class="mt-3 mb-3">2</h3>
+                                         <p class="mb-0 text-muted">
+                                             <span class="text-danger me-2"><i class="mdi mdi-arrow-down-bold"></i> 7.00%</span>
+                                             <span class="text-nowrap">Desde el ultimo mes</span>
+                                         </p>
+                                     </div> <!-- end card-body-->
+                                 </div> <!-- end card-->
+                             </div> <!-- end col-->
+ 
+                             <div class="col-sm-6">
+                                 <div class="card widget-flat">
+                                     <div class="card-body">
+                                         <div class="float-end">
+                                             <i class="mdi mdi-pulse widget-icon"></i>
+                                         </div>
+                                         <h5 class="text-muted fw-normal mt-0" title="Growth">Tipos de licencia</h5>
+                                         <h3 class="mt-3 mb-3">6</h3>
+                                         <p class="mb-0 text-muted">
+                                             <span class="text-primary me-2"><i class="mdi mdi-arrow-up-bold"></i> 0.0%</span>
+                                             <span class="text-nowrap">En retrospectiva</span>
+                                         </p>
+                                     </div> <!-- end card-body-->
+                                 </div> <!-- end card-->
+                             </div> <!-- end col-->
+                         </div> <!-- end row -->
+ 
+                     </div> <!-- end col -->
+                </div>
+                <!-- end row -->
+
+       
+
+                <div class="row">
+                    <div class="col-xl-4 col-lg-12 order-lg-2 order-xl-1">
+                        <div class="card">
+                            <div class="d-flex card-header justify-content-between align-items-center">
+                                <h4 class="header-title">Top usuarios</h4>
+                                <a href="javascript:void(0);" class="btn btn-sm btn-light">Listo <i class="mdi mdi-download ms-1"></i></a>
+                            </div>
+
+                            <div class="card-body pt-0">
+                                <div class="table-responsive">
+                                    <table id="top_user_lics" class="table table-centered table-nowrap table-hover mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th>Posición</th>
+                                                <th>Nombre de usuario</th>
+                                                <th>Cantidad de licencias</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for user in top_users_licencias %}
+                                                <tr>
+                                                    <td>
+                                                        <h5 class="font-14 my-1 fw-bold">{{ forloop.counter }}</h5>
+                                                    </td>
+                                                    <td>
+                                                        <h5 class="font-14 my-1 fw-normal">{{ user.username }}</h5>
+                                                    </td>
+                                                    <td>
+                                                        <h5 class="font-14 my-1 fw-normal">{{ user.license_count }}</h5>
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                    
+                                    
+                                </div> <!-- end table-responsive-->
+                            </div> <!-- end card-body-->
+                        </div> <!-- end card-->
+                    </div> <!-- end col-->
+
+                    <div class="col-xl-8 col-lg-6 order-lg-1">
+                        <div class="card">
+                            <div class="d-flex card-header justify-content-between align-items-center">
+                                <h4 class="header-title">Total licencias</h4>
+                                <div class="dropdown">
+                                    <a href="#" class="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="mdi mdi-dots-vertical"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-end">
+                                        <!-- item-->
+                                        <a href="javascript:void(0);" class="dropdown-item">Sales Report</a>
+                                        <!-- item-->
+                                        <a href="javascript:void(0);" class="dropdown-item">Export Report</a>
+                                        <!-- item-->
+                                        <a href="javascript:void(0);" class="dropdown-item">Profit</a>
+                                        <!-- item-->
+                                        <a href="javascript:void(0);" class="dropdown-item">Action</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card-body pt-0">
+                                <div id="average-sales" class="apex-charts mb-4 mt-2"
+                                    data-colors="#727cf5,#0acf97,#fa5c7c,#ffbc00"></div>
+                               
+
+   
+                            </div> <!-- end card-body-->
+                        </div> <!-- end card-->
+                    </div> <!-- end col-->
+
+        
+                    <!-- end col -->
+
+                </div>
+                <!-- end row -->
+              
+                
+            </div> <!-- container -->
+
+        </div> <!-- content -->
+
+        <!-- Footer Start -->
+        <footer class="footer">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-6">
+                        <script>document.write(new Date().getFullYear())</script> © Hyper - Team´s Dev 
+                    </div>
+                    <div class="col-md-6">
+                        <div class="text-md-end footer-links d-none d-md-block">
+                            <a href="javascript: void(0);">About</a>
+                            <a href="javascript: void(0);">Support</a>
+                            <a href="javascript: void(0);">Contact Us</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- end Footer -->
+
+    </div>
+    <!-- Vendor js -->
+    <script src="{% static 'login/assets/js/vendor.min.js' %}"></script>
+
+    <!-- Daterangepicker js -->
+    <script src="{% static 'login/assets/vendor/daterangepicker/moment.min.js' %}"></script>
+    <script src="{% static 'login/assets/vendor/daterangepicker/daterangepicker.js' %}"></script>
+    
+    <!-- Apex Charts js -->
+    <script src="{% static 'login/assets/vendor/apexcharts/apexcharts.min.js' %}"></script>
+
+    <script src="{% static 'login/assets/vendor/chart.js/chart.min.js' %}"></script>
+    <!-- Vector Map js -->
+    <script src="{% static 'login/assets/vendor/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.min.js' %}"></script>
+    <script src="{% static 'login/assets/vendor/admin-resources/jquery.vectormap/maps/jquery-jvectormap-world-mill-en.js' %}"></script>
+
+    <!-- Dashboard App js -->
+    <!-- App js -->
+
+<script>
+    // Parsea la cadena JSON a un objeto JavaScript
+var licenseTypesData = JSON.parse('{{ char_top_licencia | escapejs }}');
+
+// Extrae los nombres de los tipos de licencia y sus conteos
+var licenseTypeNames = licenseTypesData.map(function(item) { return item.lic_tipo; });
+var licenseTypeCounts = licenseTypesData.map(function(item) { return item.count; });
+
+// Define los colores de Bootstrap
+var bootstrapColors = [
+    '#727cf5',
+    '#0acf97',
+    '#fa5c7c',
+    '#ffbc00',
+    '#0d6efd', // Primary
+    '#d63384', // Danger
+
+    '#6610f2', // Secondary
+    '#6f42c1', // Info
+    '#d63384', // Danger
+    '#dc3545', // Warning
+    '#fd7e14', // Success
+    '#ffc107', // Light
+    '#28a745', // Dark
+];
+
+// Calcula la cantidad de colores que necesitas
+var numColorsNeeded = licenseTypeNames.length;
+
+// Si necesitas más colores que los disponibles, puedes repetir los colores
+var colors = bootstrapColors;
+
+// Usa solo la cantidad de colores que necesitas
+colors = colors.slice(0, numColorsNeeded);
+
+// Crea una serie separada para cada tipo de licencia
+var series = licenseTypeNames.map(function(name, i) {
+    return {
+        name: name,
+        data: [licenseTypeCounts[i]]
+    };
+});
+
+// Configura tu gráfico
+var options = {
+    chart: {
+        height: 290,
+        type: 'bar',
+ 
+        
+    },
+    plotOptions: {
+        bar: {
+            horizontal: true,
+            dataLabels: {
+                position: 'bottom',
+            },
+            barHeight: '100%',
+        }  
+    },
+    dataLabels: {
+          enabled: true,
+          textAnchor: 'start',
+          style: {
+            colors: ['#fff']
+          },
+          formatter: function (val, opts) {
+                return opts.w.globals.seriesNames[opts.seriesIndex] + ": " + val ;
+            },
+          offsetX: 0,
+          dropShadow: {
+            enabled: true
+          }
+        },
+    colors: colors,
+    series: series,
+    stroke: {
+          width: 1,
+          colors: ['#fff']
+        },
+    xaxis: {
+        categories: ['Licencias'],
+    },
+    yaxis: {
+          labels: {
+            show: false
+          }
+        },
+
+    tooltip: {
+
+        y: {
+            formatter: function (val, opts) {
+                return  val ;
+            }
+        }
+    }
+};
+
+// Crea el gráfico
+var chart = new ApexCharts(document.querySelector("#average-sales"), options);
+chart.render();
+
+</script>
+    <script src="{% static 'login/assets/js/app.min.js' %}"></script>
+{% endblock %}

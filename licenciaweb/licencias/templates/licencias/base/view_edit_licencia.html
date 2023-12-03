@@ -1,0 +1,666 @@
+{% extends 'dash/base.html' %}{% load static %}
+
+
+{% block title %}
+<title>Editar licencia | Hyper </title>
+
+{% endblock %}
+{% block descripcion %}
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
+<meta content="Coderthemes" name="author" />
+{% endblock %}
+
+
+{% block content %}
+
+
+
+<!-- Select2 css -->
+<link href="{% static 'login/assets/vendor/select2/css/select2.min.css' %}" rel="stylesheet" type="text/css" />
+
+<!-- Daterangepicker css -->
+<link href="{% static 'login/assets/vendor/daterangepicker/daterangepicker.css' %}" rel="stylesheet" type="text/css" />
+
+<!-- Bootstrap Touchspin css -->
+<link href="{% static 'login/assets/vendor/bootstrap-touchspin/jquery.bootstrap-touchspin.min.css' %}" rel="stylesheet"
+    type="text/css" />
+
+<!-- Bootstrap Datepicker css -->
+<link href="{% static 'login/assets/vendor/bootstrap-datepicker/css/bootstrap-datepicker.min.css' %}" rel="stylesheet"
+    type="text/css" />
+
+<!-- Bootstrap Timepicker css -->
+<link href="{% static 'login/assets/vendor/bootstrap-timepicker/css/bootstrap-timepicker.min.css' %}" rel="stylesheet"
+    type="text/css" />
+
+<!-- Flatpickr Timepicker css -->
+<link href="{% static 'login/assets/vendor/flatpickr/flatpickr.min.css' %}" rel="stylesheet" type="text/css" />
+
+<!-- Theme Config Js -->
+<script src="{% static 'login/assets/js/hyper-config.js' %}"></script>
+
+
+
+
+
+<!-- Begin page -->
+<div class="wrapper">
+
+
+    <style>
+        input{
+            text-transform: uppercase;
+        }
+    </style>
+
+
+    <!-- ============================================================== -->
+    <!-- Start Page Content here -->
+    <!-- ============================================================== -->
+
+    <div class="content-page">
+        <div class="content">
+
+            <!-- Start Content-->
+            <div class="container-fluid">
+
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box">
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Hyper</a></li>
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Licencia</a></li>
+                                    <li class="breadcrumb-item active">Crear licencia</li>
+                                </ol>
+                            </div>
+                            <h4 class="page-title">LICENCIA</h4>
+                        </div>
+                    </div>
+                </div>
+                <!-- end page title -->
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="header-title mb-3">Datos del solicitante</h4>
+                                <hr>
+                                <form class="row g-3 needs-validation" id="form_datos" novalidate>
+
+                                    <div class="col-md-4">
+                                        <label for="datos_nombres" class="form-label">Nombres(s)</label>
+                                        <input type="text" class="form-control" value="{{licencia.datos_nombres}}" id="datos_nombres" required>
+                                        <div class="valid-feedback">
+                                            Listo
+                                        </div>
+                                        <div class="invalid-feedback">
+                                            Compruebe este campo
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="datos_apellidos" class="form-label">Apllidos</label>
+                                        <input type="text" class="form-control" value="{{licencia.datos_apellidos}}" id="datos_apellidos" required>
+                                        <div class="valid-feedback">
+                                            Listo
+                                        </div>
+                                        <div class="invalid-feedback">
+                                            Compruebe este campo
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="datos_curp" class="form-label">CURP</label>
+                                        <input type="text" class="form-control" value="{{licencia.datos_curp}}" id="datos_curp" required>
+                                        <div class="valid-feedback">
+                                            Listo
+                                        </div>
+                                        <div class="invalid-feedback">
+                                            Compruebe este campo
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="datos_sangre" class="form-label">Tipo de sangre</label>
+                                        <select class="form-select" id="datos_sangre" required>
+                                            <option selected  value="{{licencia.datos_sangre}}">{{licencia.datos_sangre}}</option>
+                                            <option value="O-">O-</option>
+                                            <option value="O+">O+</option>
+                                            <option value="A-">A-</option>
+                                            <option value="A+">A+</option>
+                                            <option value="B-">B-</option>
+                                            <option value="B+">B+</option>
+                                            <option value="AB-">AB-</option>
+                                            <option value="AB+">AB+</option>
+                                            <option value="N/D">N/D</option>
+                                        </select>
+                                        <div class="valid-feedback">
+                                            Listo
+                                        </div>
+                                        <div class="invalid-feedback">
+                                            Compruebe este campo
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label for="datos_sexo" class="form-label">Sexo</label>
+                                        <div class="input-group has-validation">
+                                            <select class="form-select" id="datos_sexo" required>
+                                                <option selected  value="{{licencia.datos_sexo}}">{{licencia.datos_sexo}}</option>
+                                                <option value="M">M</option>
+                                                <option value="H">H</option>
+
+                                            </select>
+                                            <div class="valid-feedback">
+                                                Listo
+                                            </div>
+                                            <div class="invalid-feedback">
+                                                Compruebe este campo
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label for="datos_nacionalidad" class="form-label">Nacionalidad</label>
+                                        <div class="input-group has-validation">
+                                            <select class="form-select" id="datos_nacionalidad" required>
+                                                <option selected  value="{{licencia.datos_nacionalidad}}">{{licencia.datos_nacionalidad}}</option>
+                                                <option value="Mexicana">Mexicana</option>
+                                                <option value="Extranjera">Extranjera</option>
+
+                                            </select>
+                                            <div class="valid-feedback">
+                                                Listo
+                                            </div>
+                                            <div class="invalid-feedback">
+                                                Compruebe este campo
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="datos_restriacciones" class="form-label">Restricciones</label>
+                                        <input type="text" class="form-control" value="{{licencia.datos_restriacciones}}" id="datos_restriacciones" required>
+                                        <div class="valid-feedback">
+                                            Listo
+                                        </div>
+                                        <div class="invalid-feedback">
+                                            Compruebe este campo
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="datos_nacimiento" class="form-label">Fecha de nacimiento</label>
+                                        <input type="text" class="form-control" id="datos_nacimiento"
+                                            placeholder="DD/MM/YYYY" data-toggle="input-mask"
+                                            data-mask-format="00/00/0000" value="{{licencia.datos_nacimiento}}">
+                                        <div class="valid-feedback">
+                                            Listo
+                                        </div>
+                                        <div class="invalid-feedback">
+                                            Compruebe este campo
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+
+                                        <label for="datos_rfc" class="form-label">RFC</label>
+                                        <input type="text" class="form-control" id="datos_rfc" value="{{licencia.datos_rfc}}" required>
+                                        <div class="valid-feedback">
+                                            Listo
+                                        </div>
+                                        <div class="invalid-feedback">
+                                            Compruebe este campo
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+
+                                        <label for="datos_donante" class="form-label">Donante de organos</label>
+
+                                        <select class="form-select" id="datos_donante" required>
+                                            {% if licencia.datos_donante %}
+                                                <option selected value="S">Si donar</option>
+                                                <option  value="N">No donar</option>
+
+                                            {% else %}
+                                                <option selected value="N">No donar</option>
+                                                <option  value="S">Si donar</option>
+
+                                            {% endif %}
+                                            
+
+                                        </select>
+
+                                        <div class="valid-feedback">
+                                            Listo
+                                        </div>
+                                        <div class="invalid-feedback">
+                                            Compruebe este campo
+                                        </div>
+                                    </div>
+
+                                </form>
+
+
+
+                            </div> <!-- end card-body-->
+                        </div> <!-- end card-->
+                    </div> <!-- end col-->
+                </div>
+                <!-- end row-->
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="header-title mb-3">Direccion</h4>
+                                <hr>
+                                <form class="row g-3 needs-validation" id="form_direc" novalidate>
+
+                                    <div class="col-md-6">
+                                        <label for="direc_calle" class="form-label">Calle</label>
+                                        <input type="text" class="form-control" id="direc_calle" value="{{licencia.direc_calle}}" required>
+                                        <div class="valid-feedback">
+                                            Listo
+                                        </div>
+                                        <div class="invalid-feedback">
+                                            Compruebe este campo
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="direc_ciudad" class="form-label">Ciudad</label>
+                                        <input type="text" class="form-control" id="direc_ciudad" value="{{licencia.direc_ciudad}}" required>
+                                        <div class="valid-feedback">
+                                            Listo
+                                        </div>
+                                        <div class="invalid-feedback">
+                                            Compruebe este campo
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="direc_cp" class="form-label">Codigo postal</label>
+                                        <input type="text" class="form-control" id="direc_cp" value="{{licencia.direc_cp}}"  required>
+                                        <div class="valid-feedback">
+                                            Listo
+                                        </div>
+                                        <div class="invalid-feedback">
+                                            Compruebe este campo
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="col-md-4">
+                                        <label for="direc_colonia" class="form-label">Colonia</label>
+                                        <input type="text" class="form-control" value="{{licencia.direc_colonia}}" id="direc_colonia" required>
+                                        <div class="valid-feedback">
+                                            Listo
+                                        </div>
+                                        <div class="invalid-feedback">
+                                            Compruebe este campo
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+
+                                        <label for="direc_estado" class="form-label">Estado</label>
+                                        <input type="text" class="form-control" value="{{licencia.direc_estado}}" id="direc_estado" required>
+                                        <div class="valid-feedback">
+                                            Listo
+                                        </div>
+                                        <div class="invalid-feedback">
+                                            Compruebe este campo
+                                        </div>
+                                    </div>
+
+
+                                </form>
+
+
+
+                            </div> <!-- end card-body-->
+                        </div> <!-- end card-->
+                    </div> <!-- end col-->
+                </div>
+                <!-- end row-->
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="header-title mb-3">Licencia</h4>
+                                <hr>
+                                <form class="row g-3 needs-validation" id="form_licencia" novalidate>
+                                    <div class="col-md-4">
+                                        <label for="lic_expedicion" class="form-label">Fecha de expedicion</label>
+                                        <input type="text" class="form-control" id="lic_expedicion"
+                                            placeholder="DD/MM/YYYY" data-toggle="input-mask" value="{{licencia.lic_expedicion}}"
+                                            data-mask-format="00/00/0000">
+                                        <div class="valid-feedback">
+                                            Listo
+                                        </div>
+                                        <div class="invalid-feedback">
+                                            Compruebe este campo
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="lic_emisora" class="form-label">Oficina emisora</label>
+                                        <select class="form-select" id="lic_emisora" required>
+                                            <option selected  value="{{licencia.lic_emisora}}">{{licencia.lic_emisora}}</option>
+                                            <option value="TIJUANA, CERRO">Tijuana, cerro</option>
+                                            <option value="TIJUANA, LA MESA">Tijuana, La mesa</option>
+                                            <option value="ENSENADA, SAN">Ensenada, San</option>
+                                        </select>
+
+                                        </select>
+                                        <div class="valid-feedback">
+                                            Listo
+                                        </div>
+                                        <div class="invalid-feedback">
+                                            Compruebe este campo
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="lic_antiguedad" class="form-label">Fecha de antiguedad</label>
+                                        <input type="text" class="form-control" id="lic_antiguedad"
+                                            placeholder="DD/MM/YYYY" data-toggle="input-mask" value="{{licencia.lic_antiguedad}}"
+                                            data-mask-format="00/00/0000">
+                                        <div class="valid-feedback">
+                                            Listo
+                                        </div>
+                                        <div class="invalid-feedback">
+                                            Compruebe este campo
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8"> 
+                                        <label for="lic_tipo" class="form-label">Tipo de
+                                            licencia</label>
+                                        <div class="input-group has-validation">
+                                            <select class="form-select" id="lic_tipo" required>
+                                                <option selected  value="{{licencia.lic_tipo}}">{{licencia.lic_tipo}}</option>
+                                                <option value="Tipo A - AUTOMOVILISTA">Tipo A - AUTOMOVILISTA</option>
+                                                <option value="Tipo A - CHOFER A">Tipo A - CHOFER A</option>
+                                                <option value="Tipo B - CHOFER B">Tipo B - CHOFER B</option>
+                                                <option value="Tipo C - CHOFER C">Tipo C - CHOFER C</option>
+                                                <option value="Tipo E - CHOFER D">Tipo E - CHOFER D</option>
+                                                <option value="Tipo M - MOTOCICLISTA">Tipo M - MOTOCICLISTA</option>
+
+                                            </select>
+                                            <div class="valid-feedback">
+                                                Listo
+                                            </div>
+                                            <div class="invalid-feedback">
+                                                Compruebe este campo
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="lic_valido" class="form-label">Valido</label>
+                                        <div class="input-group has-validation">
+                                            <select class="form-select" id="lic_valido" required>
+                                                {% if licencia.lic_valido > 5 %}
+                                                <option selected  value="{{licencia.lic_valido}}">{{licencia.lic_valido}} años</option>
+                                                <option value="88">Permanente</option>
+                                                <option value="3">3 años</option>
+                                                <option value="5">5 años</option>
+                                       
+                                                {% else %}
+                                                <option selected  value="{{licencia.lic_valido}}">Permanente</option>
+                                                <option value="3">3 años</option>
+                                                <option value="5">5 años</option>
+                                                {% endif %}
+                                            </select>
+                                            <div class="valid-feedback">
+                                                Listo
+                                            </div>
+                                            <div class="invalid-feedback">
+                                                Compruebe este campo
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+
+                                </form>
+
+
+
+                            </div> <!-- end card-body-->
+                        </div> <!-- end card-->
+                    </div> <!-- end col-->
+                </div>
+                <!-- end row-->
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="header-title mb-3">Contacto de emergencia</h4>
+                                <hr>
+                                <form class="row g-3 needs-validation" id="form_contacto" novalidate>
+
+
+                                    <div class="col-md-4">
+                                        <label for="con_nombre" class="form-label">Nombre</label>
+                                        <input type="text" class="form-control" id="con_nombre" value="{{licencia.con_nombre}}" required>
+                                        <div class="valid-feedback">
+                                            Listo
+                                        </div>
+                                        <div class="invalid-feedback">
+                                            Compruebe este campo
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="con_apellido" class="form-label">Apellidos</label>
+                                        <input type="text" class="form-control" value="{{licencia.con_apellido}}" id="con_apellido" required>
+                                        <div class="valid-feedback">
+                                            Listo
+                                        </div>
+                                        <div class="invalid-feedback">
+                                            Compruebe este campo
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="col-md-4">
+                                        <label for="con_tel" class="form-label">Telefono de contacto</label>
+                                        <input type="text" value="{{licencia.con_tel}}" class="form-control" id="con_tel" required>
+                                        <div class="valid-feedback">
+                                            Listo
+                                        </div>
+                                        <div class="invalid-feedback">
+                                            Compruebe este campo
+                                        </div>
+                                    </div>
+
+
+
+
+                                </form>
+
+
+
+                            </div> <!-- end card-body-->
+                        </div> <!-- end card-->
+                    </div> <!-- end col-->
+                </div>
+                <!-- end row-->
+
+
+                <div class="row">
+                    <div class="col-lg-6 col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="header-title mb-3">Fotografia</h4>
+                                <hr>
+                                <!-- Preview -->
+                                <input type="text" id="url_foto" class="d-none" value=" {{licencia.foto_file.url}}">
+                                <div class="dropzone-previews mt-3" id="file-previews"></div>
+
+                                <div class="d-none" id="uploadPreviewTemplate">
+                                    <div class="card mt-1 mb-0 shadow-none border">
+                                        <div class="p-2">
+                                            <div class="row align-items-center">
+                                                <div class="col-auto">
+                                                    <img data-dz-thumbnail src="#" id="img_foto"
+                                                        class="avatar-sm rounded bg-light" alt="">
+                                                </div>
+                                                <div class="col ps-0">
+                                                    <a href="javascript:void(0);" class="text-muted fw-bold"
+                                                        data-dz-name></a>
+                                                    <p class="mb-0" data-dz-size></p>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <!-- Button -->
+                                                    <a href="" class="btn btn-link btn-lg text-muted" data-dz-remove>
+                                                        <i class="ri-close-line"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <form action="/" method="post" class="dropzone" id="myAwesomeDropzonefoto"
+                                    data-plugin="dropzone" data-previews-container="#file-previews"
+                                    data-upload-preview-template="#uploadPreviewTemplate">
+                                    <div class="fallback">
+                                        <input name="file" id="foto_file" type="file" />
+                                    </div>
+
+                                    <div class="dz-message needsclick">
+                                        <i class="h1 text-muted ri-upload-cloud-2-line"></i>
+                                        <h3>Seleccionar archivo.</h3>
+
+                                    </div>
+                                </form>
+
+
+
+                            </div> <!-- end card-body-->
+                        </div> <!-- end card-->
+                    </div> <!-- end col-->
+
+                    <div class="col-lg-6 col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="header-title mb-3">Firma</h4>
+                                <hr>
+                                <input type="text" id="url_firma" class="d-none" value=" {{licencia.firma_file.url}}">
+
+                                <!-- Preview -->
+                                <div class="dropzone-previews mt-3" id="file-previewsfirma"></div>
+
+                                <div class="d-none" id="uploadPreviewTemplatefirma">
+                                    <div class="card mt-1 mb-0 shadow-none border">
+                                        <div class="p-2">
+                                            <div class="row align-items-center">
+                                                <div class="col-auto">
+                                                    <img data-dz-thumbnail id="img_firma" src="#"
+                                                        class="avatar-sm rounded bg-light" alt="">
+                                                </div>
+                                                <div class="col ps-0">
+                                                    <a href="javascript:void(0);" class="text-muted fw-bold"
+                                                        data-dz-name></a>
+                                                    <p class="mb-0" data-dz-size></p>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <!-- Button -->
+                                                    <a href="" class="btn btn-link btn-lg text-muted" data-dz-remove>
+                                                        <i class="ri-close-line"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <form action="/" method="post" class="dropzone" id="myAwesomeDropzonefirma"
+                                    data-plugin="dropzone" data-previews-container="#file-previewsfirma"
+                                    data-upload-preview-template="#uploadPreviewTemplatefirma">
+                                    <div class="fallback">
+                                        <input name="file" type="file" id="firma_file" />
+                                    </div>
+
+                                    <div class="dz-message needsclick">
+                                        <i class="h1 text-muted ri-upload-cloud-2-line"></i>
+                                        <h3>Seleccionar archivo.</h3>
+
+                                    </div>
+                                </form>
+
+
+
+                            </div> <!-- end card-body-->
+                        </div> <!-- end card-->
+                    </div> <!-- end col-->
+                </div>
+                <!-- end row-->
+                <div class="row">
+                    <div class="col-12 d-grid">
+                        <button type="submit" id="btn_uplicencia" class="btn btn-lg btn-soft-primary"> Actualizar licencia</button>
+                    </div>
+                    <!-- end d-grid -->
+                </div>
+                <input type="text" id="id_licencia" value="{{licencia.id}}" class="d-none">
+                <div class="modal fade" id="spinner_modal" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content"  style="background-color: transparent;">
+                      
+                            <div class="modal-body text-center">
+                                <div class="spinner-border avatar-lg text-primary" role="status"></div>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
+            </div> <!-- container -->
+
+        </div> <!-- content -->
+
+
+        <!-- end Footer -->
+
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- End Page content -->
+    <!-- ============================================================== -->
+
+</div>
+
+<!-- Vendor js -->
+<script src="{% static 'login/assets/js/vendor.min.js' %}"></script>
+
+<!-- Code Highlight js -->
+<script src="{% static 'login/assets/vendor/highlightjs/highlight.pack.min.js' %}"></script>
+<script src="{% static 'login/assets/vendor/clipboard/clipboard.min.js' %}"></script>
+<script src="{% static 'login/assets/js/hyper-syntax.js' %}"></script>
+
+
+
+
+<!-- Input Mask Plugin js -->
+<script src="{% static 'login/assets/vendor/jquery-mask-plugin/jquery.mask.min.js' %}"></script>
+
+
+
+<!-- Flatpickr Timepicker Plugin js -->
+<script src="{% static 'login/assets/vendor/flatpickr/flatpickr.min.js' %}"></script>
+
+<!-- Dropzone File Upload js -->
+<script src="{% static 'login/assets/vendor/dropzone/min/dropzone.min.js' %}"></script>
+
+<!-- File Upload Demo js -->
+<script src="{% static 'login/assets/js/ui/component.fileupload.js' %}"></script>
+
+<!-- Bootstrap Wizard Form js -->
+<script src="{% static 'login/assets/vendor/twitter-bootstrap-wizard/jquery.bootstrap.wizard.min.js' %}"></script>
+<!--Sweet Alert-->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<!-- Wizard Form Demo js -->
+<script src="{% static 'login/assets/js/pages/demo.form-wizard.js' %}"></script>
+<!-- App js -->
+<script src="{% static 'login/assets/js/app.min.js' %}"></script>
+
+<script src="{% static 'licencias/js/forms.js' %}"></script>
+
+
+{% endblock %}

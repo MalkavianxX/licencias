@@ -1,0 +1,580 @@
+{% extends 'dash/base.html' %}{% load static %}
+
+
+{% block title %}
+<title>Ver licencia | Hyper </title>
+
+{% endblock %}
+{% block descripcion %}
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
+<meta content="Coderthemes" name="author" />
+{% endblock %}
+
+
+
+{% block content %}
+<script src="https://cdn.rawgit.com/neocotic/qrious/latest/dist/qrious.min.js"></script>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800;900&display=swap');
+
+    .B-choferB-anverso {
+
+        background-image: url("{% static 'licencias/img/img/B-choferB/anverso/anverso.jpg' %}");
+        background-size: cover;
+        /* Asegura que la imagen de fondo cubra todo el div */
+        position: relative;
+        width: 651px;
+        height: 1004px;
+        text-transform: uppercase;
+    }
+
+    .A-CHOFERA {
+        background-image: url("{% static 'licencias/img/A-choferA/anverso/licenciaTijAA.png' %}");
+        background-size: cover;
+        /* Asegura que la imagen de fondo cubra todo el div */
+        position: relative;
+        width: 651px;
+        height: 1004px;
+        text-transform: uppercase;
+    }
+
+    .A-AUTOMOVILISTA {
+        background-image: url("{% static 'licencias/img/A-automovilista/anverso/licenciaTijA.png' %}");
+        background-size: cover;
+        /* Asegura que la imagen de fondo cubra todo el div */
+        position: relative;
+        width: 651px;
+        height: 1004px;
+        text-transform: uppercase;
+    }
+
+    .C-CHOFERC {
+        background-image: url("{% static 'licencias/img/C-choferC/anverso/anversoc.jpg' %}");
+        background-size: cover;
+        /* Asegura que la imagen de fondo cubra todo el div */
+        position: relative;
+        width: 651px;
+        height: 1004px;
+        text-transform: uppercase;
+    }
+
+    .E-CHOFERD {
+        background-image: url("{% static 'licencias/img/E-choferD/anverso/anversoE-D.jpg' %}");
+        background-size: cover;
+        /* Asegura que la imagen de fondo cubra todo el div */
+        position: relative;
+        width: 651px;
+        height: 1004px;
+        text-transform: uppercase;
+    }
+
+    .M-MOTOCICLISTA {
+        background-image: url("{% static 'licencias/img/M-motociclista/anverso/licenciaTijM.png' %}");
+        background-size: cover;
+        /* Asegura que la imagen de fondo cubra todo el div */
+        position: relative;
+        width: 651px;
+        height: 1004px;
+        text-transform: uppercase;
+    }
+
+    .reverso-si {
+        background-image: url("{% static 'licencias/img/C-choferC/reverso/reversi.png' %}");
+        background-size: cover;
+        /* Asegura que la imagen de fondo cubra todo el div */
+        position: relative;
+        width: 651px;
+        height: 1004px;
+        text-transform: uppercase;
+    }
+
+    .reverso-no {
+        background-image: url("{% static 'licencias/img/B-choferB/reverso/reverno.png' %}");
+        background-size: cover;
+        /* Asegura que la imagen de fondo cubra todo el div */
+        position: relative;
+        width: 651px;
+        height: 1004px;
+        text-transform: uppercase;
+    }
+
+    #nombre {
+        position: absolute;
+        top: 641px;
+        left: 45px;
+        color: black;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 26px;
+    }
+
+    #curp {
+        position: absolute;
+        top: 707px;
+        left: 45px;
+        color: black;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 28px;
+    }
+
+    #nacimiento {
+        position: absolute;
+        top: 770px;
+        left: 46px;
+        color: black;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 26px;
+    }
+
+    #direccion-calle {
+        position: absolute;
+        top: 830px;
+        left: 46px;
+        color: black;
+        font-size: 21px;
+        font-weight: 800;
+        font-family: 'Montserrat', sans-serif;
+
+    }
+
+    #direccion-coloni-cp {
+        position: absolute;
+        top: 858px;
+        left: 46px;
+        color: black;
+        font-size: 21px;
+        font-weight: 800;
+        font-family: 'Montserrat', sans-serif;
+
+    }
+
+    #direccion-ciudad-estado {
+        position: absolute;
+        top: 886px;
+        left: 46px;
+        color: black;
+        font-size: 21px;
+        font-weight: 800;
+        font-family: 'Montserrat', sans-serif;
+    }
+
+    #numlicencia {
+        position: absolute;
+        top: 344px;
+        left: 318px;
+        color: #591c2e;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 31px;
+        font-weight: 800;
+    }
+
+    #expedicion {
+        position: absolute;
+        top: 445px;
+        left: 318px;
+        color: #000000;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 28px;
+        font-weight: 700;
+    }
+
+    #vencimiento {
+        position: absolute;
+        top: 525px;
+        left: 318px;
+        color: #591c2e;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 28px;
+        font-weight: 800;
+    }
+
+    #foto {
+        position: absolute;
+        top: 261px;
+        left: 46px;
+        width: 250px;
+    }
+
+    #firma {
+        position: absolute;
+        top: 561px;
+        left: 46px;
+        width: 258px;
+    }
+
+    #foto-sub {
+        position: absolute;
+        top: 708px;
+        left: 445px;
+        width: 130px;
+        opacity: 0.4;
+    }
+
+
+    #oficina {
+        position: absolute;
+        top: 130px;
+        left: 36px;
+        color: black;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 22px;
+        font-weight: 800;
+    }
+
+    #antiguedad {
+        position: absolute;
+        top: 130px;
+        left: 315px;
+        color: black;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 22px;
+        font-weight: 800;
+    }
+
+    #sexo {
+        position: absolute;
+        top: 130px;
+        left: 568px;
+        color: black;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 22px;
+        font-weight: 800;
+    }
+
+    #sanguineo {
+        position: absolute;
+        top: 190px;
+        left: 36px;
+        color: black;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 22px;
+        font-weight: 800;
+    }
+
+    #donador {
+        position: absolute;
+        top: 190px;
+        left: 220px;
+        color: black;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 22px;
+        font-weight: 800;
+    }
+
+    #restriccion {
+        position: absolute;
+        top: 190px;
+        left: 473px;
+        color: black;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 22px;
+        font-weight: 800;
+    }
+
+    #contacto {
+        position: absolute;
+        top: 248px;
+        left: 36px;
+        color: black;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 22px;
+        font-weight: 800;
+    }
+
+    #autoriza {
+        position: absolute;
+        top: 310px;
+        left: 36px;
+        color: black;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 20px;
+        font-weight: 800;
+    }
+
+    #numero {
+        position: absolute;
+        top: 745px;
+        left: 62px;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 30px;
+        font-weight: 400;
+        color: #443f38;
+    }
+
+    #qr {
+        position: absolute;
+        top: 570px;
+        left: 270px;
+    }
+</style>
+
+<div class="content-page">
+    <div class="content">
+        <!-- Start Content-->
+
+        <div class="container-fluid">
+            <br>
+
+            <input type="text" id="img_anverso" value="{{anverso}}" class="d-none">
+            <input type="text" id="img_reverso" value="{{reverso}}" class="d-none">
+            <div class="row justify-content-center">
+                <div class="col-lg-5 col-md-12 col-12"  >
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between align-items-center text-primary" style="background-color: #d3d9fd;">
+                            <h4 class="header-title" >Licencia</h4>
+                            <div class="dropdown">
+                                <a  href="#" class="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="mdi mdi-dots-vertical"></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-end" >
+                                    <!-- item-->
+                                    <a href="javascript:void(0);" id="exportar-anverso"  class="dropdown-item">Descargar imagen anverso</a>
+                                    <!-- item-->
+                                    <a href="javascript:void(0);" id="exportarpdf" class="dropdown-item">Exportar licencia PDF</a>
+                                    <a href="{% url 'view_edit_licencia' licencia.id %}" class="dropdown-item">Editar licencia</a>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body pt-0">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <img src="{{licencia.foto_file.url}}" id="f_foto" class="img-fluid rounded  align-self-center" alt="">
+                                </div>
+                                <div class="col-lg-8">
+                                    <div class="mb-1">
+                                        <label for="tipo_lic" class="form-label">Tipo de licencia</label>
+                                        <input type="text" readonly class="form-control" id="f_tipo_lic" value="E">
+                                    </div>
+                                    <div class="mb-1">
+                                        <label for="tipo_lic" class="form-label">Numero de licencia</label>
+                                        <input type="text" readonly class="form-control" id="f_folio" value="{{licencia.folio}}">
+                                    </div>
+                                    <div class="mb-1">
+                                        <label for="tipo_lic" class="form-label">Fecha expedicion</label>
+                                        <input type="text" readonly class="form-control" id="f_expedicion" value="{{licencia.lic_expedicion}}">
+                                    </div>
+                                    <div class="mb-1">
+                                        <label for="tipo_lic" class="form-label">Fecha vencimiento</label>
+                                        <input type="text" readonly class="form-control" id="f_vencimiento" value="{{licencia.lic_valido}}">
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <label for="tipo_lic" class="form-label">Nombre</label>
+
+                                    <div class="mb-1 input-group">
+                                        <input type="text" id="f_nombre" value="{{licencia.datos_nombres}}" class="form-control">
+                                        <input type="text" id="f_apellidos" value="{{licencia.datos_apellidos}}" class="form-control">
+                                    </div>
+                                    <div class="mb-1">
+                                        <label for="tipo_lic" class="form-label">CURP</label>
+                                        <input type="text" readonly class="form-control" id="f_curp" value="{{licencia.datos_curp}}">
+                                    </div>
+                                    <div class="mb-1">
+                                        <label for="tipo_lic" class="form-label">Fecha de nacimiento</label>
+                                        <input type="text" readonly class="form-control" id="f_nacimiento" value="{{licencia.datos_nacimiento}}">
+                                    </div>
+                                    <label for="row" class="form-label">Direccion</label>
+
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-floating mb-3">
+                                                <input type="text" readonly value="{{licencia.direc_calle}}" class="form-control" id="f_calle" >
+                                                <label for="floatingInput">Calle</label>
+                                              </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-floating mb-3">
+                                                <input type="text" readonly class="form-control" value="{{licencia.direc_colonia}}" id="f_colonia" >
+                                                <label for="floatingInput">Colonia</label>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-floating mb-3">
+                                                <input type="text" readonly value="{{licencia.direc_ciudad}}" class="form-control" id="f_ciudad" >
+                                                <label for="floatingInput">Ciudad</label>
+                                              </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-floating mb-3">
+                                                <input type="text" readonly class="form-control" value="{{licencia.direc_estado}}" id="f_estado" >
+                                                <label for="floatingInput">Estado</label>
+                                              </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5 col-md-12 col-12">
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between align-items-center text-primary " style="background-color: #d3d9fd;">
+                            <h4 class="header-title">Reverso</h4>
+                            <div class="dropdown">
+                                <a href="#" class="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="mdi mdi-dots-vertical"></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-end" >
+                                    <!-- item-->
+                                    <a href="javascript:void(0);" id="exportar-reverso" class="dropdown-item">Descargar imagen reverso</a>
+                                    <a href="{% url 'view_edit_licencia' licencia.id %}" id="exportar-reverso" class="dropdown-item">Editar licencia</a>
+
+                                    <!-- item-->
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body pt-0">
+                            <div class="row">
+ 
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <div class="mb-2">
+                                                <label for="tipo_lic" class="form-label">Oficina emisora</label>
+                                                <input type="text" readonly class="form-control" id="f_oficina" value="{{licencia.lic_emisora}}">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="mb-1">
+                                                <label for="tipo_lic" class="form-label">Fecha de antiguedad</label>
+                                                <input type="text" readonly class="form-control" id="f_antiguedad" value="{{licencia.lic_antiguedad}}">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="mb-1">
+                                                <label for="tipo_lic" class="form-label">Sexo</label>
+                                                <input type="text" readonly class="form-control" id="f_tipo_lic" value="{{licencia.datos_sexo}}">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="mb-2">
+                                                <label for="tipo_lic" class="form-label">Tipo sanguineo</label>
+                                                <input type="text" readonly class="form-control" id="f_sangre" value="{{licencia.datos_sangre}}">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="mb-1">
+                                                <label for="tipo_lic" class="form-label">Donador de organos</label>
+                                                {% if licencia.datos_donante %}
+                                                <input type="text" readonly class="form-control" id="f_organos" value="SI">
+                                                {% else %}
+                                                <input type="text" readonly class="form-control" id="f_organos" value="NO">
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="mb-1">
+                                                <label for="tipo_lic" class="form-label">Restricciones</label>
+                                                <input type="text" readonly class="form-control" id="f_restricciones" value="{{licencia.datos_restriacciones}}">
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="tipo_lic" class="form-label">En caso de emergencia</label>
+
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <div class="form-floating mb-3">
+                                                        <input type="text" readonly value="{{licencia.con_nombre}}" class="form-control" id="f_cnombre" >
+                                                        <label for="floatingInput">Nombre</label>
+                                                      </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-floating mb-3">
+                                                        <input type="text" readonly class="form-control" value="{{licencia.con_tel}}" id="f_cnumero" >
+                                                        <label for="floatingInput">Telefono</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                          
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="mb-1">
+                                                <label for="tipo_lic" class="form-label">Esta licencia autoriza conducir</label>
+                                                <input type="text" readonly class="form-control" id="f_restricciones" value="VEHICULO TRACTO CAMION, VOLTEO, PIPA, TORTON,CAMION DE 8 TONELADAS O MAYOR ASÍ COMO TRES EJES O MÁS, CAMION FORANEO PASAJERO.">
+                                            </div>
+                                        </div>
+                                        <div class="col-12 text-center mt-3">
+                                            <canvas id="qr-vs"></canvas>
+                                        </div>
+                                    </div>
+                           
+                                </div>
+                          
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row"   >
+                <div class="col-12">
+                    <div class="d-flex justify-content-between">
+
+                        <div id="lic_anverso" style="display: none;" class="B-choferB-anverso">
+                            <img src="{{licencia.firma_file.url}}" id="firma" alt="">
+    
+                            <img src="{{licencia.foto_file.url}}" id="foto" alt="">
+                            <h1 id="numlicencia">{{licencia.folio}}</h1>
+                            <h1 id="nombre">{{licencia.datos_nombres}} {{licencia.datos_apellidos}}</h1>
+                            <h1 id="curp">{{licencia.datos_curp}}</h1>
+                            <h1 id="nacimiento">{{licencia.datos_nacimiento}}</h1>
+                            <h1 id="direccion-calle">{{licencia.direc_calle}}</h1>
+                            <h1 id="direccion-coloni-cp"> {{licencia.direc_colonia}}, {{licencia.direc_cp}}</h1>
+                            <h1 id="direccion-ciudad-estado"> {{licencia.direc_ciudad}}, {{licencia.direc_estado}} </h1>
+                            <h1 id="expedicion">{{licencia.lic_expedicion}}</h1>
+                            <h1 id="vencimiento">{{licencia.lic_valido}}</h1>
+                            <img src="{{licencia.foto_file.url}}" id="foto-sub" alt="">
+    
+                        </div>
+                        <div id="lic_reverso" style="display: none;" class="reverso-no">
+                            <h1 id="oficina">{{licencia.lic_emisora}}</h1>
+                            <h1 id="antiguedad">{{licencia.lic_antiguedad}}</h1>
+                            <h1 id="sexo">{{licencia.datos_sexo}}</h1>
+                            <h1 id="sanguineo">{{licencia.datos_sangre}}</h1>
+                            {% if licencia.datos_donante %}
+                            <h1 id="donador">SI</h1>
+                            {% else %} 
+                            <h1 id="donador">NO</h1>
+                            {% endif %}
+                            <h1 id="restriccion">{{ licencia.datos_restriacciones}}</h1>
+                            <h1 id="contacto">{{licencia.con_nombre}} - {{licencia.con_tel}}</h1>
+                            <h1 id="autoriza">VEHÍCULO TRACTO CAMIÓN, VOLTEO, PIPA, TORTON, CAMIÓN DE 8 TONELADAS O MAYOR
+                                ASÍ COMO DE TRES EJES O MAS , CAMIÓN FORÁNEO PASAJERO.</h1>
+                            <h1 id="numero">1872884-2</h1>
+                            <canvas id="qr"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+  
+        </div>
+        <div class="modal fade" id="spinner_modal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content"  style="background-color: transparent;">
+              
+                    <div class="modal-body text-center">
+                        <div class="spinner-border avatar-lg text-primary" role="status"></div>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+        
+                                      
+    </div>
+</div>
+</div>
+
+<!-- Vendor js -->
+<script src="{% static 'login/assets/js/vendor.min.js' %}"></script>
+
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.0.272/jspdf.debug.js"></script>
+<script src="{% static 'licencias/js/licencia.js' %}"></script>
+<!-- App js -->
+<script src="{% static 'login/assets/js/app.min.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,47 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <table id="alternative-page-datatable" class="table table-striped dt-responsive nowrap w-100">
+                    <thead class="bg-primary">
+                        <tr>
+                            <th>Numero de folio</th>
+                            <th>Expedicion</th>
+                            <th>Vencimiento</th>
+                            <th>Solicitante</th>
+                            <th>Curp</th>
+                            <th>Tipo </th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+
+
+                    <tbody>
+                        {% for licencia in licencias %}
+                        <tr id="licenciaRow_{{ licencia.id }}">
+                            <td>{{licencia.folio.texto}}</td>
+                            <td>{{ licencia.lic_expedicion }}</td>
+                            <td>{{ licencia.lic_valido }}</td>
+                            <td>{{ licencia.datos_nombres }}</td>
+                            <td>{{ licencia.datos_curp }}</td>
+                            <td>{{ licencia.lic_tipo }}</td>
+                            <td class="table-action">
+
+
+
+                                <button type="button" class="btn btn-light" title="Editar licencia">
+
+                                    <i class="mdi mdi-pencil-outline"></i>
+                                </button>
+                                <a type="button" href="{% url 'view_watch_licencia' licencia.id %}"
+                                    title="Ver licencia" class="btn btn-primary"><i
+                                        class="mdi mdi-selection-search"></i> </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>                                       
+            </div> <!-- end card body-->
+        </div> <!-- end card -->
+    </div><!-- end col-->
+</div> <!-- end row-->
