@@ -22,13 +22,13 @@ class Licencia(models.Model):
     folio = models.ForeignKey(Folio, on_delete=models.CASCADE, blank=True, null=True)
     datos_nombres = models.CharField(max_length=255) 
     datos_apellidos = models.CharField(max_length=255)
-    datos_curp = models.CharField(max_length=20)
+    datos_curp = models.CharField(max_length=255)
     datos_sangre = models.CharField(max_length=15)
-    datos_sexo = models.CharField(max_length=10)
+    datos_sexo = models.CharField(max_length=255)
     datos_nacionalidad = models.CharField(max_length=255)
     datos_restriacciones = models.TextField()
     datos_nacimiento = models.DateField()
-    datos_rfc = models.CharField(max_length=13)
+    datos_rfc = models.CharField(max_length=255)
     datos_donante = models.BooleanField()
 
     direc_calle = models.CharField(max_length=255)
@@ -45,7 +45,7 @@ class Licencia(models.Model):
 
     con_nombre = models.CharField(max_length=255)
     con_apellido = models.CharField(max_length=255)
-    con_tel = models.CharField(max_length=10)
+    con_tel = models.CharField(max_length=255)
 
     foto_file = models.ImageField(upload_to='fotos/')
     firma_file = models.ImageField(upload_to='firmas/')
