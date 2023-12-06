@@ -33,7 +33,7 @@ class Licencia(models.Model):
 
     direc_calle = models.CharField(max_length=255)
     direc_ciudad = models.CharField(max_length=255)
-    direc_cp = models.CharField(max_length=5)
+    direc_cp = models.CharField(max_length=255)
     direc_colonia = models.CharField(max_length=255)
     direc_estado = models.CharField(max_length=255)
 
