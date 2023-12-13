@@ -23,7 +23,7 @@ class Licencia(models.Model):
     datos_nombres = models.CharField(max_length=255) 
     datos_apellidos = models.CharField(max_length=255)
     datos_curp = models.CharField(max_length=255)
-    datos_sangre = models.CharField(max_length=15)
+    datos_sangre = models.CharField(max_length=255)
     datos_sexo = models.CharField(max_length=255)
     datos_nacionalidad = models.CharField(max_length=255)
     datos_restriacciones = models.TextField()
@@ -41,7 +41,7 @@ class Licencia(models.Model):
     lic_emisora = models.CharField(max_length=255)
     lic_antiguedad = models.DateField()
     lic_tipo = models.CharField(max_length=255)
-    lic_valido = models.CharField(max_length=20, blank=True, null=True)
+    lic_valido = models.CharField(max_length=255, blank=True, null=True)
 
     con_nombre = models.CharField(max_length=255)
     con_apellido = models.CharField(max_length=255)
