@@ -74,9 +74,9 @@ def view_watch_licencia(request,id):
     licencia = Licencia.objects.get(pk=id)
     licencia.lic_valido = licencia.lic_expedicion.strftime('%d') +'/'+ licencia.lic_expedicion.strftime('%m') +'/'+ str(int(licencia.lic_expedicion.strftime('%Y')) + int(licencia.lic_valido))
 
-    licencia.datos_nacimiento = licencia.datos_nacimiento.strftime('%d-%m-%Y')
+    licencia.datos_nacimiento = licencia.datos_nacimiento.strftime('%d/%m/%Y')
     licencia.lic_expedicion = licencia.lic_expedicion.strftime('%d/%m/%Y')
-    licencia.lic_antiguedad = licencia.lic_antiguedad.strftime('%d-%m-%Y')
+    licencia.lic_antiguedad = licencia.lic_antiguedad.strftime('%d/%m/%Y')
     anverso,reverso = det_tipo_licencia(licencia.lic_tipo, licencia.datos_donante)
 
     
