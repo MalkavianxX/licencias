@@ -90,8 +90,8 @@ def view_mis_licencias(request):
 
     for iter in licencias:
         
-        iter.lic_valido = iter.lic_expedicion.strftime('%d') +'-'+ iter.lic_expedicion.strftime('%m') +'-'+ str(int(iter.lic_expedicion.strftime('%Y')) + int(iter.lic_valido))
-        iter.lic_expedicion = iter.lic_expedicion.strftime('%d-%m-%Y')
+        iter.lic_valido = iter.lic_expedicion.strftime('%d') +'/'+ iter.lic_expedicion.strftime('%m') +'/'+ str(int(iter.lic_expedicion.strftime('%Y')) + int(iter.lic_valido))
+        iter.lic_expedicion = iter.lic_expedicion.strftime('%d/%m/%Y')
 
     return render(request, 'licencias/base/view_mis_licencias.html',{'licencias':licencias})
 
