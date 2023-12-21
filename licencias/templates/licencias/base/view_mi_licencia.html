@@ -193,14 +193,16 @@
         position: absolute;
         top: 261px;
         left: 46px;
-        width: 250px;
+        width: 209px;
+        height: 245px;
     }
 
     #firma {
         position: absolute;
         top: 561px;
         left: 46px;
-        width: 258px;
+        width: 209px;
+        height: 53px;
     }
 
     #foto-sub {
@@ -340,7 +342,7 @@
                         </div>
                         <div class="card-body pt-0">
                             <div class="row">
-                                <div class="col-lg-4">
+                                <div class="col-lg-4 text-center mb-2">
                                     <img src="{{licencia.foto_file.url}}" id="f_foto" class="img-fluid rounded  align-self-center" alt="">
                                 </div>
                                 <div class="col-lg-8">
@@ -501,7 +503,7 @@
                                             </div>
                                         </div>
                                         <div class="col-12 text-center mt-3">
-                                            <canvas id="qr-vs"></canvas>
+                                            <canvas class="img-fluid" id="qr-vs"></canvas>
                                         </div>
                                     </div>
                            
@@ -516,39 +518,7 @@
                 <div class="col-12">
                     <div class="d-flex justify-content-between">
 
-                        <div id="lic_anverso" style="display: none;" class="B-choferB-anverso">
-                            <img src="{{licencia.firma_file.url}}" id="firma" alt="">
-    
-                            <img src="{{licencia.foto_file.url}}" id="foto" alt="">
-                            <h1 id="numlicencia">{{licencia.folio}}</h1>
-                            <h1 id="nombre">{{licencia.datos_nombres}} {{licencia.datos_apellidos}}</h1>
-                            <h1 id="curp">{{licencia.datos_curp}}</h1>
-                            <h1 id="nacimiento">{{licencia.datos_nacimiento}}</h1>
-                            <h1 id="direccion-calle">{{licencia.direc_calle}}</h1>
-                            <h1 id="direccion-coloni-cp"> {{licencia.direc_colonia}}, {{licencia.direc_cp}}</h1>
-                            <h1 id="direccion-ciudad-estado"> {{licencia.direc_ciudad}}, {{licencia.direc_estado}} </h1>
-                            <h1 id="expedicion">{{licencia.lic_expedicion}}</h1>
-                            <h1 id="vencimiento">{{licencia.lic_valido}}</h1>
-                            <img src="{{licencia.foto_file.url}}" id="foto-sub" alt="">
-    
-                        </div>
-                        <div id="lic_reverso" style="display: none;" class="reverso-no">
-                            <h1 id="oficina">{{licencia.lic_emisora}}</h1>
-                            <h1 id="antiguedad">{{licencia.lic_antiguedad}}</h1>
-                            <h1 id="sexo">{{licencia.datos_sexo}}</h1>
-                            <h1 id="sanguineo">{{licencia.datos_sangre}}</h1>
-                            {% if licencia.datos_donante %}
-                            <h1 id="donador">SI</h1>
-                            {% else %} 
-                            <h1 id="donador">NO</h1>
-                            {% endif %}
-                            <h1 id="restriccion">{{ licencia.datos_restriacciones}}</h1>
-                            <h1 id="contacto">{{licencia.con_nombre}} - {{licencia.con_tel}}</h1>
-                            <h1 id="autoriza">VEHÍCULO TRACTO CAMIÓN, VOLTEO, PIPA, TORTON, CAMIÓN DE 8 TONELADAS O MAYOR
-                                ASÍ COMO DE TRES EJES O MAS , CAMIÓN FORÁNEO PASAJERO.</h1>
-                            <h1 id="numero">1872884-2</h1>
-                            <canvas id="qr"></canvas>
-                        </div>
+
                     </div>
                 </div>
             </div>
@@ -569,7 +539,39 @@
     </div>
 </div>
 </div>
+<div id="lic_anverso" style="display: none;"  class="B-choferB-anverso">
+    <img src="{{licencia.firma_file.url}}"  id="firma" alt="">
 
+    <img src="{{licencia.foto_file.url}}" id="foto" style="width: 209; height: 245;" alt="">
+    <h1 id="numlicencia">{{licencia.folio}}</h1>
+    <h1 id="nombre">{{licencia.datos_nombres}} {{licencia.datos_apellidos}}</h1>
+    <h1 id="curp">{{licencia.datos_curp}}</h1>
+    <h1 id="nacimiento">{{licencia.datos_nacimiento}}</h1>
+    <h1 id="direccion-calle">{{licencia.direc_calle}}</h1>
+    <h1 id="direccion-coloni-cp"> {{licencia.direc_colonia}}, {{licencia.direc_cp}}</h1>
+    <h1 id="direccion-ciudad-estado"> {{licencia.direc_ciudad}}, {{licencia.direc_estado}} </h1>
+    <h1 id="expedicion">{{licencia.lic_expedicion}}</h1>
+    <h1 id="vencimiento">{{licencia.lic_valido}}</h1>
+    <img src="{{licencia.foto_file.url}}" id="foto-sub" alt="">
+
+</div>
+<div id="lic_reverso" style="display: none;"  class="reverso-no">
+    <h1 id="oficina">{{licencia.lic_emisora}}</h1>
+    <h1 id="antiguedad">{{licencia.lic_antiguedad}}</h1>
+    <h1 id="sexo">{{licencia.datos_sexo}}</h1>
+    <h1 id="sanguineo">{{licencia.datos_sangre}}</h1>
+    {% if licencia.datos_donante %}
+    <h1 id="donador">SI</h1>
+    {% else %} 
+    <h1 id="donador">NO</h1>
+    {% endif %}
+    <h1 id="restriccion">{{ licencia.datos_restriacciones}}</h1>
+    <h1 id="contacto">{{licencia.con_nombre}} - {{licencia.con_tel}}</h1>
+    <h1 id="autoriza">VEHÍCULO TRACTO CAMIÓN, VOLTEO, PIPA, TORTON, CAMIÓN DE 8 TONELADAS O MAYOR
+        ASÍ COMO DE TRES EJES O MAS , CAMIÓN FORÁNEO PASAJERO.</h1>
+    <h1 id="numero">1872884-2</h1>
+    <canvas id="qr"></canvas>
+</div>
 <!-- Vendor js -->
 <script src="{% static 'login/assets/js/vendor.min.js' %}"></script>
 

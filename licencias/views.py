@@ -5,6 +5,14 @@ from .models import Licencia, Folio, Asignaciones
 from django.utils import timezone
 from .recovery_fun import recovery_save, det_tipo_licencia
 from django.forms.models import model_to_dict
+import base64
+import requests
+
+def url_a_base64(url_imagen):
+    # Obtiene la imagen de la URL
+    with open(url_imagen, 'rb') as imagen_archivo:
+        return base64.b64encode(imagen_archivo.read()).decode('utf-8')
+
 
 # Create your views here.
 def view_add_lic(request):
@@ -84,9 +92,9 @@ def view_watch_licencia(request,id):
 
 def view_mis_licencias(request):
     if request.user.is_superuser or request.user.is_staff:
-        licencias = Licencia.objects.all().order_by('-fecha')
+        licencias = Licencia.objects.all().order_by('fecha')
     else:
-        licencias = Licencia.objects.filter(user = request.user).order_by('-fecha')
+        licencias = Licencia.objects.filter(user = request.user).order_by('fecha')
 
     for iter in licencias:
         
@@ -102,8 +110,13 @@ def view_edit_licencia(request,id):
     licencia.lic_expedicion = licencia.lic_expedicion.strftime('%d/%m/%Y')
     licencia.lic_antiguedad = licencia.lic_antiguedad.strftime('%d%m/%Y')
     anverso,reverso = det_tipo_licencia(licencia.lic_tipo, licencia.datos_donante)
+ 
+    return render(request, "licencias/base/view_edit_licencia.html",{
+        'licencia':licencia,
+        'anverso':anverso,
+        'reverso':reverso,
 
-    return render(request, "licencias/base/view_edit_licencia.html",{'licencia':licencia,'anverso':anverso,'reverso':reverso})
+        })
 
 
 def fun_up_licencia(request):

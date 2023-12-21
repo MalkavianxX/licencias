@@ -15,6 +15,26 @@ function getCSRFToken() {
 
     return null;
 }
+
+function FromEN64toPNG(imagenEn64) {
+        // Convierte la imagen en base64 a un Blob
+        let partes = imagenEn64.split(';base64,');
+        let contentType = partes[0].split(':')[1];
+        let raw = window.atob(partes[1]);
+        let rawLength = raw.length;
+        let array = new Uint8Array(new ArrayBuffer(rawLength));
+    
+        for(let i = 0; i < rawLength; i++) {
+            array[i] = raw.charCodeAt(i);
+        }
+    
+        let blob = new Blob([array], {type: contentType});
+    
+        // Crea un objeto File a partir del Blob
+        let file = new File([blob], "nombre-de-la-imagen.png", {type: 'image/png'});
+        return file;
+    
+}
 function successAlert(title = "Licencia creada") {
     Swal.fire({
         title: title,
@@ -53,14 +73,12 @@ function recopilarDatos() {
         let form_licencia = document.getElementById('form_licencia');
         let form_contacto = document.getElementById('form_contacto');
 
-        let dropzoneFirma = $("#myAwesomeDropzonefirma").get(0).dropzone;
 
-        let dropzoneFoto = $("#myAwesomeDropzonefoto").get(0).dropzone;
 
 
         // Recopilamos los archivos de las imágenes 
-        let foto_file = dropzoneFoto.files[0];
-        let firma_file = dropzoneFirma.files[0];
+        let foto_file =  FromEN64toPNG(document.getElementById('foto-form-recorte').value);
+        let firma_file = FromEN64toPNG(document.getElementById('firma-form-recorte').value);
 
         // Creamos un objeto FormData para empaquetar todos los datos
         let formData = new FormData();

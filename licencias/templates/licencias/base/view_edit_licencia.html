@@ -49,7 +49,7 @@
 
 
     <style>
-        input{
+        input {
             text-transform: uppercase;
         }
     </style>
@@ -92,7 +92,8 @@
 
                                     <div class="col-md-4">
                                         <label for="datos_nombres" class="form-label">Nombres(s)</label>
-                                        <input type="text" class="form-control" value="{{licencia.datos_nombres}}" id="datos_nombres" required>
+                                        <input type="text" class="form-control" value="{{licencia.datos_nombres}}"
+                                            id="datos_nombres" required>
                                         <div class="valid-feedback">
                                             Listo
                                         </div>
@@ -102,7 +103,8 @@
                                     </div>
                                     <div class="col-md-4">
                                         <label for="datos_apellidos" class="form-label">Apllidos</label>
-                                        <input type="text" class="form-control" value="{{licencia.datos_apellidos}}" id="datos_apellidos" required>
+                                        <input type="text" class="form-control" value="{{licencia.datos_apellidos}}"
+                                            id="datos_apellidos" required>
                                         <div class="valid-feedback">
                                             Listo
                                         </div>
@@ -112,7 +114,8 @@
                                     </div>
                                     <div class="col-md-4">
                                         <label for="datos_curp" class="form-label">CURP</label>
-                                        <input type="text" class="form-control" value="{{licencia.datos_curp}}" id="datos_curp" required>
+                                        <input type="text" class="form-control" value="{{licencia.datos_curp}}"
+                                            id="datos_curp" required>
                                         <div class="valid-feedback">
                                             Listo
                                         </div>
@@ -123,7 +126,8 @@
                                     <div class="col-md-4">
                                         <label for="datos_sangre" class="form-label">Tipo de sangre</label>
                                         <select class="form-select" id="datos_sangre" required>
-                                            <option selected  value="{{licencia.datos_sangre}}">{{licencia.datos_sangre}}</option>
+                                            <option selected value="{{licencia.datos_sangre}}">{{licencia.datos_sangre}}
+                                            </option>
                                             <option value="O-">O-</option>
                                             <option value="O+">O+</option>
                                             <option value="A-">A-</option>
@@ -145,7 +149,8 @@
                                         <label for="datos_sexo" class="form-label">Sexo</label>
                                         <div class="input-group has-validation">
                                             <select class="form-select" id="datos_sexo" required>
-                                                <option selected  value="{{licencia.datos_sexo}}">{{licencia.datos_sexo}}</option>
+                                                <option selected value="{{licencia.datos_sexo}}">{{licencia.datos_sexo}}
+                                                </option>
                                                 <option value="M">M</option>
                                                 <option value="H">H</option>
 
@@ -162,7 +167,8 @@
                                         <label for="datos_nacionalidad" class="form-label">Nacionalidad</label>
                                         <div class="input-group has-validation">
                                             <select class="form-select" id="datos_nacionalidad" required>
-                                                <option selected  value="{{licencia.datos_nacionalidad}}">{{licencia.datos_nacionalidad}}</option>
+                                                <option selected value="{{licencia.datos_nacionalidad}}">
+                                                    {{licencia.datos_nacionalidad}}</option>
                                                 <option value="Mexicana">Mexicana</option>
                                                 <option value="Extranjera">Extranjera</option>
 
@@ -177,7 +183,9 @@
                                     </div>
                                     <div class="col-md-4">
                                         <label for="datos_restriacciones" class="form-label">Restricciones</label>
-                                        <input type="text" class="form-control" value="{{licencia.datos_restriacciones}}" id="datos_restriacciones" required>
+                                        <input type="text" class="form-control"
+                                            value="{{licencia.datos_restriacciones}}" id="datos_restriacciones"
+                                            required>
                                         <div class="valid-feedback">
                                             Listo
                                         </div>
@@ -200,7 +208,8 @@
                                     <div class="col-md-4">
 
                                         <label for="datos_rfc" class="form-label">RFC</label>
-                                        <input type="text" class="form-control" id="datos_rfc" value="{{licencia.datos_rfc}}" required>
+                                        <input type="text" class="form-control" id="datos_rfc"
+                                            value="{{licencia.datos_rfc}}" required>
                                         <div class="valid-feedback">
                                             Listo
                                         </div>
@@ -214,15 +223,15 @@
 
                                         <select class="form-select" id="datos_donante" required>
                                             {% if licencia.datos_donante %}
-                                                <option selected value="S">Si donar</option>
-                                                <option  value="N">No donar</option>
+                                            <option selected value="S">Si donar</option>
+                                            <option value="N">No donar</option>
 
                                             {% else %}
-                                                <option selected value="N">No donar</option>
-                                                <option  value="S">Si donar</option>
+                                            <option selected value="N">No donar</option>
+                                            <option value="S">Si donar</option>
 
                                             {% endif %}
-                                            
+
 
                                         </select>
 
@@ -254,7 +263,8 @@
 
                                     <div class="col-md-6">
                                         <label for="direc_calle" class="form-label">Calle</label>
-                                        <input type="text" class="form-control" id="direc_calle" value="{{licencia.direc_calle}}" required>
+                                        <input type="text" class="form-control" id="direc_calle"
+                                            value="{{licencia.direc_calle}}" required>
                                         <div class="valid-feedback">
                                             Listo
                                         </div>
@@ -264,7 +274,8 @@
                                     </div>
                                     <div class="col-md-6">
                                         <label for="direc_ciudad" class="form-label">Ciudad</label>
-                                        <input type="text" class="form-control" id="direc_ciudad" value="{{licencia.direc_ciudad}}" required>
+                                        <input type="text" class="form-control" id="direc_ciudad"
+                                            value="{{licencia.direc_ciudad}}" required>
                                         <div class="valid-feedback">
                                             Listo
                                         </div>
@@ -274,7 +285,8 @@
                                     </div>
                                     <div class="col-md-4">
                                         <label for="direc_cp" class="form-label">Codigo postal</label>
-                                        <input type="text" class="form-control" id="direc_cp" value="{{licencia.direc_cp}}"  required>
+                                        <input type="text" class="form-control" id="direc_cp"
+                                            value="{{licencia.direc_cp}}" required>
                                         <div class="valid-feedback">
                                             Listo
                                         </div>
@@ -287,7 +299,8 @@
 
                                     <div class="col-md-4">
                                         <label for="direc_colonia" class="form-label">Colonia</label>
-                                        <input type="text" class="form-control" value="{{licencia.direc_colonia}}" id="direc_colonia" required>
+                                        <input type="text" class="form-control" value="{{licencia.direc_colonia}}"
+                                            id="direc_colonia" required>
                                         <div class="valid-feedback">
                                             Listo
                                         </div>
@@ -299,7 +312,8 @@
                                     <div class="col-md-4">
 
                                         <label for="direc_estado" class="form-label">Estado</label>
-                                        <input type="text" class="form-control" value="{{licencia.direc_estado}}" id="direc_estado" required>
+                                        <input type="text" class="form-control" value="{{licencia.direc_estado}}"
+                                            id="direc_estado" required>
                                         <div class="valid-feedback">
                                             Listo
                                         </div>
@@ -329,8 +343,8 @@
                                     <div class="col-md-4">
                                         <label for="lic_expedicion" class="form-label">Fecha de expedicion</label>
                                         <input type="text" class="form-control" id="lic_expedicion"
-                                            placeholder="DD/MM/YYYY" data-toggle="input-mask" value="{{licencia.lic_expedicion}}"
-                                            data-mask-format="00/00/0000">
+                                            placeholder="DD/MM/YYYY" data-toggle="input-mask"
+                                            value="{{licencia.lic_expedicion}}" data-mask-format="00/00/0000">
                                         <div class="valid-feedback">
                                             Listo
                                         </div>
@@ -341,7 +355,8 @@
                                     <div class="col-md-4">
                                         <label for="lic_emisora" class="form-label">Oficina emisora</label>
                                         <select class="form-select" id="lic_emisora" required>
-                                            <option selected  value="{{licencia.lic_emisora}}">{{licencia.lic_emisora}}</option>
+                                            <option selected value="{{licencia.lic_emisora}}">{{licencia.lic_emisora}}
+                                            </option>
                                             <option value="TIJUANA, CERRO">Tijuana, cerro</option>
                                             <option value="TIJUANA, LA MESA">Tijuana, La mesa</option>
                                             <option value="ENSENADA, SAN">Ensenada, San</option>
@@ -358,8 +373,8 @@
                                     <div class="col-md-4">
                                         <label for="lic_antiguedad" class="form-label">Fecha de antiguedad</label>
                                         <input type="text" class="form-control" id="lic_antiguedad"
-                                            placeholder="DD/MM/YYYY" data-toggle="input-mask" value="{{licencia.lic_antiguedad}}"
-                                            data-mask-format="00/00/0000">
+                                            placeholder="DD/MM/YYYY" data-toggle="input-mask"
+                                            value="{{licencia.lic_antiguedad}}" data-mask-format="00/00/0000">
                                         <div class="valid-feedback">
                                             Listo
                                         </div>
@@ -367,12 +382,13 @@
                                             Compruebe este campo
                                         </div>
                                     </div>
-                                    <div class="col-md-8"> 
+                                    <div class="col-md-8">
                                         <label for="lic_tipo" class="form-label">Tipo de
                                             licencia</label>
                                         <div class="input-group has-validation">
                                             <select class="form-select" id="lic_tipo" required>
-                                                <option selected  value="{{licencia.lic_tipo}}">{{licencia.lic_tipo}}</option>
+                                                <option selected value="{{licencia.lic_tipo}}">{{licencia.lic_tipo}}
+                                                </option>
                                                 <option value="Tipo A - AUTOMOVILISTA">Tipo A - AUTOMOVILISTA</option>
                                                 <option value="Tipo A - CHOFER A">Tipo A - CHOFER A</option>
                                                 <option value="Tipo B - CHOFER B">Tipo B - CHOFER B</option>
@@ -394,13 +410,14 @@
                                         <div class="input-group has-validation">
                                             <select class="form-select" id="lic_valido" required>
                                                 {% if licencia.lic_valido > 5 %}
-                                                <option selected  value="{{licencia.lic_valido}}">{{licencia.lic_valido}} años</option>
+                                                <option selected value="{{licencia.lic_valido}}">{{licencia.lic_valido}}
+                                                    años</option>
                                                 <option value="88">Permanente</option>
                                                 <option value="3">3 años</option>
                                                 <option value="5">5 años</option>
-                                       
+
                                                 {% else %}
-                                                <option selected  value="{{licencia.lic_valido}}">Permanente</option>
+                                                <option selected value="{{licencia.lic_valido}}">Permanente</option>
                                                 <option value="3">3 años</option>
                                                 <option value="5">5 años</option>
                                                 {% endif %}
@@ -438,7 +455,8 @@
 
                                     <div class="col-md-4">
                                         <label for="con_nombre" class="form-label">Nombre</label>
-                                        <input type="text" class="form-control" id="con_nombre" value="{{licencia.con_nombre}}" required>
+                                        <input type="text" class="form-control" id="con_nombre"
+                                            value="{{licencia.con_nombre}}" required>
                                         <div class="valid-feedback">
                                             Listo
                                         </div>
@@ -448,7 +466,8 @@
                                     </div>
                                     <div class="col-md-4">
                                         <label for="con_apellido" class="form-label">Apellidos</label>
-                                        <input type="text" class="form-control" value="{{licencia.con_apellido}}" id="con_apellido" required>
+                                        <input type="text" class="form-control" value="{{licencia.con_apellido}}"
+                                            id="con_apellido" required>
                                         <div class="valid-feedback">
                                             Listo
                                         </div>
@@ -461,7 +480,8 @@
 
                                     <div class="col-md-4">
                                         <label for="con_tel" class="form-label">Telefono de contacto</label>
-                                        <input type="text" value="{{licencia.con_tel}}" class="form-control" id="con_tel" required>
+                                        <input type="text" value="{{licencia.con_tel}}" class="form-control"
+                                            id="con_tel" required>
                                         <div class="valid-feedback">
                                             Listo
                                         </div>
@@ -490,50 +510,25 @@
                             <div class="card-body">
                                 <h4 class="header-title mb-3">Fotografia</h4>
                                 <hr>
-                                <!-- Preview -->
-                                <input type="text" id="url_foto" class="d-none" value=" {{licencia.foto_file.url}}">
-                                <div class="dropzone-previews mt-3" id="file-previews"></div>
 
-                                <div class="d-none" id="uploadPreviewTemplate">
-                                    <div class="card mt-1 mb-0 shadow-none border">
-                                        <div class="p-2">
-                                            <div class="row align-items-center">
-                                                <div class="col-auto">
-                                                    <img data-dz-thumbnail src="#" id="img_foto"
-                                                        class="avatar-sm rounded bg-light" alt="">
-                                                </div>
-                                                <div class="col ps-0">
-                                                    <a href="javascript:void(0);" class="text-muted fw-bold"
-                                                        data-dz-name></a>
-                                                    <p class="mb-0" data-dz-size></p>
-                                                </div>
-                                                <div class="col-auto">
-                                                    <!-- Button -->
-                                                    <a href="" class="btn btn-link btn-lg text-muted" data-dz-remove>
-                                                        <i class="ri-close-line"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
+                                <div class="row">
+                                    <a href="#" data-bs-toggle="modal" data-bs-target="#modal-foto"
+                                        class="col-12 text-center border rounded">
+                                        <h3 class="mb-2 text-secondary"><i
+                                                class="mdi mdi-cloud-upload-outline fs-1"></i></h3>
+                                        <h3 class="text-secondary">Seleccionar archivo</h3>
+                                    </a>
+                                    <div class="col-12 d-flex justify-content-center">
+                                        <div class="border border-1  border-secondary text-center mt-2"
+                                            style="height: 245px; width: 209px;">
+                                            <img src="{{licencia.foto_file.url}}" class="img-fluid" id="prev-foto-form"
+                                                alt="">
+
                                         </div>
+                                        <input type="text" id="foto-form-recorte" value="" class="d-none">
+
                                     </div>
                                 </div>
-
-                                <form action="/" method="post" class="dropzone" id="myAwesomeDropzonefoto"
-                                    data-plugin="dropzone" data-previews-container="#file-previews"
-                                    data-upload-preview-template="#uploadPreviewTemplate">
-                                    <div class="fallback">
-                                        <input name="file" id="foto_file" type="file" />
-                                    </div>
-
-                                    <div class="dz-message needsclick">
-                                        <i class="h1 text-muted ri-upload-cloud-2-line"></i>
-                                        <h3>Seleccionar archivo.</h3>
-
-                                    </div>
-                                </form>
-
-
-
                             </div> <!-- end card-body-->
                         </div> <!-- end card-->
                     </div> <!-- end col-->
@@ -543,48 +538,24 @@
                             <div class="card-body">
                                 <h4 class="header-title mb-3">Firma</h4>
                                 <hr>
-                                <input type="text" id="url_firma" class="d-none" value=" {{licencia.firma_file.url}}">
+                                <div class="row">
+                                    <a href="#" data-bs-toggle="modal" data-bs-target="#modal-firma"
+                                        class="col-12 text-center border rounded">
+                                        <h3 class="mb-2 text-secondary"><i
+                                                class="mdi mdi-cloud-upload-outline fs-1"></i></h3>
+                                        <h3 class="text-secondary">Seleccionar archivo</h3>
+                                    </a>
+                                    <div class="col-12 d-flex justify-content-center ">
+                                        <div class="border border-1  border-secondary mt-2"
+                                            style="height: 53px; width: 209px;">
+                                            <img src="{{licencia.firma_file.url}}" class="img-fluid" alt=""
+                                                id="prev-firma-form">
 
-                                <!-- Preview -->
-                                <div class="dropzone-previews mt-3" id="file-previewsfirma"></div>
-
-                                <div class="d-none" id="uploadPreviewTemplatefirma">
-                                    <div class="card mt-1 mb-0 shadow-none border">
-                                        <div class="p-2">
-                                            <div class="row align-items-center">
-                                                <div class="col-auto">
-                                                    <img data-dz-thumbnail id="img_firma" src="#"
-                                                        class="avatar-sm rounded bg-light" alt="">
-                                                </div>
-                                                <div class="col ps-0">
-                                                    <a href="javascript:void(0);" class="text-muted fw-bold"
-                                                        data-dz-name></a>
-                                                    <p class="mb-0" data-dz-size></p>
-                                                </div>
-                                                <div class="col-auto">
-                                                    <!-- Button -->
-                                                    <a href="" class="btn btn-link btn-lg text-muted" data-dz-remove>
-                                                        <i class="ri-close-line"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
+
+                                    <input type="text" id="firma-form-recorte" value="" class="d-none">
                                 </div>
-
-                                <form action="/" method="post" class="dropzone" id="myAwesomeDropzonefirma"
-                                    data-plugin="dropzone" data-previews-container="#file-previewsfirma"
-                                    data-upload-preview-template="#uploadPreviewTemplatefirma">
-                                    <div class="fallback">
-                                        <input name="file" type="file" id="firma_file" />
-                                    </div>
-
-                                    <div class="dz-message needsclick">
-                                        <i class="h1 text-muted ri-upload-cloud-2-line"></i>
-                                        <h3>Seleccionar archivo.</h3>
-
-                                    </div>
-                                </form>
 
 
 
@@ -595,21 +566,121 @@
                 <!-- end row-->
                 <div class="row">
                     <div class="col-12 d-grid">
-                        <button type="submit" id="btn_uplicencia" class="btn btn-lg btn-soft-primary"> Actualizar licencia</button>
+                        <button type="submit" id="btn_uplicencia" class="btn btn-lg btn-soft-primary"> Actualizar
+                            licencia</button>
                     </div>
                     <!-- end d-grid -->
                 </div>
                 <input type="text" id="id_licencia" value="{{licencia.id}}" class="d-none">
                 <div class="modal fade" id="spinner_modal" tabindex="-1" role="dialog" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content"  style="background-color: transparent;">
-                      
+                        <div class="modal-content" style="background-color: transparent;">
+
                             <div class="modal-body text-center">
                                 <div class="spinner-border avatar-lg text-primary" role="status"></div>
                             </div>
                         </div><!-- /.modal-content -->
                     </div><!-- /.modal-dialog -->
                 </div><!-- /.modal -->
+
+
+
+
+
+
+                <div id="modal-foto" class="modal fade" tabindex="-1" role="dialog"
+                    aria-labelledby="fullWidthModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-full-width">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="fullWidthModalLabel">Fotografia del perfil</h4>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-hidden="true"></button>
+                            </div>
+                            <div class="modal-body">
+
+                                <div class="mb-3 col-lg-3 col-12">
+                                    <label for="formFile" class="form-label">Selecciona foto</label>
+                                    <input class="form-control" type="file" id="image1">
+                                </div>
+                                <!-- Input file donde se adjunta la imagen -->
+                                <div class="row justify-content-center">
+                                    <div class="col-lg-5 col-12">
+                                        <div id="editor1"></div>
+
+                                    </div>
+                                    <div class="col-lg-5 col-12">
+                                        <div class="border border-3  border-danger "
+                                            style="height: 245px; width: 209px;">
+                                            <canvas id="preview1" class="img-fluid"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+                                <code class="d-none" id="base64"></code>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancelar</button>
+                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Guardar
+                                    cambios</button>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
+
+
+                <div id="modal-firma" class="modal fade" tabindex="-1" role="dialog"
+                    aria-labelledby="fullWidthModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-full-width">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="fullWidthModalLabel">Firma del perfil</h4>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-hidden="true"></button>
+                            </div>
+                            <div class="modal-body">
+
+                                <div class="mb-3 col-lg-3 col-12">
+                                    <label for="formFile" class="form-label">Selecciona firma</label>
+                                    <input class="form-control" type="file" id="image2">
+                                </div>
+                                <!-- Input file donde se adjunta la imagen -->
+                                <div class="row justify-content-center">
+                                    <div class="col-lg-5 col-12 text-center">
+                                        <div id="editor2"></div>
+
+                                    </div>
+                                    <div class="col-lg-5 col-12 text-center">
+                                        <div class="border border-3  border-danger "
+                                            style="height: 53px; width: 209px;">
+                                            <canvas id="preview2" class="img-fluid"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+                                <code class="d-none" id="base64"></code>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancelar</button>
+                                <button type="button" data-bs-dismiss="modal" class="btn btn-primary">Guardar
+                                    cambios</button>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
+
+
+
+
+
+
+
             </div> <!-- container -->
 
         </div> <!-- content -->
@@ -662,5 +733,121 @@
 
 <script src="{% static 'licencias/js/forms.js' %}"></script>
 
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        
+        function imagenABase64(idImagen) {
+            // Obtiene el elemento img
+            let imgElement = document.getElementById(idImagen);
 
+            // Crea un canvas y obtén su contexto
+            let canvas = document.createElement('canvas');
+            let ctx = canvas.getContext('2d');
+
+            // Asegúrate de que el canvas tenga el mismo tamaño que la imagen
+            canvas.width = imgElement.width;
+            canvas.height = imgElement.height;
+
+            // Dibuja la imagen en el canvas
+            ctx.drawImage(imgElement, 0, 0, imgElement.width, imgElement.height);
+
+            // Retorna la representación en base64 de la imagen
+            return canvas.toDataURL("image/png");
+        }
+        try {
+            let inputfoto = document.getElementById('foto-form-recorte');
+            let inputfirma = document.getElementById('firma-form-recorte');
+
+            inputfoto.value = imagenABase64('prev-foto-form');
+
+            inputfirma.value = imagenABase64('prev-firma-form');
+        } catch (error) {
+
+        }
+
+
+        // Input File
+        const inputImage1 = document.querySelector('#image1');
+        const inputImage2 = document.querySelector('#image2');
+        // Nodo donde estará el editor
+        const editor1 = document.querySelector('#editor1');
+        const editor2 = document.querySelector('#editor2');
+        // El canvas donde se mostrará la previa
+        const miCanvas1 = document.querySelector('#preview1');
+        const miCanvas2 = document.querySelector('#preview2');
+        // Contexto del canvas
+        const contexto1 = miCanvas1.getContext('2d');
+        const contexto2 = miCanvas2.getContext('2d');
+        // Ruta de la imagen seleccionada
+        let urlImage1 = undefined;
+        let urlImage2 = undefined;
+
+        // Evento disparado cuando se adjunte una imagen
+        inputImage1.addEventListener('change', (e) => abrirEditor(e, editor1, contexto1, urlImage1, miCanvas1, 1.195, [205, 245], 'prev-foto-form', 'foto-form-recorte'), false);
+        inputImage2.addEventListener('change', (e) => abrirEditor(e, editor2, contexto2, urlImage2, miCanvas2, 0.253, [300, 100], 'prev-firma-form', 'firma-form-recorte'), false);
+
+        /**
+         * Método que abre el editor con la imagen seleccionada
+         */
+        function abrirEditor(e, editor, contexto, urlImage, miCanvas, aspect, size, idImgElement, idinputElement) {
+            // Obtiene la imagen
+            urlImage = URL.createObjectURL(e.target.files[0]);
+
+            // Borra editor en caso que existiera una imagen previa
+            editor.innerHTML = '';
+            let cropprImg = document.createElement('img');
+            cropprImg.setAttribute('id', 'croppr');
+            editor.appendChild(cropprImg);
+
+            // Limpia la previa en caso que existiera algún elemento previo
+            contexto.clearRect(0, 0, miCanvas.width, miCanvas.height);
+
+            // Envia la imagen al editor para su recorte
+            document.querySelector('#croppr').setAttribute('src', urlImage);
+
+            // Crea el editor
+            new Croppr('#croppr', {
+                aspectRatio: aspect,
+                startSize: size,
+                onCropEnd: (data) => recortarImagen(data, contexto, urlImage, miCanvas, idImgElement, idinputElement),
+
+            })
+        }
+
+        /**
+         * Método que recorta la imagen con las coordenadas proporcionadas con croppr.js
+         */
+        function recortarImagen(data, contexto, urlImage, miCanvas, idImgElement, idinputElement) {
+            // Variables
+            const inicioX = data.x;
+            const inicioY = data.y;
+            const nuevoAncho = data.width;
+            const nuevaAltura = data.height;
+            const zoom = 1;
+            let imagenEn64 = '';
+            let img = document.getElementById(idImgElement);
+            let inputimg = document.getElementById(idinputElement);
+            // La imprimo
+            miCanvas.width = nuevoAncho;
+            miCanvas.height = nuevaAltura;
+            // La declaro
+            let miNuevaImagenTemp = new Image();
+            // Cuando la imagen se carge se procederá al recorte
+            miNuevaImagenTemp.onload = function () {
+                // Se recorta
+                contexto.drawImage(miNuevaImagenTemp, inicioX, inicioY, nuevoAncho * zoom, nuevaAltura * zoom, 0, 0, nuevoAncho, nuevaAltura);
+                // Se transforma a base64
+                imagenEn64 = miCanvas.toDataURL("image/png");
+                // Mostramos el código generado
+                document.querySelector('#base64').textContent = imagenEn64;
+                img.src = imagenEn64;
+                inputimg.value = imagenEn64;
+            }
+            // Proporciona la imagen cruda, sin editarla por ahora
+            miNuevaImagenTemp.src = urlImage;
+        }
+    });
+
+
+</script>
 {% endblock %}
