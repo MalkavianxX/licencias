@@ -35,11 +35,11 @@ function FromEN64toPNG(imagenEn64) {
         return file;
     
 }
-function successAlert(title = "Licencia creada") {
+function successAlert(title = "Licencia creada",id_licencia = undefined) {
     Swal.fire({
         title: title,
         icon: 'success',
-        confirmButtonText: 'Listo',
+        confirmButtonText: 'Ver licencia',
         customClass: {
             confirmButton: 'btn btn-soft-primary',
         },
@@ -47,7 +47,8 @@ function successAlert(title = "Licencia creada") {
     }).then((result) => {
         /* Read more about isConfirmed, isDenied below */ 
         if (result.isConfirmed) {
-            window.location.reload();
+            
+            window.location.href= '/licenciasview_watch_licencia/'+id_licencia+'/';
         } else if (result.isDenied) {
             Swal.fire('Changes are not saved', '', 'info')
         }
@@ -126,7 +127,7 @@ function enviarDatos() {
             .then(response => response.json())
             .then(data => {
                 // Manejar la respuesta de Django si es necesario
-                successAlert();
+                successAlert('Licencia creada',data.id);
     
             })
             .catch(error => {

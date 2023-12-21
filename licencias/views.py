@@ -72,7 +72,7 @@ def fun_save_licencia(request):
         else:
             asg = Asignaciones.objects.get(user = request.user)
             asg.usar()
-        return JsonResponse(data= {'mensaje': 'Datos recibidos correctamente'})
+        return JsonResponse(data= {'mensaje': 'Datos recibidos correctamente','id':licencia.id})
    
     else:
         return JsonResponse(data= {'error': 'Método no permitido'}, status=400)
