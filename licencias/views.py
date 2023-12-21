@@ -41,7 +41,7 @@ def fun_save_licencia(request):
             datos_sexo=data['datos_sexo'],
             datos_nacionalidad=data['datos_nacionalidad'],
             datos_restriacciones=data['datos_restriacciones'],
-            datos_nacimiento=timezone.datetime.strptime(data['datos_nacimiento'], '%d/%m/%Y').date(),
+            datos_nacimiento=timezone.datetime.strptime(data['datos_nacimiento'], '%Y-%m-%d').date(),
             datos_rfc=data['datos_rfc'],
             datos_donante=data['datos_donante'] ,
 
@@ -51,9 +51,9 @@ def fun_save_licencia(request):
             direc_colonia=data['direc_colonia'],
             direc_estado=data['direc_estado'],
 
-            lic_expedicion=timezone.datetime.strptime(data['lic_expedicion'], '%d/%m/%Y').date(),
+            lic_expedicion=timezone.datetime.strptime(data['lic_expedicion'], '%Y-%m-%d').date(),
             lic_emisora=data['lic_emisora'],
-            lic_antiguedad=timezone.datetime.strptime(data['lic_antiguedad'], '%d/%m/%Y').date(),
+            lic_antiguedad=timezone.datetime.strptime(data['lic_antiguedad'], '%Y-%m-%d').date(),
             lic_tipo=data['lic_tipo'],
             lic_valido=data['lic_valido'],
 
@@ -106,9 +106,9 @@ def view_mis_licencias(request):
 def view_edit_licencia(request,id):
     licencia = Licencia.objects.get(pk=id)
 
-    licencia.datos_nacimiento = licencia.datos_nacimiento.strftime('%d/%m/%Y')
-    licencia.lic_expedicion = licencia.lic_expedicion.strftime('%d/%m/%Y')
-    licencia.lic_antiguedad = licencia.lic_antiguedad.strftime('%d%m/%Y')
+    licencia.datos_nacimiento = licencia.datos_nacimiento.strftime('%Y-%m-%d')
+    licencia.lic_expedicion = licencia.lic_expedicion.strftime('%Y-%m-%d')
+    licencia.lic_antiguedad = licencia.lic_antiguedad.strftime('%Y-%m-%d')
     anverso,reverso = det_tipo_licencia(licencia.lic_tipo, licencia.datos_donante)
  
     return render(request, "licencias/base/view_edit_licencia.html",{
@@ -180,7 +180,7 @@ def fun_up_licencia(request):
         licencia_up.datos_sexo =  data['datos_sexo']
         licencia_up.datos_nacionalidad = data['datos_nacionalidad']
         licencia_up.datos_restriacciones = data['datos_restriacciones']
-        licencia_up.datos_nacimiento = timezone.datetime.strptime(data['datos_nacimiento'], '%d/%m/%Y').date()
+        licencia_up.datos_nacimiento = timezone.datetime.strptime(data['datos_nacimiento'], '%Y-%m-%d').date()
         licencia_up.datos_rfc = data['datos_rfc']
         licencia_up.datos_donante = data['datos_donante']
 
@@ -190,9 +190,9 @@ def fun_up_licencia(request):
         licencia_up.direc_colonia = data['direc_colonia']
         licencia_up.direc_estado = data['direc_estado']
 
-        licencia_up.lic_expedicion = timezone.datetime.strptime(data['lic_expedicion'], '%d/%m/%Y').date()
+        licencia_up.lic_expedicion = timezone.datetime.strptime(data['lic_expedicion'], '%Y-%m-%d').date()
         licencia_up.lic_emisora = data['lic_emisora']
-        licencia_up.lic_antiguedad = timezone.datetime.strptime(data['lic_antiguedad'], '%d/%m/%Y').date()
+        licencia_up.lic_antiguedad = timezone.datetime.strptime(data['lic_antiguedad'], '%Y-%m-%d').date()
         licencia_up.lic_tipo = data['lic_tipo']
         licencia_up.lic_valido = data['lic_valido']
 
