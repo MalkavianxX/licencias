@@ -92,13 +92,16 @@ def view_watch_licencia(request,id):
 
 def view_mis_licencias(request):
     if request.user.is_superuser or request.user.is_staff:
-        licencias = Licencia.objects.all().order_by('fecha')
+        licencias = Licencia.objects.all().order_by('-fecha')
     else:
-        licencias = Licencia.objects.filter(user = request.user).order_by('fecha')
+        licencias = Licencia.objects.filter(user = request.user).order_by('-fecha')
 
     for iter in licencias:
-        
-        iter.lic_valido = iter.lic_expedicion.strftime('%d') +'/'+ iter.lic_expedicion.strftime('%m') +'/'+ str(int(iter.lic_expedicion.strftime('%Y')) + int(iter.lic_valido))
+        try:
+
+            iter.lic_valido_temp = iter.lic_expedicion.strftime('%d') +'/'+ iter.lic_expedicion.strftime('%m') +'/'+ str(int(iter.lic_expedicion.strftime('%Y')) + int(iter.lic_valido))
+        except:
+            iter.lic_valido_tem = "ERROR"
         iter.lic_expedicion = iter.lic_expedicion.strftime('%d/%m/%Y')
 
     return render(request, 'licencias/base/view_mis_licencias.html',{'licencias':licencias})
@@ -249,6 +252,7 @@ def validar_licencia(request,XWOPSLT,FFTWRPTO):
         licencia = Licencia.objects.get(pk=XWOPSLT)  # Intenta obtener la instancia del modelo
         data = model_to_dict(licencia, exclude=["foto_file", "firma_file"])  # Conviértelo a un diccionario
         data['folio'] = licencia.folio.texto  # Agrega el atributo 'texto' del objeto 'Folio' asociado
+        data['lic_expedicion'] = licencia.lic_expedicion.strftime('%d/%m/%Y')
         data['valido'] = licencia.lic_expedicion.strftime('%d') +'/'+ licencia.lic_expedicion.strftime('%m') +'/'+ str(int(licencia.lic_expedicion.strftime('%Y')) + int(licencia.lic_valido))
         print(data["valido"])
         return JsonResponse(data)  # Retorna los datos como una respuesta JSON

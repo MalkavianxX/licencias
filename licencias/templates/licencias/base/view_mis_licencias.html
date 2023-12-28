@@ -74,13 +74,12 @@
                     <table id="alternative-page-datatable" class="table table-striped dt-responsive w-100">
                         <thead class="bg-primary">
                             <tr>
+                                <th>Solicitante</th>
                                 <th>Folio</th>
                                 <th>Expedicion</th>
                                 <th>Vencimiento</th>
-                                <th>Solicitante</th>
                                 <th>Curp</th>
                                 <th>Tipo </th>
-
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -89,16 +88,14 @@
                         <tbody>
                             {% for licencia in licencias %}
                             <tr id="licenciaRow_{{ licencia.id }}">
+                                <td>{{ licencia.datos_nombres }}</td>
                                 <td>{{ licencia.folio}}</td>
                                 <td>{{ licencia.lic_expedicion }}</td>
-                                <td>{{ licencia.lic_valido }}</td>
-                                <td>{{ licencia.datos_nombres }}</td>
+                                <td>{{ licencia.lic_valido_temp }}</td>
                                 <td>{{ licencia.datos_curp }}</td>
                                 <td>{{ licencia.lic_tipo }}</td>
 
                                 <td class="table-action">
-
-
 
                                     <a type="button" href="{% url 'view_edit_licencia' licencia.id %}" 
                                         class="btn btn-light" 
