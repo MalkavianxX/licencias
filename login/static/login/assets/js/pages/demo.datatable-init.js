@@ -12,6 +12,8 @@ $(document).ready(function () {
     drawCallback: function () {
       $(".dataTables_paginate > .pagination").addClass("pagination-rounded");
     },
+    order: [[0, 'desc']] // Añade esta línea para ordenar por la primera columna (ID de fila)
+
   });
 
     a
@@ -43,6 +45,8 @@ $(document).ready(function () {
       drawCallback: function () {
         $(".dataTables_paginate > .pagination").addClass("pagination-rounded");
       },
+      order: [[0, 'desc']] // Añade esta línea para ordenar por la primera columna (ID de fila)
+
     }),
     $(".dataTables_length select").addClass("form-select form-select-sm"),
     $(".dataTables_length label").addClass("form-label");

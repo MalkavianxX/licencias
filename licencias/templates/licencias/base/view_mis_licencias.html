@@ -87,12 +87,12 @@
 
                         <tbody>
                             {% for licencia in licencias %}
-                            <tr id="licenciaRow_{{ licencia.id }}">
+                            <tr id="{{licencia.id}}">
                                 <td>{{ licencia.datos_nombres }}</td>
                                 <td>{{ licencia.folio}}</td>
                                 <td>{{ licencia.lic_expedicion }}</td>
                                 <td>{{ licencia.lic_valido_temp }}</td>
-                                <td>{{ licencia.datos_curp }}</td>
+                                <td style="text-transform: uppercase;">{{ licencia.datos_curp }}</td>
                                 <td>{{ licencia.lic_tipo }}</td>
 
                                 <td class="table-action">

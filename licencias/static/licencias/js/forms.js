@@ -215,8 +215,8 @@ document.addEventListener('DOMContentLoaded', function () {
         editbtn.addEventListener('click', function (e) {
             // Crear una nueva instancia de Cropper con la nueva imagen
             cropper = new Cropper(image, {
-                aspectRatio: aspectRatio,
-                viewMode: 0,
+                aspectRatio: 205/245,
+                viewMode: 3,
                 dragMode: 'move',
                 crop(event) {
                     updatePreview(cropper, previewImage);
@@ -249,8 +249,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 // Crear una nueva instancia de Cropper con la nueva imagen
                 cropper = new Cropper(image, {
-                    aspectRatio: aspectRatio,
-                    viewMode: 0,
+                    aspectRatio: 205/49,
+                    viewMode: 3,
                     dragMode: 'move',
                     crop(event) {
                         updatePreview(cropper, previewImage);
@@ -318,7 +318,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var inputImagen = document.getElementById('imagen_foto'); // input que carga la imagen
     var previewImage = document.getElementById('foto_preview_editor');
     var inputtododata = document.getElementById('b64F');
-    var aspectRatio = 0;
+    var aspectRatio = 0; 
     let cropper;
     var edit_btn = document.getElementById('editF');
     // Función para crear o reemplazar la instancia de Cropper
@@ -326,8 +326,8 @@ document.addEventListener('DOMContentLoaded', function () {
         edit_btn.addEventListener('click', function (e) {
             // Crear una nueva instancia de Cropper con la nueva imagen
             cropper = new Cropper(image, {
-                aspectRatio: aspectRatio,
-                viewMode: 0,
+                aspectRatio: 205/245, 
+                viewMode: 1 ,
                 dragMode: 'move',
                 crop(event) {
                     updatePreview(cropper, previewImage);
@@ -360,8 +360,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Crear una nueva instancia de Cropper con la nueva imagen
             cropper = new Cropper(image, {
-                aspectRatio: aspectRatio,
-                viewMode: 0,
+                aspectRatio: 205/245,
+                viewMode: 2,
                 dragMode: 'move',
                 crop(event) {
                     updatePreview(cropper, previewImage);
