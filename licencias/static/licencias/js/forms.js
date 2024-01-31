@@ -250,7 +250,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Crear una nueva instancia de Cropper con la nueva imagen
                 cropper = new Cropper(image, {
                     aspectRatio: 205/49,
-                    viewMode: 3,
+                    viewMode: 0,
                     dragMode: 'move',
                     crop(event) {
                         updatePreview(cropper, previewImage);
@@ -389,7 +389,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     document.getElementById('zoom-outF').addEventListener('click', function () {
-        cropper.zoom(-0.1);  // Hacer zoom in 0.1 unidades
+        cropper.zoom(-1) ;  // Hacer zoom in 0.1 unidades
     });
 
     document.getElementById('rotate-rightF').addEventListener('click', function () {
