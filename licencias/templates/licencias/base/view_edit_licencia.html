@@ -519,7 +519,7 @@
                                         <div class="accordion" id="accordionExample">
                                             <div class="accordion-item">
                                                 <h2 class="accordion-header" id="headingOne">
-                                                    <button  class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
                                                         aria-expanded="true" aria-controls="collapseOne">
                                                         Seleccionar archivo
                                                     </button>
@@ -535,12 +535,6 @@
                                                         <div class="row mb-lg-3 mb-2 jus">
                                                             <div class=" col-12 d-flex justify-content-start" id="toolsfirma">
                                                                 <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-                                                                    <div class="btn-group me-2" role="group" aria-label="First group">
-                        
-                                                                        <button id="editF" type="button" class="btn btn-warning"> <i
-                                                                                class="mdi mdi-image-edit-outline fs-3"></i></button>
-                                                                       
-                                                                    </div>
                                                                     <div class="btn-group me-2" role="group" aria-label="First group">
                         
                                                                         <button id="rotate-leftF" type="button" class="btn btn-primary"> <i
@@ -576,9 +570,9 @@
                                                             </div>
                                                             <div
                                                                 class="col-lg-6 col-md-6 col-12 mt-lg-0 mt-3 d-flex align-items-center justify-content-center  ">
-                                                                <div style="height: 245px; width: 209px;"
+                                                                <div style="height: 245px; width: 205px;"
                                                                     class=" border border-1  border-secondary text-center overflow-hidden">
-                                                                    <img src="{{licencia.foto_file.url}}" style="max-width: 100%; display: block;"
+                                                                    <img src="{{licencia.foto_file.url}}" style="width: 100%;"
                                                                         id="foto_preview_editor" alt="">
                         
                                                                 </div>
@@ -625,12 +619,6 @@
                                                         <div class="col-12 d-flex justify-content-start" id="toolsfirma">
                                                             <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                                                                 <div class="btn-group me-2" role="group" aria-label="First group">
-                        
-                                                                    <button id="edit" type="button" class="btn btn-warning"> <i
-                                                                            class="mdi mdi-image-edit-outline fs-3"></i></button>
-                                                                   
-                                                                </div>
-                                                                <div class="btn-group me-2" role="group" aria-label="First group">
                     
                                                                     <button id="rotate-left" type="button" class="btn btn-primary"> <i
                                                                             class="mdi mdi-rotate-left fs-3"></i></button>
@@ -661,16 +649,16 @@
                     
                                                     <div class="row">
                                                         <div class="col-lg-6 col-md-6 col-12 text-center">
-                                                            <img style="max-width: 100%;" src="{{licencia.firma_file.url}}" id="firma_img_editor" alt=""
+                                                            <img style="width: 100%; height: 100%;object-fit: contain !important;" src="{{licencia.firma_file.url}}" id="firma_img_editor" alt=""
                                                                 class="img-fluid">
                     
                                                         </div>
                                                         <div
                                                             class="col-lg-6 col-md-6 col-12 mt-lg-0 mt-3 d-flex align-items-center justify-content-center  ">
-                                                            <div style="height: 53px; width: 209px;"
+                                                            <div style="height: 49px; width: 205px;"
                                                                 class=" border border-1  border-secondary text-center overflow-hidden">
-                                                                <img src="{{licencia.firma_file.url}}" style="max-width: 100%; display: block;"
-                                                                    id="firma_preview_editor" alt="">
+                                                                <img src="{{licencia.firma_file.url}}" 
+                                                                    id="firma_preview_editor" style="width: 100%;" alt="">
                     
                                                             </div>
                                                         </div>
