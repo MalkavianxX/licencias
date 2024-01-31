@@ -28,7 +28,7 @@ def fun_save_licencia(request):
         nuevo_folio.add_folio()
         
         data = recovery_save(request)
-
+    
 
 
         licencia = Licencia(

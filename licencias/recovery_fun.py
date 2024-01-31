@@ -35,7 +35,7 @@ def recovery_save(request):
     data['con_nombre'] = request.POST.get('con_nombre')
     data['con_apellido'] = request.POST.get('con_apellido')
     data['con_tel'] = request.POST.get('con_tel')
-
+    print(request.FILES['foto_file'])
     # Obtener los archivos de las imágenes
     data['foto_file'] = request.FILES['foto_file']
     data['firma_file'] = request.FILES['firma_file']  

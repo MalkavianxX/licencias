@@ -559,7 +559,7 @@
                         
                                                             </div>
                                                             <div class="col-lg-8 col-12">
-                                                                <input type="hidden" class="form-control" id="b64F">
+                                                                <input type="text" class="form-control" id="b64F">
                                                             </div>
                                                         </div>
                         
@@ -643,7 +643,7 @@
                     
                                                         </div>
                                                         <div class="col-lg-8 col-12">
-                                                            <input type="hidden" class="form-control" id="b64">
+                                                            <input type="text" class="form-control" id="b64">
                                                         </div>
                                                     </div>
                     
@@ -759,5 +759,37 @@
     integrity="sha512-9KkIqdfN7ipEW6B6k+Aq20PV31bjODg4AA52W+tYtAE0jE0kMx49bjJ3FgvS56wzmyfMUHbQ4Km2b7l9+Y/+Eg=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+    <script>
+        // Función para convertir una imagen a base64
+function imageToBase64(img, callback) {
+    var canvas = document.createElement('canvas');
+    canvas.width = img.naturalWidth;
+    canvas.height = img.naturalHeight;
+    canvas.getContext('2d').drawImage(img, 0, 0);
+    var base64String = canvas.toDataURL();
+    callback(base64String);
+}
+
+// Función para manejar la carga de la imagen
+function handleImageLoad(img, inputId) {
+    imageToBase64(img, function(base64String) {
+        document.getElementById(inputId).value = base64String;
+    });
+}
+
+// Función para ejecutar cuando se carga la página
+window.onload = function() {
+    // Obtén las imágenes y los inputs
+    var firmaImg = document.getElementById('firma_img_editor');
+    var fotoImg = document.getElementById('foto_img_editor');
+    var firmaInput = 'b64';
+    var fotoInput = 'b64F';
+
+    // Maneja la carga de las imágenes
+    handleImageLoad(firmaImg, firmaInput);
+    handleImageLoad(fotoImg, fotoInput);
+};
+
+    </script>
 
 {% endblock %}

@@ -35,6 +35,7 @@ function FromEN64toPNG(imagenEn64) {
     return file;
 
 }
+
 function successAlert(title = "Licencia creada", id_licencia = undefined) {
     Swal.fire({
         title: title,
@@ -78,27 +79,40 @@ function getBase64Image(img) {
 }
 
 function recopilarDatos() {
-    try {
+
         // Recopilamos los datos de los formularios
         let form_datos = document.getElementById('form_datos');
         let form_direc = document.getElementById('form_direc');
         let form_licencia = document.getElementById('form_licencia');
         let form_contacto = document.getElementById('form_contacto');
+        var b64firma = document.getElementById('b64');
+        var b64foto = document.getElementById('b64F');
+        // Definimos las variables fuera de los bloques try/catch
+        var foto_file;
+        var firma_file;
+                
+        if (b64firma.value || b64foto.value) {
+            console.log("ambas tineen b64");
+            foto_file = FromEN64toPNG(b64foto.value);
+            firma_file = FromEN64toPNG(b64firma.value);
 
-
-
-        try {
-            // Recopilamos los archivos de las imágenes 
-            var foto_file = FromEN64toPNG(document.getElementById('foto-form-recorte').value);
-            var firma_file = FromEN64toPNG(document.getElementById('firma-form-recorte').value);
-
-        } catch (error) {
-
-            // Recopilamos los archivos de las imágenes 
-            var foto_file = getBase64Image(document.getElementById('foto_preview_editor'));
-            var firma_file = getBase64Image(document.getElementById('firma_preview_editor'));
-
+        } else{
+            try {
+                // Recopilamos los archivos de las imágenes 
+                foto_file = FromEN64toPNG(document.getElementById('foto-form-recorte').value);
+                firma_file = FromEN64toPNG(document.getElementById('firma-form-recorte').value);
+    
+            } catch (error) {
+    
+                // Recopilamos los archivos de las imágenes 
+                foto_file = getBase64Image(document.getElementById('foto_preview_editor'));
+                firma_file = getBase64Image(document.getElementById('firma_preview_editor'));
+    
+            }
         }
+        
+
+
         // Creamos  un objeto FormData para empaquetar todos los datos
         let formData = new FormData();
 
@@ -117,14 +131,22 @@ function recopilarDatos() {
         } catch (error) { }
 
         // Retornamos el objeto FormData con todos los datos recopilados
+            // Verificar que se está enviando un archivo de imagen
+        for (let [key, value] of formData.entries()) {
+            if (value instanceof File) {
+                console.log(key + ' es un archivo de tipo ' + value.type);
+                if (!value.type.startsWith('image/')) {
+                    console.log(key + ' no es un archivo de imagen');
+                }
+            }else{
+                console.log("no");
+                console.log(key, value.type, value);
+            }
+        }
         return formData;
 
-    } catch (error) {
-        return error;
     }
 
-
-}
 
 // Función para enviar los datos por medio de FETCH
 function enviarDatos() {
@@ -132,7 +154,19 @@ function enviarDatos() {
     const csrfToken = getCSRFToken();
 
     var datos = recopilarDatos();
-    console.log(datos);
+        // Verificar que se está enviando un archivo de imagen
+    for (let [key, value] of datos.entries()) {
+        if (value instanceof File) {
+            console.log(key + ' es un archivo de tipo ' + value.type);
+            if (!value.type.startsWith('image/')) {
+                console.log(key + ' no es un archivo de imagen');
+            }
+        }else{
+            console.log(key,value.type, value);
+        }
+
+    }
+    
     if (datos instanceof FormData) {
         fetch('/licenciasfun_save_licencia', {
             method: 'POST',
