@@ -20,26 +20,40 @@ window.onload = function() {
   //imagenes
   let img_anverso = parseInt( document.getElementById('img_anverso').value);
   let img_reverso = parseInt( document.getElementById('img_reverso').value);
-
+  let autoriza = document.getElementById('autoriza');
+  let f_autoriza = document.getElementById('f_autoriza');
   console.log(img_anverso, img_reverso);
   switch (img_anverso) {
       case 1:
           lic_anverso.classList.add('A-CHOFERA');
+          autoriza.innerHTML = 'VEHÍCULO TRACTO CAMIÓN, VOLTEO, PIPA, TORTON, CAMIÓN DE 8 TONELADAS O MAYOR ASÍ COMO DE TRES EJES O MAS , CAMIÓN FORÁNEO PASAJERO.';
+          f_autoriza.value = 'VEHÍCULO TRACTO CAMIÓN, VOLTEO, PIPA, TORTON, CAMIÓN DE 8 TONELADAS O MAYOR ASÍ COMO DE TRES EJES O MAS , CAMIÓN FORÁNEO PASAJERO.';
+
           break;
       case 2:
           lic_anverso.classList.add('A-AUTOMOVILISTA');
+          autoriza.innerHTML = 'AUTOMOVILES PARTICULARES';
+          f_autoriza.value = 'AUTOMOVILES PARTICULARES';
           break; 
       case 3:
           lic_anverso.classList.add('B-choferB-anverso');
+          autoriza.innerHTML = 'CAMION URBANO DE PASAJEROS Y CAMION DE CARGA A DOS TON DE DOS EJES';
+          f_autoriza.value = 'CAMION URBANO DE PASAJEROS Y CAMION DE CARGA A DOS TON DE DOS EJES';
           break;            
       case 4:
           lic_anverso.classList.add('C-CHOFERC');
+          autoriza.innerHTML  = 'VEHICULOS COMERCIALES CAMIONES TIPO PICK-UP. PANELES CERRADOS y CAMIONES RABONES DE HASTA DE 3 TON';
+          f_autoriza.value = 'VEHICULOS COMERCIALES CAMIONES TIPO PICK-UP. PANELES CERRADOS y CAMIONES RABONES DE HASTA DE 3 TON';
           break;   
       case 5:
           lic_anverso.classList.add('E-CHOFERD');
+          autoriza.innerHTML = 'VEHICULOS DE ALQUILER (TAXIS)';
+          f_autoriza.value = "VEHICULOS DE ALQUILER (TAXIS)";
           break;   
       case 6:
           lic_anverso.classList.add('M-MOTOCICLISTA');
+          autoriza.innerHTML= 'MOTOCICLETA';
+          f_autoriza.value = "MOTOCICLETA";
           break;                          
       default:
           break;
@@ -80,10 +94,10 @@ document.getElementById('exportar-reverso').addEventListener('click', function()
       ctxRotado.drawImage(canvas, -canvas.width / 2, -canvas.height / 2);
 
       // Descargar la imagen rotada
-      let folio = document.getElementById('numlicencia');
+      let nombre = document.getElementById('f_nombre').value + ' ' + document.getElementById('f_apellidos').value;
       let link = document.createElement('a');
-      link.download =  folio.textContent || folio.innerText;
-      link.download = 'reverso-' + link.download
+      link.download =  nombre;
+      link.download = 'REVERSO -' + link.download
       link.href = canvasRotado.toDataURL()
       link.click();
       setTimeout(function() {
@@ -120,10 +134,10 @@ document.getElementById('exportar-anverso').addEventListener('click', function()
         ctxRotado.drawImage(canvas, -canvas.width / 2, -canvas.height / 2);
   
         // Descargar la imagen rotada
-        let folio = document.getElementById('numlicencia');
+        let nombre = document.getElementById('f_nombre').value + ' ' + document.getElementById('f_apellidos').value;
         let link = document.createElement('a');
-        link.download =  folio.textContent || folio.innerText;
-        link.download = 'anverso-' + link.download
+        link.download =  nombre;
+        link.download = 'ANVERSO -' + link.download
         link.href = canvasRotado.toDataURL()
         link.click();
         setTimeout(function() {
@@ -152,9 +166,9 @@ document.getElementById('exportarpdf').addEventListener('click', function() {
       pdf.addPage();
       html2canvas(document.querySelector("#lic_reverso")).then(canvas2 => {
           pdf.addImage(canvas2.toDataURL("image/png"), 'PNG', 0, 0, width, height);
-          let folio = document.getElementById('numlicencia');
-            let texto = folio.textContent || folio.innerText;
-          pdf.save(texto);
+          let nombre = document.getElementById('f_nombre').value + ' ' + document.getElementById('f_apellidos').value;
+
+          pdf.save(nombre);
       });
       setTimeout(function() {
         modal.hide();
