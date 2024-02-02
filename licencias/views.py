@@ -98,11 +98,13 @@ def view_watch_licencia(request,id):
 
 def view_mis_licencias(request):
     if request.user.is_superuser or request.user.is_staff:
-        licencias = Licencia.objects.all()
+        licencias = Licencia.objects.all().order_by('-id')
     else:
-        licencias = Licencia.objects.filter(user = request.user)
-
-    return render(request, 'licencias/base/view_mis_licencias.html',{'licencias':licencias.order_by('-id')})
+        licencias = Licencia.objects.filter(user = request.user).order_by('-id')
+        
+    for iter in licencias:
+        iter.lic_expedicion = iter.lic_expedicion.strftime('%d/%m/%Y')
+    return render(request, 'licencias/base/view_mis_licencias.html',{'licencias':licencias})
 
 def view_edit_licencia(request,id):
     licencia = Licencia.objects.get(pk=id)
