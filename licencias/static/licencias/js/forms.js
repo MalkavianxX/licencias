@@ -54,14 +54,14 @@ function successAlert(title = "Licencia creada", id_licencia = undefined) {
             Swal.fire('Changes are not saved', '', 'info')
         }
     })
-}
+} 
 function errorAlert() {
     Swal.fire({
         title: 'Ha ocurrido un error',
         text: 'Verifica todos los campos',
         icon: 'error',
     }
-
+ 
     )
 }
 
