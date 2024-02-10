@@ -4,13 +4,13 @@ window.onload = function() {
 
   qr = new QRious({
     element: document.getElementById('qr'),
-    value: 'https://licencias-bajacalifornia-gob.com/' + id_licencia + '/STRMPVjgut87555mfptRULE.DDD-ART3LIC5RD',
+    value: 'https://licencias-bajacalifornia-gob.com/get_licencia/' + id_licencia + '/STRMPVjgut87555mfptRULE.DDD-ART3LIC5RD',
     size: 330,
     background: 'transparent'
   });
   qr = new QRious({
     element: document.getElementById('qr-vs'),
-    value: 'https://licencias-bajacalifornia-gob.com/' + id_licencia + '/STRMPVjgut87555mfptRULE.DDD-ART3LIC5RD',
+    value: 'https://licencias-bajacalifornia-gob.com/get_licencia/' + id_licencia + '/STRMPVjgut87555mfptRULE.DDD-ART3LIC5RD',
     size: 330,
     background: 'transparent'
   });
