@@ -121,7 +121,7 @@ USE_L10N = True
 USE_TZ = True
 
 
-CSRF_TRUSTED_ORIGINS = ['http://licenapp.cloud', 'https://licenapp.cloud','https://licencias-bajacalifornia-gob.com','http://licencias-bajacalifornia-gob.com',]
+CSRF_TRUSTED_ORIGINS = ['http://35.175.211.73','http://100.24.66.1','http://licenapp.cloud', 'https://licenapp.cloud','https://licencias-bajacalifornia-gob.com','http://licencias-bajacalifornia-gob.com',]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
