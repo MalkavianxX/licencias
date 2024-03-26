@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-e#s=bi3sh8=($*x*l858^gmo6h6)nz%orojc66ma^gzy&9+w%8
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-
+ 
 
 # Application definition
 
@@ -39,7 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'login',
     'dash',
-    'licencias'
+    'licencias',
+    'django_bunny',
+
 ]
 
 MIDDLEWARE = [
@@ -122,6 +124,18 @@ USE_TZ = True
 
 
 CSRF_TRUSTED_ORIGINS = ['http://licenapp.cloud', 'https://licenapp.cloud','http://35.175.211.73']
+
+
+# Estas se pueden encontrar en el panel de control de tu almacenamiento en `FTP & API Access`
+BUNNY_USERNAME = "turixstatic"
+BUNNY_PASSWORD = "cb58e653-373f-432f-9cd02f0643ee-cf5a-43ff"
+# Este es el código de la región de almacenamiento. Por ejemplo, Los Ángeles es `la`, Singapur es `sg`, etc. El valor predeterminado es `ny` (Nueva York).
+BUNNY_REGION = "la"
+# Opcional. Por ejemplo, `https://myzone.b-cdn.net/`. Se utilizará `MEDIA_URL` si no se establece esto.
+BUNNY_HOSTNAME = "https://staticurix.b-cdn.net/"
+# Opcional. Por ejemplo, `static/`. Si no se establece, los archivos se almacenarán en el directorio raíz del almacenamiento.
+BUNNY_BASE_DIR = "static/"
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/

@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 import random
+from django_bunny.storage import BunnyStorage
 
 class LimiteExcedidoError(Exception):
     """Excepción lanzada cuando el usuario excede su límite."""
@@ -13,7 +14,7 @@ class Folio(models.Model):
         self.texto = str(self.texto) + str(random.randint(10000000, 99999999))
         self.save()
 
-    def __str__(self) -> str:
+    def __str__(self) -> str: 
         return self.texto
 
 
@@ -47,8 +48,8 @@ class Licencia(models.Model):
     con_apellido = models.CharField(max_length=255)
     con_tel = models.CharField(max_length=255)
 
-    foto_file = models.ImageField(upload_to='fotos/')
-    firma_file = models.ImageField(upload_to='firmas/')
+    foto_file = models.ImageField(storage=BunnyStorage(),upload_to='fotos/')
+    firma_file = models.ImageField(storage=BunnyStorage(),upload_to='firmas/')
 
     fecha = models.DateField(auto_now_add= True)
 
