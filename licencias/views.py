@@ -28,7 +28,7 @@ def fun_save_licencia(request):
         nuevo_folio.add_folio()
         
         data = recovery_save(request)
-
+    
 
 
         licencia = Licencia(
@@ -98,23 +98,12 @@ def view_watch_licencia(request,id):
 
 def view_mis_licencias(request):
     if request.user.is_superuser or request.user.is_staff:
-        licencias = Licencia.objects.all().order_by('-fecha')
+        licencias = Licencia.objects.all().order_by('-id')
     else:
-        licencias = Licencia.objects.filter(user = request.user).order_by('-fecha')
-
+        licencias = Licencia.objects.filter(user = request.user).order_by('-id')
+        
     for iter in licencias:
-        try:
-            suma = int(iter.lic_expedicion.strftime('%Y')) + int(iter.lic_valido)
-            if suma > 2029:
-                iter.lic_valido_temp = "PERMANENTE"
-            else:
-                iter.lic_valido_temp = iter.lic_expedicion.strftime('%d') +'/'+ iter.lic_expedicion.strftime('%m') +'/'+ str(suma)
-
-        except:
-            iter.lic_valido_temp = "ERROR"
         iter.lic_expedicion = iter.lic_expedicion.strftime('%d/%m/%Y')
-    for i in licencias:
-        print(i.lic_expedicion)
     return render(request, 'licencias/base/view_mis_licencias.html',{'licencias':licencias})
 
 def view_edit_licencia(request,id):

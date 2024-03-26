@@ -12,7 +12,7 @@ $(document).ready(function () {
     drawCallback: function () {
       $(".dataTables_paginate > .pagination").addClass("pagination-rounded");
     },
-  });
+  }); 
 
     a
       .buttons()

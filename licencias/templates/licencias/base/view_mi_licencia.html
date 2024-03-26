@@ -501,7 +501,7 @@
                                         <div class="col-12">
                                             <div class="mb-1">
                                                 <label for="tipo_lic" class="form-label">Esta licencia autoriza conducir</label>
-                                                <input type="text" readonly class="form-control" id="f_restricciones" value="VEHICULO TRACTO CAMION, VOLTEO, PIPA, TORTON,CAMION DE 8 TONELADAS O MAYOR ASÍ COMO TRES EJES O MÁS, CAMION FORANEO PASAJERO.">
+                                                <input type="text" readonly class="form-control" id="f_autoriza" value="">
                                             </div>
                                         </div>
                                         <div class="col-12 text-center mt-3">
@@ -557,7 +557,7 @@
     <h1 id="vencimiento">{{licencia.lic_valido_temp}}</h1>
     <img src="{{licencia.foto_file.url}}" id="foto-sub" alt="">
 
-</div>
+</div> 
 <div id="lic_reverso" style=" display: none;"  class="reverso-no">
     <h1 id="oficina">{{licencia.lic_emisora}}</h1>
     <h1 id="antiguedad">{{licencia.lic_antiguedad}}</h1>

@@ -71,13 +71,13 @@
             </div>
             <div class="row ">
                 <div class="col-12 ">
-                    <table id="alternative-page-datatable" class="table table-striped dt-responsive w-100">
+                    <table id="datatable-licencias" class="table table-striped dt-responsive w-100">
                         <thead class="bg-primary">
                             <tr>
+                                <th>ID</th>
                                 <th>Solicitante</th>
                                 <th>Folio</th>
                                 <th>Expedicion</th>
-                                <th>Vencimiento</th>
                                 <th>Curp</th>
                                 <th>Tipo </th>
                                 <th>Acciones</th>
@@ -88,10 +88,10 @@
                         <tbody>
                             {% for licencia in licencias %}
                             <tr id="{{licencia.id}}">
+                                <td>{{licencia.id}}</td>
                                 <td>{{ licencia.datos_nombres }}</td>
                                 <td>{{ licencia.folio}}</td>
                                 <td>{{ licencia.lic_expedicion }}</td>
-                                <td>{{ licencia.lic_valido_temp }}</td>
                                 <td style="text-transform: uppercase;">{{ licencia.datos_curp }}</td>
                                 <td>{{ licencia.lic_tipo }}</td>
 
@@ -148,9 +148,41 @@
 <script src="{% static 'login/assets/vendor/datatables.net-select/js/dataTables.select.min.js' %}"></script>
 
 <!-- Datatable Demo Aapp js -->
-<script src="{% static 'login/assets/js/pages/demo.datatable-init.js' %}"></script>
+<script>
 
+
+new DataTable('#datatable-licencias',{
+    pagingType: 'full_numbers',
+    serverSide: false, // Añade esta línea
+    order: [[ 0, 'desc' ]], // Ordena la primera columna en orden descendente
+    language: {
+            "decimal": "",
+            "emptyTable": "No hay información",
+            "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+            "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+            "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+            "infoPostFix": "",
+            "thousands": ",",
+            "lengthMenu": "Mostrar _MENU_ Entradas",
+            "loadingRecords": "Cargando...",
+            "processing": "Procesando...",
+            "search": "Buscar:",
+            "zeroRecords": "Sin resultados encontrados",
+            "paginate": {
+                "first": "Primero",
+                "last": "Ultimo",
+                previous: "<i class='mdi mdi-chevron-left'>",
+                next: "<i class='mdi mdi-chevron-right'>",
+            }
+        },
+        drawCallback: function () {
+        $(".dataTables_paginate > .pagination").addClass("pagination-rounded");
+      },
+
+});
+
+</script>
 <!-- App js -->
 <script src="{% static 'login/assets/js/app.min.js' %}"></script>
 
-{% endblock %}
+{% endblock %} 
