@@ -1,10 +1,391 @@
 // Función para recopilar los datos de los formularios
 var modal = new bootstrap.Modal(document.getElementById('spinner_modal'), {});
+var fotocropped = null;
+var firmarecortada = null;
+
+window.onload = function () { 
+
+    'use strict';
+    var Cropper = window.Cropper;
+    var URL = window.URL || window.webkitURL;
+    var container = document.querySelector('.img-container');
+    var image = container.getElementsByTagName('img').item(0);
+    var download = document.getElementById('download');
+    var actions = document.getElementById('actions');
+
+
+
+    var options = {
+      aspectRatio: 205 / 245,
+      preview: '.img-preview',
+      ready: function (e) {
+        console.log(fotocropped)
+        console.log(e.type);
+      },
+      cropstart: function (e) {
+        console.log(e.type, e.detail.action);
+      },
+      cropmove: function (e) {
+        console.log(e.type, e.detail.action);
+      },
+      cropend: function (e) {
+        console.log(e.type, e.detail.action);
+      },
+      crop: function (e) {
+        var data = e.detail;
+
+
+      },
+      zoom: function (e) {
+        console.log(e.type, e.detail.ratio);
+      }
+    };
+    var cropper = new Cropper(image, options);
+    var originalImageURL = image.src;
+    var uploadedImageType = 'image/jpeg';
+    var uploadedImageName = 'cropped.jpg';
+    var uploadedImageURL;
+    var btnGuardarFirmaRecortada = document.getElementById('guardarfirmarecortada');
+    btnGuardarFirmaRecortada.style.display = 'none';
+
+    var btnGuardarFotoRecortada = document.getElementById('guardarfotorecortada');
+    btnGuardarFotoRecortada.style.display = 'none';
+
+
+
+    document.getElementById('btnModoFirma').addEventListener('click', function () {
+      cropper.enable();
+      cropper.setAspectRatio(205 / 49);
+      var previewElement = document.querySelector('.preview-lg');
+      previewElement.style.width = '205px';
+      previewElement.style.height = '49px';
+      btnGuardarFotoRecortada.style.display = 'none';
+      btnGuardarFirmaRecortada.style.display = 'block';
+      cropper.enable();
+
+    });
+    document.getElementById('btnModoFoto').addEventListener('click', function () {
+      cropper.enable();
+      cropper.setAspectRatio(205 / 245);
+      var previewElement = document.querySelector('.preview-lg');
+      previewElement.style.width = '205px';
+      previewElement.style.height = '245px';
+      btnGuardarFotoRecortada.style.display = 'block';
+      btnGuardarFirmaRecortada.style.display = 'none';
+      cropper.enable();
+
+    });
+
+    btnGuardarFotoRecortada.addEventListener('click', function () {
+      cropper.getCroppedCanvas().toBlob(function (blob) {
+        // Guardar el Blob en la variable global
+        fotocropped = blob;
+        console.log(fotocropped);
+
+        // Crear una URL de objeto del Blob
+        var url = URL.createObjectURL(blob);
+
+        // Establecer la URL de objeto como el atributo src del elemento img
+        document.getElementById('foto_preview_editor').src = url;
+      });
+
+      cropper.reset();
+      Swal.fire({
+        title: 'Foto cargada',
+        icon: 'success',
+        confirmButtonText: 'De acuerdo',
+        customClass: {
+          confirmButton: 'btn btn-soft-primary',
+        },
+
+      })
+      console.log(fotocropped)
+    });
+
+
+    btnGuardarFirmaRecortada.addEventListener('click', function () {
+      cropper.getCroppedCanvas().toBlob(function (blob) {
+        // Guardar el Blob en la variable global
+        firmarecortada = blob;
+        console.log(firmarecortada);
+
+        // Crear una URL de objeto del Blob
+        var url = URL.createObjectURL(blob);
+
+        // Establecer la URL de objeto como el atributo src del elemento img
+        document.getElementById('firma_preview_editor').src = url;
+      });
+
+      cropper.enable();
+      Swal.fire({
+        title: 'firma cargada',
+        icon: 'success',
+        confirmButtonText: 'De acuerdo',
+        customClass: {
+          confirmButton: 'btn btn-soft-primary',
+        },
+
+      })
+      console.log(firmarecortada)
+    });
+
+    // Tooltip
+    $('[data-toggle="tooltip"]').tooltip();
+
+    // Buttons
+    if (!document.createElement('canvas').getContext) {
+      $('button[data-method="getCroppedCanvas"]').prop('disabled', true);
+    }
+
+    if (typeof document.createElement('cropper').style.transition === 'undefined') {
+      $('button[data-method="rotate"]').prop('disabled', true);
+      $('button[data-method="scale"]').prop('disabled', true);
+    }
+
+    // Download
+    if (typeof download.download === 'undefined') {
+      download.className += ' disabled';
+      download.title = 'Your browser does not support download';
+    }
+
+    // Options
+    actions.querySelector('.docs-toggles').onchange = function (event) {
+      var e = event || window.event;
+      var target = e.target || e.srcElement;
+      var cropBoxData;
+      var canvasData;
+      var isCheckbox;
+      var isRadio;
+
+      if (!cropper) {
+        return;
+      }
+
+      if (target.tagName.toLowerCase() === 'label') {
+        target = target.querySelector('input');
+      }
+
+      isCheckbox = target.type === 'checkbox';
+      isRadio = target.type === 'radio';
+
+      if (isCheckbox || isRadio) {
+        if (isCheckbox) {
+          options[target.name] = target.checked;
+          cropBoxData = cropper.getCropBoxData();
+          canvasData = cropper.getCanvasData();
+
+          options.ready = function () {
+            console.log('ready');
+            cropper.setCropBoxData(cropBoxData).setCanvasData(canvasData);
+          };
+        } else {
+          options[target.name] = target.value;
+          options.ready = function () {
+            console.log('ready');
+          };
+        }
+
+        // Restart
+        cropper.destroy();
+        cropper = new Cropper(image, options);
+      }
+    };
+
+    // Methods
+    actions.querySelector('.docs-buttons').onclick = function (event) {
+      var e = event || window.event;
+      var target = e.target || e.srcElement;
+      var cropped;
+      var result;
+      var input;
+      var data;
+
+      if (!cropper) {
+        return;
+      }
+
+      while (target !== this) {
+        if (target.getAttribute('data-method')) {
+          break;
+        }
+
+        target = target.parentNode;
+      }
+
+      if (target === this || target.disabled || target.className.indexOf('disabled') > -1) {
+        return;
+      }
+
+      data = {
+        method: target.getAttribute('data-method'),
+        target: target.getAttribute('data-target'),
+        option: target.getAttribute('data-option') || undefined,
+        secondOption: target.getAttribute('data-second-option') || undefined
+      };
+
+      cropped = cropper.cropped;
+
+      if (data.method) {
+        if (typeof data.target !== 'undefined') {
+          input = document.querySelector(data.target);
+
+          if (!target.hasAttribute('data-option') && data.target && input) {
+            try {
+              data.option = JSON.parse(input.value);
+            } catch (e) {
+              console.log(e.message);
+            }
+          }
+        }
+
+        switch (data.method) {
+          case 'rotate':
+            if (cropped && options.viewMode > 0) {
+              cropper.clear();
+            }
+
+            break;
+
+          case 'getCroppedCanvas':
+            try {
+              data.option = JSON.parse(data.option);
+            } catch (e) {
+              console.log(e.message);
+            }
+
+            if (uploadedImageType === 'image/jpeg') {
+              if (!data.option) {
+                data.option = {};
+              }
+
+              data.option.fillColor = '#fff';
+            }
+
+            break;
+        }
+
+        result = cropper[data.method](data.option, data.secondOption);
+
+        switch (data.method) {
+          case 'rotate':
+            if (cropped && options.viewMode > 0) {
+              cropper.crop();
+            }
+
+            break;
+
+          case 'scaleX':
+          case 'scaleY':
+            target.setAttribute('data-option', -data.option);
+            break;
+
+          case 'getCroppedCanvas':
+            if (result) {
+              // Bootstrap's Modal
+              $('#getCroppedCanvasModal').modal().find('.modal-body').html(result);
+
+              if (!download.disabled) {
+                download.download = uploadedImageName;
+                download.href = result.toDataURL(uploadedImageType);
+              }
+            }
+
+            break;
+
+          case 'destroy':
+            cropper = null;
+
+            if (uploadedImageURL) {
+              URL.revokeObjectURL(uploadedImageURL);
+              uploadedImageURL = '';
+              image.src = originalImageURL;
+            }
+
+            break;
+        }
+
+        if (typeof result === 'object' && result !== cropper && input) {
+          try {
+            input.value = JSON.stringify(result);
+          } catch (e) {
+            console.log(e.message);
+          }
+        }
+      }
+    };
+
+    document.body.onkeydown = function (event) {
+      var e = event || window.event;
+
+      if (e.target !== this || !cropper || this.scrollTop > 300) {
+        return;
+      }
+
+      switch (e.keyCode) {
+        case 37:
+          e.preventDefault();
+          cropper.move(-1, 0);
+          break;
+
+        case 38:
+          e.preventDefault();
+          cropper.move(0, -1);
+          break;
+
+        case 39:
+          e.preventDefault();
+          cropper.move(1, 0);
+          break;
+
+        case 40:
+          e.preventDefault();
+          cropper.move(0, 1);
+          break;
+      }
+    };
+
+    // Import image
+    var inputImage = document.getElementById('inputImage');
+
+    if (URL) {
+      inputImage.onchange = function () {
+        var files = this.files;
+        var file;
+
+        if (files && files.length) {
+          file = files[0];
+
+          if (/^image\/\w+/.test(file.type)) {
+            uploadedImageType = file.type;
+            uploadedImageName = file.name;
+
+            if (uploadedImageURL) {
+              URL.revokeObjectURL(uploadedImageURL);
+            }
+
+            image.src = uploadedImageURL = URL.createObjectURL(file);
+
+            if (cropper) {
+              cropper.destroy();
+            }
+
+            cropper = new Cropper(image, options);
+            inputImage.value = null;
+          } else {
+            window.alert('Please choose an image file.');
+          }
+        }
+      };
+    } else {
+      inputImage.disabled = true;
+      inputImage.parentNode.className += ' disabled';
+    }
+  };
 
 function getCSRFToken() {
-    const name = 'csrftoken=';
-    const decodedCookie = decodeURIComponent(document.cookie);
-    const cookieArray = decodedCookie.split(';');
+    var name = 'csrftoken=';
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var cookieArray = decodedCookie.split(';');
 
     for (let i = 0; i < cookieArray.length; i++) {
         let cookie = cookieArray[i].trim();
@@ -16,25 +397,6 @@ function getCSRFToken() {
     return null;
 }
 
-function FromEN64toPNG(imagenEn64) {
-    // Convierte la imagen en base64 a un Blob
-    let partes = imagenEn64.split(';base64,');
-    let contentType = partes[0].split(':')[1];
-    let raw = window.atob(partes[1]);
-    let rawLength = raw.length;
-    let array = new Uint8Array(new ArrayBuffer(rawLength));
-
-    for (let i = 0; i < rawLength; i++) {
-        array[i] = raw.charCodeAt(i);
-    }
-
-    let blob = new Blob([array], { type: contentType });
-
-    // Crea un objeto File a partir del Blob
-    let file = new File([blob], "nombre-de-la-imagen.png", { type: 'image/png' });
-    return file;
-
-}
 
 function successAlert(title = "Licencia creada", id_licencia = undefined) {
     Swal.fire({
@@ -65,18 +427,7 @@ function errorAlert() {
     )
 }
 
-function getBase64Image(img) {
-    var canvas = document.createElement("canvas");
-    canvas.width = img.width;
-    canvas.height = img.height;
 
-    var ctx = canvas.getContext("2d");
-    ctx.drawImage(img, 0, 0);
-
-    var dataURL = canvas.toDataURL("image/png");
-
-    return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
-}
 
 function recopilarDatos() {
 
@@ -85,32 +436,8 @@ function recopilarDatos() {
         let form_direc = document.getElementById('form_direc');
         let form_licencia = document.getElementById('form_licencia');
         let form_contacto = document.getElementById('form_contacto');
-        var b64firma = document.getElementById('b64');
-        var b64foto = document.getElementById('b64F');
-        // Definimos las variables fuera de los bloques try/catch
-        var foto_file;
-        var firma_file;
-                
-        if (b64firma.value || b64foto.value) {
-            console.log("ambas tineen b64");
-            foto_file = FromEN64toPNG(b64foto.value);
-            firma_file = FromEN64toPNG(b64firma.value);
 
-        } else{
-            try {
-                // Recopilamos los archivos de las imágenes 
-                foto_file = FromEN64toPNG(document.getElementById('foto-form-recorte').value);
-                firma_file = FromEN64toPNG(document.getElementById('firma-form-recorte').value);
-    
-            } catch (error) {
-    
-                // Recopilamos los archivos de las imágenes 
-                foto_file = getBase64Image(document.getElementById('foto_preview_editor'));
-                firma_file = getBase64Image(document.getElementById('firma_preview_editor'));
-    
-            }
-        }
-        
+                
 
 
         // Creamos  un objeto FormData para empaquetar todos los datos
@@ -122,9 +449,14 @@ function recopilarDatos() {
         for (let input of form_licencia.elements) formData.append(input.id, input.value);
         for (let input of form_contacto.elements) formData.append(input.id, input.value);
 
-        // Añadimos los archivos de las imágenes al objeto FormData
-        formData.append('foto_file', foto_file);
-        formData.append('firma_file', firma_file);
+        // Convertir los blobs a objetos File
+        var fotoFile = new File([fotocropped], "foto.png", {type: "image/png"});
+        var firmaFile = new File([firmarecortada], "firma.png", {type: "image/png"});
+
+        // Añadir los objetos File al FormData
+        formData.append('foto_file', fotoFile);
+        formData.append('firma_file', firmaFile);
+
         try {
             let id_licencia = document.getElementById('id_licencia').value;
             formData.append('id', id_licencia);
@@ -151,7 +483,7 @@ function recopilarDatos() {
 // Función para enviar los datos por medio de FETCH
 function enviarDatos() {
     // Recopilamos los datos
-    const csrfToken = getCSRFToken();
+    var csrfToken = getCSRFToken();
 
     var datos = recopilarDatos();
         // Verificar que se está enviando un archivo de imagen
@@ -201,7 +533,7 @@ function enviarDatos() {
 try {
     document.getElementById('btn_uplicencia').addEventListener('click', function () {
         modal.show();
-        const csrfToken = getCSRFToken();
+        var csrfToken = getCSRFToken();
 
         let datos = recopilarDatos();
         var id_licencia = document.getElementById('id_licencia').value;
@@ -237,224 +569,3 @@ try {
 
 
 
-document.addEventListener('DOMContentLoaded', function () {
-    const inputImagen = document.getElementById('imagen_firma'); // input que carga la imagen
-    const image = document.getElementById('firma_img_editor');
-    const previewImage = document.getElementById('firma_preview_editor');
-    const inputtododata = document.getElementById('b64');
-    const aspectRatio = 0;
-    const editbtn = document.getElementById('edit');
-    let cropper;
-    try {
-        editbtn.addEventListener('click', function (e) {
-            // Crear una nueva instancia de Cropper con la nueva imagen
-            cropper = new Cropper(image, {
-                aspectRatio: 205/245,
-                viewMode: 3,
-                dragMode: 'move',
-                crop(event) {
-                    updatePreview(cropper, previewImage);
-                    inputtododata.value = "";
-                },
-                cropend(event) {
-                    const croppedCanvas = cropper.getCroppedCanvas();
-                    inputtododata.value = croppedCanvas.toDataURL("image/png");
-                },
-            });
-        });
-    } catch (error) {
-        
-    }
-
-
-    inputImagen.addEventListener('change', function (e) {
-        if (e.target.files.length > 0) {
-            const file = e.target.files[0];
-            const reader = new FileReader();
-
-            reader.onload = function (loadEvent) {
-                const imagenDataURL = loadEvent.target.result;
-
-                if (cropper) {
-                    console.log('ya existe una instancia de Cropper');
-                    cropper.destroy();
-                }
-
-
-                // Crear una nueva instancia de Cropper con la nueva imagen
-                cropper = new Cropper(image, {
-                    aspectRatio: 205/49,
-                    viewMode: 3,
-                    dragMode: 'move',
-                    crop(event) {
-                        updatePreview(cropper, previewImage);
-                        inputtododata.value = "";
-                    },
-                    cropend(event) {
-                        const croppedCanvas = cropper.getCroppedCanvas();
-                        inputtododata.value = croppedCanvas.toDataURL("image/png");
-                    },
-                });
-
-                // Establecer la imagen en el cropper
-                cropper.replace(imagenDataURL);
-            };
-
-            reader.readAsDataURL(file);
-        }
-    });
-
-    document.getElementById('rotate-left').addEventListener('click', function () {
-        cropper.rotate(-45);  // Rotar 90 grados en sentido antihorario
-    });
-
-    document.getElementById('zoom-in').addEventListener('click', function () {
-        cropper.zoom(0.1);  // Hacer zoom in 0.1 unidades
-    });
-
-    document.getElementById('zoom-out').addEventListener('click', function () {
-        cropper.zoom(-0.1);  // Hacer zoom in 0.1 unidades
-    });
-
-    document.getElementById('rotate-right').addEventListener('click', function () {
-        cropper.rotate(45);  // Rotar 90 grados en sentido antihorario
-    });
-
-    document.getElementById('restart').addEventListener('click', function () {
-        cropper.reset(); //restart 
-    });
-
-    document.getElementById('crop').addEventListener('click', function () {
-
-        document.getElementById('firma-form-recorte').value = inputtododata.value;
-        cropper.crop();
-        Swal.fire({
-            title: 'Firma cargada',
-            icon: 'success',
-            confirmButtonText: 'Listo',
-            customClass: {
-                confirmButton: 'btn btn-soft-primary',
-            },
-
-        })
-    });
-
-    function updatePreview(cropperInstance, previewElement) {
-        const croppedCanvas = cropperInstance.getCroppedCanvas();
-        previewElement.src = croppedCanvas.toDataURL();
-    }
-});
-
-
-document.addEventListener('DOMContentLoaded', function () {
-    var image = document.getElementById('foto_img_editor');
-
-    var inputImagen = document.getElementById('imagen_foto'); // input que carga la imagen
-    var previewImage = document.getElementById('foto_preview_editor');
-    var inputtododata = document.getElementById('b64F');
-    var aspectRatio = 0; 
-    let cropper;
-    var edit_btn = document.getElementById('editF');
-    // Función para crear o reemplazar la instancia de Cropper
-    try {
-        edit_btn.addEventListener('click', function (e) {
-            // Crear una nueva instancia de Cropper con la nueva imagen
-            cropper = new Cropper(image, {
-                aspectRatio: 205/245, 
-                viewMode: 0 ,
-                dragMode: 'move',
-                crop(event) {
-                    updatePreview(cropper, previewImage);
-                    inputtododata.value = "";
-                },
-                cropend(event) {
-                    const croppedCanvas = cropper.getCroppedCanvas();
-                    inputtododata.value = croppedCanvas.toDataURL("image/png");
-                },
-            });
-        });
-    } catch (error) {
-        
-    }
-
-
-    inputImagen.addEventListener('change', function (e) {
-        console.log('Cambio en el input de imagen');
-
-        var file = e.target.files[0];
-        var readerF = new FileReader();
-
-        readerF.onload = function (loadEvent) {
-            var imagenDataURL = loadEvent.target.result;
-
-            if (cropper) {
-                console.log('ya existe una instancia de Cropper');
-                cropper.destroy();
-            }
-
-            // Crear una nueva instancia de Cropper con la nueva imagen
-            cropper = new Cropper(image, {
-                aspectRatio: 205/245,
-                viewMode: 0,
-                dragMode: 'move',
-                crop(event) {
-                    updatePreview(cropper, previewImage);
-                    inputtododata.value = "";
-                },
-                cropend(event) {
-                    var croppedCanvas = cropper.getCroppedCanvas();
-                    inputtododata.value = croppedCanvas.toDataURL("image/png");
-                },
-            });
-
-            // Establecer la imagen en el cropper
-            cropper.replace(imagenDataURL, false);
-        };
-
-        readerF.readAsDataURL(file);
-    });
-
-    document.getElementById('rotate-leftF').addEventListener('click', function () {
-        cropper.rotate(-45);  // Rotar 90 grados en sentido antihorario
-    });
-
-    document.getElementById('zoom-inF').addEventListener('click', function () {
-        cropper.zoom(0.1);  // Hacer zoom in 0.1 unidades
-    });
-
-    document.getElementById('zoom-outF').addEventListener('click', function () {
-        cropper.zoom(-0.1) ;  // Hacer zoom in 0.1 unidades
-    });
-
-    document.getElementById('rotate-rightF').addEventListener('click', function () {
-        cropper.rotate(45);  // Rotar 90 grados en sentido antihorario
-    });
-
-    document.getElementById('restartF').addEventListener('click', function () {
-        cropper.reset(); //restart 
-    });
-
-    document.getElementById('cropF').addEventListener('click', function () {
-
-        document.getElementById('foto-form-recorte').value = inputtododata.value;
-        cropper.crop();
-        Swal.fire({
-            title: 'Fotografia cargada',
-            icon: 'success',
-            confirmButtonText: 'Listo',
-            customClass: {
-                confirmButton: 'btn btn-soft-primary',
-            },
-
-        })
-
-
-
-    });
-
-    function updatePreview(cropperInstance, previewElement) {
-        const croppedCanvas = cropperInstance.getCroppedCanvas();
-        previewElement.src = croppedCanvas.toDataURL();
-    }
-
-});

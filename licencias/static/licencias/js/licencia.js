@@ -1,4 +1,6 @@
 var qr;
+
+
 window.onload = function() {
   let id_licencia = document.getElementById('id_licencia').value;
 

@@ -22,15 +22,15 @@
 
 <!-- Bootstrap Touchspin css -->
 <link href="{% static 'login/assets/vendor/bootstrap-touchspin/jquery.bootstrap-touchspin.min.css' %}" rel="stylesheet"
-    type="text/css" />
+  type="text/css" />
 
 <!-- Bootstrap Datepicker css -->
 <link href="{% static 'login/assets/vendor/bootstrap-datepicker/css/bootstrap-datepicker.min.css' %}" rel="stylesheet"
-    type="text/css" />
+  type="text/css" />
 
 <!-- Bootstrap Timepicker css -->
 <link href="{% static 'login/assets/vendor/bootstrap-timepicker/css/bootstrap-timepicker.min.css' %}" rel="stylesheet"
-    type="text/css" />
+  type="text/css" />
 
 <!-- Flatpickr Timepicker css -->
 <link href="{% static 'login/assets/vendor/flatpickr/flatpickr.min.css' %}" rel="stylesheet" type="text/css" />
@@ -38,675 +38,1045 @@
 <!-- Theme Config Js -->
 <script src="{% static 'login/assets/js/hyper-config.js' %}"></script>
 
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" crossorigin="anonymous">
 
 
 <style>
-    input {
-        text-transform: uppercase;
+  input {
+    text-transform: uppercase;
+  }
+
+  .btn {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+
+  label.btn {
+    margin-bottom: 0;
+  }
+
+  .d-flex>.btn {
+    flex: 1;
+  }
+
+  .carbonads {
+    border: 1px solid #ccc;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+    overflow: hidden;
+    padding: 1rem;
+  }
+
+  .carbon-wrap {
+    overflow: hidden;
+  }
+
+  .carbon-img {
+    clear: left;
+    display: block;
+    float: left;
+  }
+
+  .carbon-text,
+  .carbon-poweredby {
+    display: block;
+    margin-left: 140px;
+  }
+
+  .carbon-text,
+  .carbon-text:hover,
+  .carbon-text:focus {
+    color: #fff;
+    text-decoration: none;
+  }
+
+  .carbon-poweredby,
+  .carbon-poweredby:hover,
+  .carbon-poweredby:focus {
+    color: #ddd;
+    text-decoration: none;
+  }
+
+  @media (min-width: 768px) {
+    .carbonads {
+      float: right;
+      margin-bottom: -1rem;
+      margin-top: -1rem;
+      max-width: 360px;
     }
+  }
+
+  .footer {
+    font-size: 0.875rem;
+  }
+
+  .heart {
+    color: #ddd;
+    display: block;
+    height: 2rem;
+    line-height: 2rem;
+    margin-bottom: 0;
+    margin-top: 1rem;
+    position: relative;
+    text-align: center;
+    width: 100%;
+  }
+
+  .heart:hover {
+    color: #ff4136;
+  }
+
+  .heart::before {
+    border-top: 1px solid #eee;
+    content: " ";
+    display: block;
+    height: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 50%;
+  }
+
+  .heart::after {
+    background-color: #fff;
+    content: "♥";
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .docs-demo {
+    margin-bottom: 1rem;
+    overflow: hidden;
+    padding: 2px;
+  }
+
+  .img-container,
+  .img-preview {
+    background-color: #f7f7f7;
+    text-align: center;
+    width: 100%;
+  }
+
+  .img-container {
+    max-height: 497px;
+    min-height: 200px;
+  }
+
+  @media (min-width: 768px) {
+    .img-container {
+      min-height: 497px;
+    }
+  }
+
+  .img-container>img {
+    max-width: 100%;
+  }
+
+  .docs-preview {
+    margin-right: -1rem;
+  }
+
+  .img-preview {
+    float: left;
+    margin-bottom: 0.5rem;
+    margin-right: 0.5rem;
+    overflow: hidden;
+
+  }
+
+  .img-preview>img {
+    max-width: 100%;
+  }
+
+  .preview-lg {
+    height: 245px;
+    width: 205px;
+  }
+
+  .preview-md {
+    height: 4.5rem;
+    width: 8rem;
+  }
+
+  .preview-sm {
+    height: 2.25rem;
+    width: 4rem;
+  }
+
+  .preview-xs {
+    height: 1.125rem;
+    margin-right: 0;
+    width: 2rem;
+  }
+
+  .docs-data>.input-group {
+    margin-bottom: 0.5rem;
+  }
+
+  .docs-data .input-group-prepend .input-group-text {
+    min-width: 4rem;
+  }
+
+  .docs-data .input-group-append .input-group-text {
+    min-width: 3rem;
+  }
+
+  .docs-buttons>.btn,
+  .docs-buttons>.btn-group,
+  .docs-buttons>.form-control {
+    margin-bottom: 0.5rem;
+    margin-right: 0.25rem;
+  }
+
+  .docs-toggles>.btn,
+  .docs-toggles>.btn-group,
+  .docs-toggles>.dropdown {
+    margin-bottom: 0.5rem;
+  }
+
+  .docs-tooltip {
+    display: block;
+    margin: -0.5rem -0.75rem;
+    padding: 0.5rem 0.75rem;
+  }
+
+  .docs-tooltip>.icon {
+    margin: 0 -0.25rem;
+    vertical-align: top;
+  }
+
+  .tooltip-inner {
+    white-space: normal;
+  }
+
+  .btn-upload .tooltip-inner,
+  .btn-toggle .tooltip-inner {
+    white-space: nowrap;
+  }
+
+  .btn-toggle {
+    padding: 0.5rem;
+  }
+
+  .btn-toggle>.docs-tooltip {
+    margin: -0.5rem;
+    padding: 0.5rem;
+  }
+
+  @media (max-width: 400px) {
+    .btn-group-crop {
+      margin-right: -1rem !important;
+    }
+
+    .btn-group-crop>.btn {
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+    }
+
+    .btn-group-crop .docs-tooltip {
+      margin-left: -0.5rem;
+      margin-right: -0.5rem;
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+    }
+  }
+
+  .docs-options .dropdown-menu {
+    width: 100%;
+  }
+
+  .docs-options .dropdown-menu>li {
+    font-size: 0.875rem;
+    padding: 0.125rem 1rem;
+  }
+
+  .docs-options .dropdown-menu .form-check-label {
+    display: block;
+  }
+
+  .docs-cropped .modal-body {
+    text-align: center;
+  }
+
+  .docs-cropped .modal-body>img,
+  .docs-cropped .modal-body>canvas {
+    max-width: 100%;
+  }
 </style>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.css"
-    integrity="sha512-hvNR0F/e2J7zPPfLC9auFe3/SE0yG4aJCOd/qxew74NN7eyiSKjr7xJJMu1Jy2wf7FXITpWS1E/RY8yzuXN7VA=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.css" />
 <!-- Begin page -->
 <div class="wrapper">
 
 
 
 
-    <!-- ============================================================== -->
-    <!-- Start Page Content here -->
-    <!-- ============================================================== -->
-
-    <div class="content-page">
-        <div class="content">
-
-            <!-- Start Content-->
-            <div class="container-fluid">
-
-                <!-- start page title -->
-                <div class="row">
-                    <div class="col-12">
-                        <div class="page-title-box">
-                            <div class="page-title-right">
-                                <ol class="breadcrumb m-0">
-                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Hyper</a></li>
-                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Licencia</a></li>
-                                    <li class="breadcrumb-item active">Crear licencia</li>
-                                </ol>
-                            </div>
-                            <h4 class="page-title">LICENCIA</h4>
-                        </div>
-                    </div>
-                </div>
-                <!-- end page title -->
-                {% csrf_token %}
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="header-title mb-3">Datos del solicitante</h4>
-                                <hr>
-                                <form class="row g-3 needs-validation" id="form_datos" novalidate>
-
-                                    <div class="col-md-4">
-                                        <label for="datos_nombres" class="form-label">Nombres(s)</label>
-                                        <input type="text" class="form-control" id="datos_nombres" required>
-                                        <div class="valid-feedback">
-                                            Listo
-                                        </div>
-                                        <div class="invalid-feedback">
-                                            Compruebe este campo
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="datos_apellidos" class="form-label">Apllidos</label>
-                                        <input type="text" class="form-control" id="datos_apellidos" required>
-                                        <div class="valid-feedback">
-                                            Listo
-                                        </div>
-                                        <div class="invalid-feedback">
-                                            Compruebe este campo
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="datos_curp" class="form-label">CURP</label>
-                                        <input type="text" class="form-control" id="datos_curp" required>
-                                        <div class="valid-feedback">
-                                            Listo
-                                        </div>
-                                        <div class="invalid-feedback">
-                                            Compruebe este campo
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="datos_sangre" class="form-label">Tipo de sangre</label>
-                                        <select class="form-select" id="datos_sangre" required>
-                                            <option selected value="O-">O negativo / O-</option>
-                                            <option value="O+">O positivo / O+</option>
-                                            <option value="A-">A negativo / A-</option>
-                                            <option value="A+">A positivo / A+</option>
-                                            <option value="B-">B negativo / B-</option>
-                                            <option value="B+">B positivo / B+</option>
-                                            <option value="AB-">AB negativo / AB-</option>
-                                            <option value="AB+">AB positivo / AB+</option>
-                                            <option value="N/D">Desconocido</option>
-
-                                        </select>
-                                        <div class="valid-feedback">
-                                            Listo
-                                        </div>
-                                        <div class="invalid-feedback">
-                                            Compruebe este campo
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <label for="datos_sexo" class="form-label">Sexo</label>
-                                        <div class="input-group has-validation">
-                                            <select class="form-select" id="datos_sexo" required>
-                                                <option value="H" selected>Hombre</option>
-                                                <option value="M">Mujer</option>
-
-                                            </select>
-                                            <div class="valid-feedback">
-                                                Listo
-                                            </div>
-                                            <div class="invalid-feedback">
-                                                Compruebe este campo
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <label for="datos_nacionalidad" class="form-label">Nacionalidad</label>
-                                        <div class="input-group has-validation">
-                                            <select class="form-select" id="datos_nacionalidad" required>
-                                                <option selected value="Mexicana">Mexicana</option>
-                                                <option value="Extranjera">Extranjera</option>
-
-                                            </select>
-                                            <div class="valid-feedback">
-                                                Listo
-                                            </div>
-                                            <div class="invalid-feedback">
-                                                Compruebe este campo
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="datos_restriacciones" class="form-label">Restricciones</label>
-                                        <input type="text" class="form-control" value="NINGUNA"
-                                            id="datos_restriacciones" required>
-                                        <div class="valid-feedback">
-                                            Listo
-                                        </div>
-                                        <div class="invalid-feedback">
-                                            Compruebe este campo
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="datos_nacimiento" class="form-label">Fecha de nacimiento</label>
-                                        <input type="date" class="form-control" id="datos_nacimiento">
-                                        <div class="valid-feedback">
-                                            Listo
-                                        </div>
-                                        <div class="invalid-feedback">
-                                            Compruebe este campo
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-
-                                        <label for="datos_rfc" class="form-label">RFC</label>
-                                        <input type="text" class="form-control" id="datos_rfc" required>
-                                        <div class="valid-feedback">
-                                            Listo
-                                        </div>
-                                        <div class="invalid-feedback">
-                                            Compruebe este campo
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-
-                                        <label for="datos_donante" class="form-label">Donante de organos</label>
-
-                                        <select class="form-select" id="datos_donante" required>
-                                            <option selected value="N">No donar</option>
-                                            <option value="S">Si donar</option>
-
-                                        </select>
-
-                                        <div class="valid-feedback">
-                                            Listo
-                                        </div>
-                                        <div class="invalid-feedback">
-                                            Compruebe este campo
-                                        </div>
-                                    </div>
-
-                                </form>
-
-
-
-                            </div> <!-- end card-body-->
-                        </div> <!-- end card-->
-                    </div> <!-- end col-->
-                </div>
-                <!-- end row-->
-
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="header-title mb-3">Direccion</h4>
-                                <hr>
-                                <form class="row g-3 needs-validation" id="form_direc" novalidate>
-
-                                    <div class="col-md-6">
-                                        <label for="direc_calle" class="form-label">Calle</label>
-                                        <input type="text" class="form-control" id="direc_calle" required>
-                                        <div class="valid-feedback">
-                                            Listo
-                                        </div>
-                                        <div class="invalid-feedback">
-                                            Compruebe este campo
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="direc_ciudad" class="form-label">Ciudad</label>
-                                        <input type="text" class="form-control" id="direc_ciudad" required>
-                                        <div class="valid-feedback">
-                                            Listo
-                                        </div>
-                                        <div class="invalid-feedback">
-                                            Compruebe este campo
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="direc_cp" class="form-label">Codigo postal</label>
-                                        <input type="text" class="form-control" id="direc_cp" required>
-                                        <div class="valid-feedback">
-                                            Listo
-                                        </div>
-                                        <div class="invalid-feedback">
-                                            Compruebe este campo
-                                        </div>
-                                    </div>
-
-
-
-                                    <div class="col-md-4">
-                                        <label for="direc_colonia" class="form-label">Colonia</label>
-                                        <input type="text" class="form-control" id="direc_colonia" required>
-                                        <div class="valid-feedback">
-                                            Listo
-                                        </div>
-                                        <div class="invalid-feedback">
-                                            Compruebe este campo
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-4">
-
-                                        <label for="direc_estado" class="form-label">Estado</label>
-                                        <input type="text" class="form-control" id="direc_estado" required>
-                                        <div class="valid-feedback">
-                                            Listo
-                                        </div>
-                                        <div class="invalid-feedback">
-                                            Compruebe este campo
-                                        </div>
-                                    </div>
-
-
-                                </form>
-
-
-
-                            </div> <!-- end card-body-->
-                        </div> <!-- end card-->
-                    </div> <!-- end col-->
-                </div>
-                <!-- end row-->
-
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="header-title mb-3">Licencia</h4>
-                                <hr>
-                                <form class="row g-3 needs-validation" id="form_licencia" novalidate>
-                                    <div class="col-md-4">
-                                        <label for="lic_expedicion" class="form-label">Fecha de expedicion</label>
-                                        <input type="date" class="form-control" id="lic_expedicion">
-                                        <div class="valid-feedback">
-                                            Listo
-                                        </div>
-                                        <div class="invalid-feedback">
-                                            Compruebe este campo
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="lic_emisora" class="form-label">Oficina emisora</label>
-                                        <select class="form-select" id="lic_emisora" required>
-                                            <option selected value="TIJUANA, CERRO">Tijuana, cerro</option>
-                                            <option value="TIJUANA, LA MESA">Tijuana, La mesa</option>
-                                            <option value="ENSENADA, SAN">Ensenada, San</option>
-                                        </select>
-
-                                        </select>
-                                        <div class="valid-feedback">
-                                            Listo
-                                        </div>
-                                        <div class="invalid-feedback">
-                                            Compruebe este campo
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="lic_antiguedad" class="form-label">Fecha de antiguedad</label>
-                                        <input type="date" class="form-control" id="lic_antiguedad" >
-                                        <div class="valid-feedback">
-                                            Listo
-                                        </div>
-                                        <div class="invalid-feedback">
-                                            Compruebe este campo
-                                        </div>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <label for="lic_tipo" class="form-label">Tipo de
-                                            licencia</label>
-                                        <div class="input-group has-validation">
-                                            <select class="form-select" id="lic_tipo" required>
-                                                <option selected value="Tipo A - AUTOMOVILISTA">Tipo A - AUTOMOVILISTA</option>
-                                                <option value="Tipo A - CHOFER A">Tipo A - CHOFER A</option>
-                                                <option value="Tipo B - CHOFER B">Tipo B - CHOFER B</option>
-                                                <option value="Tipo C - CHOFER C">Tipo C - CHOFER C</option>
-                                                <option value="Tipo E - CHOFER D">Tipo E - CHOFER D</option>
-                                                <option value="Tipo M - MOTOCICLISTA">Tipo M - MOTOCICLISTA</option>
-
-                                            </select>
-                                            <div class="valid-feedback">
-                                                Listo
-                                            </div>
-                                            <div class="invalid-feedback">
-                                                Compruebe este campo
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="lic_valido" class="form-label">Valido</label>
-                                        <div class="input-group has-validation">
-                                            <select class="form-select" id="lic_valido" required>
-                                                <option selected value="3">3 años</option>
-                                                <option value="5">5 años</option>
-                                                <option value="88">Permanente</option>
-
-                                            </select>
-                                            <div class="valid-feedback">
-                                                Listo
-                                            </div>
-                                            <div class="invalid-feedback">
-                                                Compruebe este campo
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-
-
-                                </form>
-
-
-
-                            </div> <!-- end card-body-->
-                        </div> <!-- end card-->
-                    </div> <!-- end col-->
-                </div>
-                <!-- end row-->
-
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="header-title mb-3">Contacto de emergencia</h4>
-                                <hr>
-                                <form class="row g-3 needs-validation" id="form_contacto" novalidate>
-
-
-                                    <div class="col-md-4">
-                                        <label for="con_nombre" class="form-label">Nombre</label>
-                                        <input type="text" class="form-control" id="con_nombre" required>
-                                        <div class="valid-feedback">
-                                            Listo
-                                        </div>
-                                        <div class="invalid-feedback">
-                                            Compruebe este campo
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="con_apellido" class="form-label">Apellidos</label>
-                                        <input type="text" class="form-control" id="con_apellido" required>
-                                        <div class="valid-feedback">
-                                            Listo
-                                        </div>
-                                        <div class="invalid-feedback">
-                                            Compruebe este campo
-                                        </div>
-                                    </div>
-
-
-
-                                    <div class="col-md-4">
-                                        <label for="con_tel" class="form-label">Telefono de contacto</label>
-                                        <input type="text" class="form-control" id="con_tel" required>
-                                        <div class="valid-feedback">
-                                            Listo
-                                        </div>
-                                        <div class="invalid-feedback">
-                                            Compruebe este campo
-                                        </div>
-                                    </div>
-
-
-
-
-                                </form>
-
-
-
-                            </div> <!-- end card-body-->
-                        </div> <!-- end card-->
-                    </div> <!-- end col-->
-                </div>
-                <!-- end row-->
-
-
-                <div class="row ">
-                    <div class="col-lg-6 col-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="header-title mb-3">Fotografia</h4>
-                                <hr>
-
-                                <div class="row">
-                                 
-                                    <div class="col-12">
-                                        <div class="accordion" id="accordionExample">
-                                            <div class="accordion-item">
-                                                <h2 class="accordion-header" id="headingOne">
-                                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
-                                                        aria-expanded="true" aria-controls="collapseOne">
-                                                        Seleccionar archivo
-                                                    </button>
-                                                </h2>
-                                                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
-                                                    data-bs-parent="#accordionExample">
-                                                    <div class="accordion-body">
-                                                        <div class="mb-3 col-lg-12 col-12">
-                                                            <label for="formFile" class="form-label">Selecciona foto</label>
-                                                            <input class="form-control" type="file" accept="image/*"   id="imagen_foto">
-                                                        </div>
-                        
-                                                        <div class="row mb-lg-3 mb-2 jus">
-                                                            <div class=" col-12 d-flex justify-content-start" id="toolsfirma">
-                                                                <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-                                                                    <div class="btn-group me-2" role="group" aria-label="First group">
-                        
-                                                                        <button id="rotate-leftF" type="button" class="btn btn-primary"> <i
-                                                                                class="mdi mdi-rotate-left fs-3"></i></button>
-                                                                        <button id="rotate-rightF" type="button" class="btn btn-primary"><i
-                                                                                class="mdi mdi-rotate-right fs-3"></i></button>
-                                                                    </div>
-                                                                    <div class="btn-group me-2" role="group" aria-label="Second group">
-                                                                        <button type="button" id="zoom-inF" class="btn btn-light"><i
-                                                                                class="ri-zoom-in-line fs-3"></i></button>
-                                                                        <button type="button" id="zoom-outF" class="btn btn-light"><i
-                                                                                class="ri-zoom-out-line fs-3"></i></button>
-                                                                    </div>
-                        
-                                                                    <div class="btn-group" role="group" aria-label="Third group">
-                                                                        <button type="button" id="restartF" class="btn btn-danger"><i
-                                                                                class="mdi mdi-rotate-3d-variant fs-3"></i></button>
-                                                                        <button type="button" id="cropF" class="btn btn-success"><i
-                                                                                class="mdi mdi-check-bold fs-3"></i></button>
-                                                                    </div>
-                                                                </div>
-                        
-                                                            </div>
-                                                            <div class="col-lg-8 col-12">
-                                                                <input type="hidden" class="form-control" id="b64F">
-                                                            </div>
-                                                        </div>
-                        
-                                                        <div class="row">
-                                                            <div class="col-lg-6 col-md-6 col-12 text-center">
-                                                                <img  style="width: 100%; height: 100%;object-fit: contain !important;" src="" id="foto_img_editor" alt="" class="img-fluid">
-                                                                
-                                                            </div>
-                                                            <div
-                                                                class="col-lg-6 col-md-6 col-12 mt-lg-0 mt-3 d-flex align-items-center justify-content-center  ">
-                                                                <div style="height: 245px; width: 205px;"
-                                                                    class=" border border-1  border-secondary text-center overflow-hidden">
-                                                                    <img src="" style="width: 100%;"
-                                                                        id="foto_preview_editor" alt="">
-                        
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                        
-                                                    </div>
-                                                </div>
-                                            </div>
-                      
-                                           
-                                        </div>
-                                    </div>
-                                     
-                                    <input type="text"  id="foto-form-recorte" class="">
-
-                                </div>
-                            </div> <!-- end card-body-->
-                        </div> <!-- end card-->
-                    </div> <!-- end col-->
-
-                    <div class="col-lg-6 col-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="header-title mb-3">Firma</h4>
-                                <hr>
-                                <div class="row">
-                                    <div class="accordion" id="accordionExample">
-                                        <div class="accordion-item">
-                                            <h2 class="accordion-header" id="headingOne">
-                                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo"
-                                                    aria-expanded="true" aria-controls="collapseTwo">
-                                                    Seleccionar archivo 
-                                                </button>
-                                            </h2>
-                                            <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingOne"
-                                                data-bs-parent="#accordionExample">
-                                                <div class="accordion-body">
-                                                    <div class="mb-3  col-12">
-                                                        <label for="formFile" class="form-label">Selecciona firma</label>
-                                                        <input class="form-control" type="file" accept="image/*" id="imagen_firma">
-                                                    </div>
-                                                    <div class="row mb-lg-3 mb-2 ">
-                                                        <div class="col-12 d-flex justify-content-start" id="toolsfirma">
-                                                            <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-                                                                <div class="btn-group me-2" role="group" aria-label="First group">
-                    
-                                                                    <button id="rotate-left" type="button" class="btn btn-primary"> <i
-                                                                            class="mdi mdi-rotate-left fs-3"></i></button>
-                                                                    <button id="rotate-right" type="button" class="btn btn-primary"><i
-                                                                            class="mdi mdi-rotate-right fs-3"></i></button>
-                                                                </div>
-                                                                <div class="btn-group me-2" role="group" aria-label="Second group">
-                                                                    <button type="button" id="zoom-in" class="btn btn-light"><i
-                                                                            class="ri-zoom-in-line fs-3"></i></button>
-                                                                    <button type="button" id="zoom-out" class="btn btn-light"><i
-                                                                            class="ri-zoom-out-line fs-3"></i></button>
-                                                                </div>
-                    
-                                                                <div class="btn-group" role="group" aria-label="Third group">
-                                                                    <button type="button" id="restart" class="btn btn-danger"><i
-                                                                            class="mdi mdi-rotate-3d-variant fs-3"></i></button>
-                                                                    <button type="button" id="crop" data-bs-dismiss="modal"
-                                                                        class="btn btn-success"><i
-                                                                            class="mdi mdi-check-bold fs-3"></i></button>
-                                                                </div>
-                                                            </div>
-                    
-                                                        </div>
-                                                        <div class="col-lg-8 col-12">
-                                                            <input type="text" class="form-control" id="b64">
-                                                        </div>
-                                                    </div>
-                    
-                                                    <div class="row">
-                                                        <div class="col-lg-6 col-md-6 col-12 text-center">
-                                                            <img style="max-width: 100%;" src="" id="firma_img_editor" alt=""
-                                                                class="img-fluid">
-                    
-                                                        </div>
-                                                        <div
-                                                            class="col-lg-6 col-md-6 col-12 mt-lg-0 mt-3 d-flex align-items-center justify-content-center  ">
-                                                            <div style="height: 49px; width: 205px;"
-                                                                class=" border border-1  border-secondary text-center overflow-hidden">
-                                                                <img src="" 
-                                                                    id="firma_preview_editor" style="width: 100%;" alt="">
-                    
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                    </div>
-                                </div>
-
-
-                                <input type="text" id="firma-form-recorte" class="d-none">
-
-                            </div> <!-- end card-body-->
-                        </div> <!-- end card-->
-                    </div> <!-- end col-->
-                </div>
-                <!-- end row-->
-                <div class="row">
-                    <div class="col-12 d-grid">
-                        <button type="submit" onclick="enviarDatos()" class="btn btn-lg btn-soft-primary"> Generar
-                            licencia</button>
-                    </div>
-                    <!-- end d-grid -->
-                </div>
-
-                <!-- Full width modal -->
-
-                <div class="modal fade" id="spinner_modal" tabindex="-1" role="dialog" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content" style="background-color: transparent;">
-
-                            <div class="modal-body text-center">
-                                <div class="spinner-border avatar-lg text-primary" role="status"></div>
-                            </div>
-                        </div><!-- /.modal-content -->
-                    </div><!-- /.modal-dialog -->
-                </div><!-- /.modal -->
-
-
-
-
-
-
-
-
-                
-
-        
-                <code class="d-none" id="base64"></code>
-                <code class="d-none" id="base64F"></code>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            </div> <!-- container -->
-
-        </div> <!-- content -->
-
-        <!-- Footer Start -->
-        <footer class="footer">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-6">
-                        <script>document.write(new Date().getFullYear())</script> © Hyper - Coderthemes.com
-                    </div>
-                    <div class="col-md-6">
-                        <div class="text-md-end footer-links d-none d-md-block">
-                            <a href="javascript: void(0);">About</a>
-                            <a href="javascript: void(0);">Support</a>
-                            <a href="javascript: void(0);">Contact Us</a>
-                        </div>
-                    </div>
-                </div>
+  <!-- ============================================================== -->
+  <!-- Start Page Content here -->
+  <!-- ============================================================== -->
+
+  <div class="content-page">
+    <div class="content">
+
+      <!-- Start Content-->
+      <div class="container-fluid">
+
+        <!-- start page title -->
+        <div class="row">
+          <div class="col-12">
+            <div class="page-title-box">
+              <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                  <li class="breadcrumb-item"><a href="javascript: void(0);">Hyper</a></li>
+                  <li class="breadcrumb-item"><a href="javascript: void(0);">Licencia</a></li>
+                  <li class="breadcrumb-item active">Crear licencia</li>
+                </ol>
+              </div>
+              <h4 class="page-title">LICENCIA</h4>
             </div>
-        </footer>
-        <!-- end Footer -->
+          </div>
+        </div>
+        <!-- end page title -->
+        {% csrf_token %}
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="header-title mb-3">Datos del solicitante</h4>
+                <hr>
+                <form class="row g-3 needs-validation" id="form_datos" novalidate>
 
-    </div>
+                  <div class="col-md-4">
+                    <label for="datos_nombres" class="form-label">Nombres(s)</label>
+                    <input type="text" class="form-control" id="datos_nombres" required>
+                    <div class="valid-feedback">
+                      Listo
+                    </div>
+                    <div class="invalid-feedback">
+                      Compruebe este campo
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <label for="datos_apellidos" class="form-label">Apllidos</label>
+                    <input type="text" class="form-control" id="datos_apellidos" required>
+                    <div class="valid-feedback">
+                      Listo
+                    </div>
+                    <div class="invalid-feedback">
+                      Compruebe este campo
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <label for="datos_curp" class="form-label">CURP</label>
+                    <input type="text" class="form-control" id="datos_curp" required>
+                    <div class="valid-feedback">
+                      Listo
+                    </div>
+                    <div class="invalid-feedback">
+                      Compruebe este campo
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <label for="datos_sangre" class="form-label">Tipo de sangre</label>
+                    <select class="form-select" id="datos_sangre" required>
+                      <option selected value="O-">O negativo / O-</option>
+                      <option value="O+">O positivo / O+</option>
+                      <option value="A-">A negativo / A-</option>
+                      <option value="A+">A positivo / A+</option>
+                      <option value="B-">B negativo / B-</option>
+                      <option value="B+">B positivo / B+</option>
+                      <option value="AB-">AB negativo / AB-</option>
+                      <option value="AB+">AB positivo / AB+</option>
+                      <option value="N/D">Desconocido</option>
 
-    <!-- ============================================================== -->
-    <!-- End Page content -->
-    <!-- ============================================================== -->
+                    </select>
+                    <div class="valid-feedback">
+                      Listo
+                    </div>
+                    <div class="invalid-feedback">
+                      Compruebe este campo
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <label for="datos_sexo" class="form-label">Sexo</label>
+                    <div class="input-group has-validation">
+                      <select class="form-select" id="datos_sexo" required>
+                        <option value="H" selected>Hombre</option>
+                        <option value="M">Mujer</option>
+
+                      </select>
+                      <div class="valid-feedback">
+                        Listo
+                      </div>
+                      <div class="invalid-feedback">
+                        Compruebe este campo
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <label for="datos_nacionalidad" class="form-label">Nacionalidad</label>
+                    <div class="input-group has-validation">
+                      <select class="form-select" id="datos_nacionalidad" required>
+                        <option selected value="Mexicana">Mexicana</option>
+                        <option value="Extranjera">Extranjera</option>
+
+                      </select>
+                      <div class="valid-feedback">
+                        Listo
+                      </div>
+                      <div class="invalid-feedback">
+                        Compruebe este campo
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <label for="datos_restriacciones" class="form-label">Restricciones</label>
+                    <input type="text" class="form-control" value="NINGUNA" id="datos_restriacciones" required>
+                    <div class="valid-feedback">
+                      Listo
+                    </div>
+                    <div class="invalid-feedback">
+                      Compruebe este campo
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <label for="datos_nacimiento" class="form-label">Fecha de nacimiento</label>
+                    <input type="date" class="form-control" id="datos_nacimiento">
+                    <div class="valid-feedback">
+                      Listo
+                    </div>
+                    <div class="invalid-feedback">
+                      Compruebe este campo
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+
+                    <label for="datos_rfc" class="form-label">RFC</label>
+                    <input type="text" class="form-control" id="datos_rfc" required>
+                    <div class="valid-feedback">
+                      Listo
+                    </div>
+                    <div class="invalid-feedback">
+                      Compruebe este campo
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+
+                    <label for="datos_donante" class="form-label">Donante de organos</label>
+
+                    <select class="form-select" id="datos_donante" required>
+                      <option selected value="N">No donar</option>
+                      <option value="S">Si donar</option>
+
+                    </select>
+
+                    <div class="valid-feedback">
+                      Listo
+                    </div>
+                    <div class="invalid-feedback">
+                      Compruebe este campo
+                    </div>
+                  </div>
+
+                </form>
+
+
+
+              </div> <!-- end card-body-->
+            </div> <!-- end card-->
+          </div> <!-- end col-->
+        </div>
+        <!-- end row-->
+
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="header-title mb-3">Direccion</h4>
+                <hr>
+                <form class="row g-3 needs-validation" id="form_direc" novalidate>
+
+                  <div class="col-md-6">
+                    <label for="direc_calle" class="form-label">Calle</label>
+                    <input type="text" class="form-control" id="direc_calle" required>
+                    <div class="valid-feedback">
+                      Listo
+                    </div>
+                    <div class="invalid-feedback">
+                      Compruebe este campo
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="direc_ciudad" class="form-label">Ciudad</label>
+                    <input type="text" class="form-control" id="direc_ciudad" required>
+                    <div class="valid-feedback">
+                      Listo
+                    </div>
+                    <div class="invalid-feedback">
+                      Compruebe este campo
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <label for="direc_cp" class="form-label">Codigo postal</label>
+                    <input type="text" class="form-control" id="direc_cp" required>
+                    <div class="valid-feedback">
+                      Listo
+                    </div>
+                    <div class="invalid-feedback">
+                      Compruebe este campo
+                    </div>
+                  </div>
+
+
+
+                  <div class="col-md-4">
+                    <label for="direc_colonia" class="form-label">Colonia</label>
+                    <input type="text" class="form-control" id="direc_colonia" required>
+                    <div class="valid-feedback">
+                      Listo
+                    </div>
+                    <div class="invalid-feedback">
+                      Compruebe este campo
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+
+                    <label for="direc_estado" class="form-label">Estado</label>
+                    <input type="text" class="form-control" id="direc_estado" required>
+                    <div class="valid-feedback">
+                      Listo
+                    </div>
+                    <div class="invalid-feedback">
+                      Compruebe este campo
+                    </div>
+                  </div>
+
+
+                </form>
+
+
+
+              </div> <!-- end card-body-->
+            </div> <!-- end card-->
+          </div> <!-- end col-->
+        </div>
+        <!-- end row-->
+
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="header-title mb-3">Licencia</h4>
+                <hr>
+                <form class="row g-3 needs-validation" id="form_licencia" novalidate>
+                  <div class="col-md-4">
+                    <label for="lic_expedicion" class="form-label">Fecha de expedicion</label>
+                    <input type="date" class="form-control" id="lic_expedicion">
+                    <div class="valid-feedback">
+                      Listo
+                    </div>
+                    <div class="invalid-feedback">
+                      Compruebe este campo
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <label for="lic_emisora" class="form-label">Oficina emisora</label>
+                    <select class="form-select" id="lic_emisora" required>
+                      <option selected value="TIJUANA, CERRO">Tijuana, cerro</option>
+                      <option value="TIJUANA, LA MESA">Tijuana, La mesa</option>
+                      <option value="ENSENADA, SAN">Ensenada, San</option>
+                    </select>
+
+                    </select>
+                    <div class="valid-feedback">
+                      Listo
+                    </div>
+                    <div class="invalid-feedback">
+                      Compruebe este campo
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <label for="lic_antiguedad" class="form-label">Fecha de antiguedad</label>
+                    <input type="date" class="form-control" id="lic_antiguedad">
+                    <div class="valid-feedback">
+                      Listo
+                    </div>
+                    <div class="invalid-feedback">
+                      Compruebe este campo
+                    </div>
+                  </div>
+                  <div class="col-md-8">
+                    <label for="lic_tipo" class="form-label">Tipo de
+                      licencia</label>
+                    <div class="input-group has-validation">
+                      <select class="form-select" id="lic_tipo" required>
+                        <option selected value="Tipo A - AUTOMOVILISTA">Tipo A - AUTOMOVILISTA</option>
+                        <option value="Tipo A - CHOFER A">Tipo A - CHOFER A</option>
+                        <option value="Tipo B - CHOFER B">Tipo B - CHOFER B</option>
+                        <option value="Tipo C - CHOFER C">Tipo C - CHOFER C</option>
+                        <option value="Tipo E - CHOFER D">Tipo E - CHOFER D</option>
+                        <option value="Tipo M - MOTOCICLISTA">Tipo M - MOTOCICLISTA</option>
+
+                      </select>
+                      <div class="valid-feedback">
+                        Listo
+                      </div>
+                      <div class="invalid-feedback">
+                        Compruebe este campo
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <label for="lic_valido" class="form-label">Valido</label>
+                    <div class="input-group has-validation">
+                      <select class="form-select" id="lic_valido" required>
+                        <option selected value="3">3 años</option>
+                        <option value="5">5 años</option>
+                        <option value="88">Permanente</option>
+
+                      </select>
+                      <div class="valid-feedback">
+                        Listo
+                      </div>
+                      <div class="invalid-feedback">
+                        Compruebe este campo
+                      </div>
+                    </div>
+                  </div>
+
+
+
+
+                </form>
+
+
+
+              </div> <!-- end card-body-->
+            </div> <!-- end card-->
+          </div> <!-- end col-->
+        </div>
+        <!-- end row-->
+
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="header-title mb-3">Contacto de emergencia</h4>
+                <hr>
+                <form class="row g-3 needs-validation" id="form_contacto" novalidate>
+
+
+                  <div class="col-md-4">
+                    <label for="con_nombre" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" id="con_nombre" required>
+                    <div class="valid-feedback">
+                      Listo
+                    </div>
+                    <div class="invalid-feedback">
+                      Compruebe este campo
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <label for="con_apellido" class="form-label">Apellidos</label>
+                    <input type="text" class="form-control" id="con_apellido" required>
+                    <div class="valid-feedback">
+                      Listo
+                    </div>
+                    <div class="invalid-feedback">
+                      Compruebe este campo
+                    </div>
+                  </div>
+
+
+
+                  <div class="col-md-4">
+                    <label for="con_tel" class="form-label">Telefono de contacto</label>
+                    <input type="text" class="form-control" id="con_tel" required>
+                    <div class="valid-feedback">
+                      Listo
+                    </div>
+                    <div class="invalid-feedback">
+                      Compruebe este campo
+                    </div>
+                  </div>
+
+
+
+
+                </form>
+
+
+
+              </div> <!-- end card-body-->
+            </div> <!-- end card-->
+          </div> <!-- end col-->
+        </div>
+        <!-- end row-->
+
+
+        <div class="row ">
+          <div class="col-lg-6 col-12">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="header-title mb-3">Fotografia</h4>
+                <hr>
+
+                <div class="row">
+
+                  <div class="col-12">
+                    <div class="accordion" id="accordionExample">
+                      <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingOne">
+                          <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            Vista previa
+                          </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                          data-bs-parent="#accordionExample">
+                          <div class="accordion-body">
+                            <div class="mb-3 col-lg-12 col-12">
+
+                            </div>
+
+
+
+                            <div class="row">
+
+                              <div
+                                class="col-lg-6 col-md-6 col-12 mt-lg-0 mt-3 d-flex align-items-center justify-content-center  ">
+                                <div style="height: 245px; width: 205px;"
+                                  class=" border border-1  border-secondary text-center overflow-hidden">
+                                  <img src="" style="width: 100%;" id="foto_preview_editor" alt="">
+
+                                </div>
+                              </div>
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+
+
+                    </div>
+                  </div>
+
+
+                </div>
+              </div> <!-- end card-body-->
+            </div> <!-- end card-->
+          </div> <!-- end col-->
+
+          <div class="col-lg-6 col-12">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="header-title mb-3">Firma</h4>
+                <hr>
+                <div class="row">
+                  <div class="accordion" id="accordionExample">
+                    <div class="accordion-item">
+                      <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                          data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                          Vista previa
+                        </button>
+                      </h2>
+                      <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                        data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                          
+
+
+                          <div class="row">
+
+                            <div
+                              class="col-lg-6 col-md-6 col-12 mt-lg-0 mt-3 d-flex align-items-center justify-content-center  ">
+                              <div style="height: 49px; width: 205px;"
+                                class=" border border-1  border-secondary text-center overflow-hidden">
+                                <img src="" id="firma_preview_editor" style="width: 100%;" alt="">
+
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+
+
+              </div> <!-- end card-body-->
+            </div> <!-- end card-->
+          </div> <!-- end col-->
+        </div>
+
+        <!-- Content -->
+        <div class="container" id="container-cropper" style="margin-top: 5rem;">
+          <div class="row">
+            <div class="col-md-9">
+              <!-- <h3>Demo:</h3> -->
+              <div class="docs-demo">
+                <div class="img-container">
+                  <img
+                    src="https://static.vecteezy.com/system/resources/previews/000/439/863/original/vector-users-icon.jpg"
+                    alt="Picture">
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <!-- <h3>Preview:</h3> -->
+              <div class="docs-preview clearfix">
+                <div class="img-preview preview-lg border border-dark"></div>
+
+              </div>
+
+
+            </div>
+          </div>
+
+          <div class="row" id="actions">
+            <div class="col-md-9 docs-buttons">
+              <!-- <h3>Toolbar:</h3> -->
+              <div class="btn-group">
+                <label class="btn btn-primary btn-upload" for="inputImage" title="Upload image file">
+                  <input type="file" class="sr-only" id="inputImage" name="file" accept="image/*">
+                  <span class="docs-tooltip" data-toggle="tooltip" title="Import image with Blob URLs">
+                    <span class="fa fa-folder"></span>
+                  </span>
+                </label>
+                <button type="button" class="btn btn-primary" data-method="reset" title="Reset">
+                  <span class="docs-tooltip" data-toggle="tooltip" title="cropper.reset()">
+                    <span class="fa fa-sync-alt"></span>
+                  </span>
+                </button>
+
+
+              </div>
+ 
+
+              <div class="btn-group">
+                <button type="button" class="btn btn-primary" data-method="zoom" data-option="0.1" title="Zoom In">
+                  <span class="docs-tooltip" data-toggle="tooltip" title="cropper.zoom(0.1)">
+                    <span class="fa fa-search-plus"></span>
+                  </span>
+                </button>
+                <button type="button" class="btn btn-primary" data-method="zoom" data-option="-0.1" title="Zoom Out">
+                  <span class="docs-tooltip" data-toggle="tooltip" title="cropper.zoom(-0.1)">
+                    <span class="fa fa-search-minus"></span>
+                  </span>
+                </button>
+              </div>
+
+              <div class="btn-group">
+                <button type="button" class="btn btn-primary" data-method="move" data-option="-10"
+                  data-second-option="0" title="Move Left">
+                  <span class="docs-tooltip" data-toggle="tooltip" title="cropper.move(-10, 0)">
+                    <span class="fa fa-arrow-left"></span>
+                  </span>
+                </button>
+                <button type="button" class="btn btn-primary" data-method="move" data-option="10" data-second-option="0"
+                  title="Move Right">
+                  <span class="docs-tooltip" data-toggle="tooltip" title="cropper.move(10, 0)">
+                    <span class="fa fa-arrow-right"></span>
+                  </span>
+                </button>
+                <button type="button" class="btn btn-primary" data-method="move" data-option="0"
+                  data-second-option="-10" title="Move Up">
+                  <span class="docs-tooltip" data-toggle="tooltip" title="cropper.move(0, -10)">
+                    <span class="fa fa-arrow-up"></span>
+                  </span>
+                </button>
+                <button type="button" class="btn btn-primary" data-method="move" data-option="0" data-second-option="10"
+                  title="Move Down">
+                  <span class="docs-tooltip" data-toggle="tooltip" title="cropper.move(0, 10)">
+                    <span class="fa fa-arrow-down"></span>
+                  </span>
+                </button>
+              </div>
+
+              <div class="btn-group">
+                <button type="button" class="btn btn-primary" data-method="rotate" data-option="-45"
+                  title="Rotate Left">
+                  <span class="docs-tooltip" data-toggle="tooltip" title="cropper.rotate(-45)">
+                    <span class="fa fa-undo-alt"></span>
+                  </span>
+                </button>
+                <button type="button" class="btn btn-primary" data-method="rotate" data-option="45"
+                  title="Rotate Right">
+                  <span class="docs-tooltip" data-toggle="tooltip" title="cropper.rotate(45)">
+                    <span class="fa fa-redo-alt"></span>
+                  </span>
+                </button>
+              </div>
+
+              <div class="btn-group">
+                <button type="button" class="btn btn-primary" data-method="scaleX" data-option="-1"
+                  title="Flip Horizontal">
+                  <span class="docs-tooltip" data-toggle="tooltip" title="cropper.scaleX(-1)">
+                    <span class="fa fa-arrows-alt-h"></span>
+                  </span>
+                </button>
+                <button type="button" class="btn btn-primary" data-method="scaleY" data-option="-1"
+                  title="Flip Vertical">
+                  <span class="docs-tooltip" data-toggle="tooltip" title="cropper.scaleY(-1)">
+                    <span class="fa fa-arrows-alt-v"></span>
+                  </span>
+                </button>
+                <button type="button" class="btn btn-warning" data-method="enable" title="Enable">
+                  <span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="cropper.enable()">
+                    <span class="fa fa-unlock"></span>
+                  </span>
+                </button>
+              </div>
+
+ 
+
+              <div class="btn-group">
+                <button type="button" class="btn btn-light" id="btnModoFirma" data-method="disable" title="Disable">
+                  Modo firma
+                </button>
+                <button type="button" class="btn btn-dark" id="btnModoFoto" data-method="enable" title="Enable">
+                  Modo foto
+                </button>
+              </div>
+
+              <div class="btn-group">
+                <button type="button" id="guardarfotorecortada" class="btn btn-success" data-method="disable" title="Disable">
+                  <span class="docs-tooltip"  data-toggle="tooltip" title="">
+                    Guardar foto
+                  </span>
+                </button>
+                <button type="button" id="guardarfirmarecortada" class="btn btn-danger" data-method="enable" title="Enable">
+                  <span class="docs-tooltip"  data-toggle="tooltip" title="">
+                    Guardar firma
+                  </span>
+                </button>
+              </div>
+
+
+
+
+              <!-- Show the cropped image in modal -->
+              <div class="modal fade docs-cropped" id="getCroppedCanvasModal" role="dialog" aria-hidden="true"
+                aria-labelledby="getCroppedCanvasTitle" tabindex="-1">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="getCroppedCanvasTitle">Cropped</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body"></div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <a class="btn btn-primary" id="download" href="javascript:void(0);"
+                        download="cropped.jpg">Download</a>
+                    </div>
+                  </div>
+                </div>
+              </div><!-- /.modal -->
+
+
+              <textarea class="form-control" id="putData"
+                placeholder="Get data to here or set data with this value"></textarea>
+
+            </div><!-- /.docs-buttons -->
+
+            <div class="col-md-3 docs-toggles">
+              <!-- <h3>Toggles:</h3> -->
+              <div class="btn-group d-flex flex-nowrap" data-toggle="buttons">
+
+              </div>
+
+
+
+
+
+
+            </div><!-- /.docs-toggles -->
+          </div>
+        </div>
+        <!-- end row-->
+        <div class="row">
+          <div class="col-12 d-grid">
+            <button type="submit" onclick="enviarDatos()" class="btn btn-lg btn-soft-primary"> Generar
+              licencia</button>
+          </div>
+          <!-- end d-grid -->
+        </div>
+
+        <!-- Full width modal -->
+
+        <div class="modal fade" id="spinner_modal" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content" style="background-color: transparent;">
+
+              <div class="modal-body text-center">
+                <div class="spinner-border avatar-lg text-primary" role="status"></div>
+              </div>
+            </div><!-- /.modal-content -->
+          </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+
+
+
+
+
+
+
+
+
+
+        <code class="d-none" id="base64"></code>
+        <code class="d-none" id="base64F"></code>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      </div> <!-- container -->
+
+    </div> <!-- content -->
+
+    <!-- Footer Start -->
+    <footer class="footer">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-6">
+            <script>document.write(new Date().getFullYear())</script> © Hyper - Coderthemes.com
+          </div>
+          <div class="col-md-6">
+            <div class="text-md-end footer-links d-none d-md-block">
+              <a href="javascript: void(0);">About</a>
+              <a href="javascript: void(0);">Support</a>
+              <a href="javascript: void(0);">Contact Us</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- end Footer -->
+
+  </div>
+
+  <!-- ============================================================== -->
+  <!-- End Page content -->
+  <!-- ============================================================== -->
 
 </div>
 
@@ -724,13 +1094,7 @@
 
 <script src="{% static 'licencias/js/forms.js' %}"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.js"
-    integrity="sha512-9KkIqdfN7ipEW6B6k+Aq20PV31bjODg4AA52W+tYtAE0jE0kMx49bjJ3FgvS56wzmyfMUHbQ4Km2b7l9+Y/+Eg=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-<script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.js"></script>
 
 
-
-</script>
 {% endblock %}

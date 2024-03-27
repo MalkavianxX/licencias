@@ -48,8 +48,8 @@ class Licencia(models.Model):
     con_apellido = models.CharField(max_length=255)
     con_tel = models.CharField(max_length=255)
 
-    foto_file = models.ImageField(storage=BunnyStorage(),upload_to='fotos/')
-    firma_file = models.ImageField(storage=BunnyStorage(),upload_to='firmas/')
+    foto_file = models.ImageField(upload_to='fotos/')
+    firma_file = models.ImageField(upload_to='firmas/')
 
     fecha = models.DateField(auto_now_add= True)
 

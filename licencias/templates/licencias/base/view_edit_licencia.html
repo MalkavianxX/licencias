@@ -15,7 +15,7 @@
 {% block content %}
 
 
-
+ 
 <!-- Select2 css -->
 <link href="{% static 'login/assets/vendor/select2/css/select2.min.css' %}" rel="stylesheet" type="text/css" />
 
@@ -39,10 +39,10 @@
 
 <!-- Theme Config Js -->
 <script src="{% static 'login/assets/js/hyper-config.js' %}"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.css"
-    integrity="sha512-hvNR0F/e2J7zPPfLC9auFe3/SE0yG4aJCOd/qxew74NN7eyiSKjr7xJJMu1Jy2wf7FXITpWS1E/RY8yzuXN7VA=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.css" />
 
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" crossorigin="anonymous">
 
 
 
@@ -52,9 +52,268 @@
 
     <style>
         input {
-            text-transform: uppercase;
+          text-transform: uppercase;
         }
-    </style>
+      
+        .btn {
+          padding-left: 0.75rem;
+          padding-right: 0.75rem;
+        }
+      
+        label.btn {
+          margin-bottom: 0;
+        }
+      
+        .d-flex>.btn {
+          flex: 1;
+        }
+      
+        .carbonads {
+          border: 1px solid #ccc;
+          border-radius: 0.25rem;
+          font-size: 0.875rem;
+          overflow: hidden;
+          padding: 1rem;
+        }
+      
+        .carbon-wrap {
+          overflow: hidden;
+        }
+      
+        .carbon-img {
+          clear: left;
+          display: block;
+          float: left;
+        }
+      
+        .carbon-text,
+        .carbon-poweredby {
+          display: block;
+          margin-left: 140px;
+        }
+      
+        .carbon-text,
+        .carbon-text:hover,
+        .carbon-text:focus {
+          color: #fff;
+          text-decoration: none;
+        }
+      
+        .carbon-poweredby,
+        .carbon-poweredby:hover,
+        .carbon-poweredby:focus {
+          color: #ddd;
+          text-decoration: none;
+        }
+      
+        @media (min-width: 768px) {
+          .carbonads {
+            float: right;
+            margin-bottom: -1rem;
+            margin-top: -1rem;
+            max-width: 360px;
+          }
+        }
+      
+        .footer {
+          font-size: 0.875rem;
+        }
+      
+        .heart {
+          color: #ddd;
+          display: block;
+          height: 2rem;
+          line-height: 2rem;
+          margin-bottom: 0;
+          margin-top: 1rem;
+          position: relative;
+          text-align: center;
+          width: 100%;
+        }
+      
+        .heart:hover {
+          color: #ff4136;
+        }
+      
+        .heart::before {
+          border-top: 1px solid #eee;
+          content: " ";
+          display: block;
+          height: 0;
+          left: 0;
+          position: absolute;
+          right: 0;
+          top: 50%;
+        }
+      
+        .heart::after {
+          background-color: #fff;
+          content: "♥";
+          padding-left: 0.5rem;
+          padding-right: 0.5rem;
+          position: relative;
+          z-index: 1;
+        }
+      
+        .docs-demo {
+          margin-bottom: 1rem;
+          overflow: hidden;
+          padding: 2px;
+        }
+      
+        .img-container,
+        .img-preview {
+          background-color: #f7f7f7;
+          text-align: center;
+          width: 100%;
+        }
+      
+        .img-container {
+          max-height: 497px;
+          min-height: 200px;
+        }
+      
+        @media (min-width: 768px) {
+          .img-container {
+            min-height: 497px;
+          }
+        }
+      
+        .img-container>img {
+          max-width: 100%;
+        }
+      
+        .docs-preview {
+          margin-right: -1rem;
+        }
+      
+        .img-preview {
+          float: left;
+          margin-bottom: 0.5rem;
+          margin-right: 0.5rem;
+          overflow: hidden;
+      
+        }
+      
+        .img-preview>img {
+          max-width: 100%;
+        }
+      
+        .preview-lg {
+          height: 245px;
+          width: 205px;
+        }
+      
+        .preview-md {
+          height: 4.5rem;
+          width: 8rem;
+        }
+      
+        .preview-sm {
+          height: 2.25rem;
+          width: 4rem;
+        }
+      
+        .preview-xs {
+          height: 1.125rem;
+          margin-right: 0;
+          width: 2rem;
+        }
+      
+        .docs-data>.input-group {
+          margin-bottom: 0.5rem;
+        }
+      
+        .docs-data .input-group-prepend .input-group-text {
+          min-width: 4rem;
+        }
+      
+        .docs-data .input-group-append .input-group-text {
+          min-width: 3rem;
+        }
+      
+        .docs-buttons>.btn,
+        .docs-buttons>.btn-group,
+        .docs-buttons>.form-control {
+          margin-bottom: 0.5rem;
+          margin-right: 0.25rem;
+        }
+      
+        .docs-toggles>.btn,
+        .docs-toggles>.btn-group,
+        .docs-toggles>.dropdown {
+          margin-bottom: 0.5rem;
+        }
+      
+        .docs-tooltip {
+          display: block;
+          margin: -0.5rem -0.75rem;
+          padding: 0.5rem 0.75rem;
+        }
+      
+        .docs-tooltip>.icon {
+          margin: 0 -0.25rem;
+          vertical-align: top;
+        }
+      
+        .tooltip-inner {
+          white-space: normal;
+        }
+      
+        .btn-upload .tooltip-inner,
+        .btn-toggle .tooltip-inner {
+          white-space: nowrap;
+        }
+      
+        .btn-toggle {
+          padding: 0.5rem;
+        }
+      
+        .btn-toggle>.docs-tooltip {
+          margin: -0.5rem;
+          padding: 0.5rem;
+        }
+      
+        @media (max-width: 400px) {
+          .btn-group-crop {
+            margin-right: -1rem !important;
+          }
+      
+          .btn-group-crop>.btn {
+            padding-left: 0.5rem;
+            padding-right: 0.5rem;
+          }
+      
+          .btn-group-crop .docs-tooltip {
+            margin-left: -0.5rem;
+            margin-right: -0.5rem;
+            padding-left: 0.5rem;
+            padding-right: 0.5rem;
+          }
+        }
+      
+        .docs-options .dropdown-menu {
+          width: 100%;
+        }
+      
+        .docs-options .dropdown-menu>li {
+          font-size: 0.875rem;
+          padding: 0.125rem 1rem;
+        }
+      
+        .docs-options .dropdown-menu .form-check-label {
+          display: block;
+        }
+      
+        .docs-cropped .modal-body {
+          text-align: center;
+        }
+      
+        .docs-cropped .modal-body>img,
+        .docs-cropped .modal-body>canvas {
+          max-width: 100%;
+        }
+      </style>
 
 
     <!-- ============================================================== -->
@@ -508,176 +767,290 @@
 
                 <div class="row ">
                     <div class="col-lg-6 col-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="header-title mb-3">Fotografia</h4>
-                                <hr>
-
-                                <div class="row">
-                                 
-                                    <div class="col-12">
-                                        <div class="accordion" id="accordionExample">
-                                            <div class="accordion-item">
-                                                <h2 class="accordion-header" id="headingOne">
-                                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
-                                                        aria-expanded="true" aria-controls="collapseOne">
-                                                        Seleccionar archivo
-                                                    </button>
-                                                </h2>
-                                                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
-                                                    data-bs-parent="#accordionExample">
-                                                    <div class="accordion-body">
-                                                        <div class="mb-3 col-lg-12 col-12">
-                                                            <label for="formFile" class="form-label">Selecciona foto</label>
-                                                            <input class="form-control" type="file"  id="imagen_foto">
-                                                        </div>
-                        
-                                                        <div class="row mb-lg-3 mb-2 jus">
-                                                            <div class=" col-12 d-flex justify-content-start" id="toolsfirma">
-                                                                <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-                                                                    <div class="btn-group me-2" role="group" aria-label="First group">
-                        
-                                                                        <button id="rotate-leftF" type="button" class="btn btn-primary"> <i
-                                                                                class="mdi mdi-rotate-left fs-3"></i></button>
-                                                                        <button id="rotate-rightF" type="button" class="btn btn-primary"><i
-                                                                                class="mdi mdi-rotate-right fs-3"></i></button>
-                                                                    </div>
-                                                                    <div class="btn-group me-2" role="group" aria-label="Second group">
-                                                                        <button type="button" id="zoom-inF" class="btn btn-light"><i
-                                                                                class="ri-zoom-in-line fs-3"></i></button>
-                                                                        <button type="button" id="zoom-outF" class="btn btn-light"><i
-                                                                                class="ri-zoom-out-line fs-3"></i></button>
-                                                                    </div>
-                        
-                                                                    <div class="btn-group" role="group" aria-label="Third group">
-                                                                        <button type="button" id="restartF" class="btn btn-danger"><i
-                                                                                class="mdi mdi-rotate-3d-variant fs-3"></i></button>
-                                                                        <button type="button" id="cropF" class="btn btn-success"><i
-                                                                                class="mdi mdi-check-bold fs-3"></i></button>
-                                                                    </div>
-                                                                </div>
-                        
-                                                            </div>
-                                                            <div class="col-lg-8 col-12">
-                                                                <input type="text" class="form-control" id="b64F">
-                                                            </div>
-                                                        </div>
-                        
-                                                        <div class="row">
-                                                            <div class="col-lg-6 col-md-6 col-12 text-center">
-                                                                <img style="width: 100%; height: 100%;object-fit: contain !important;" src="{{licencia.foto_file.url}}" id="foto_img_editor" alt="" class="img-fluid">
-                                                                
-                                                            </div>
-                                                            <div
-                                                                class="col-lg-6 col-md-6 col-12 mt-lg-0 mt-3 d-flex align-items-center justify-content-center  ">
-                                                                <div style="height: 245px; width: 205px;"
-                                                                    class=" border border-1  border-secondary text-center overflow-hidden">
-                                                                    <img src="{{licencia.foto_file.url}}" style="width: 100%;"
-                                                                        id="foto_preview_editor" alt="">
-                        
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                        
-                                                    </div>
-                                                </div>
-                                            </div>
-                      
-                                           
+                      <div class="card">
+                        <div class="card-body">
+                          <h4 class="header-title mb-3">Fotografia</h4>
+                          <hr>
+                
+                          <div class="row">
+                
+                            <div class="col-12">
+                              <div class="accordion" id="accordionExample">
+                                <div class="accordion-item">
+                                  <h2 class="accordion-header" id="headingOne">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                      data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                      Vista previa
+                                    </button>
+                                  </h2>
+                                  <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                                    data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                      <div class="mb-3 col-lg-12 col-12">
+                
+                                      </div>
+                
+                
+                
+                                      <div class="row">
+                
+                                        <div
+                                          class="col-lg-6 col-md-6 col-12 mt-lg-0 mt-3 d-flex align-items-center justify-content-center  ">
+                                          <div style="height: 245px; width: 205px;"
+                                            class=" border border-1  border-secondary text-center overflow-hidden">
+                                            <img src="{{licencia.foto_file.url}}" style="width: 100%;" id="foto_preview_editor" alt="">
+                
+                                          </div>
                                         </div>
+                                      </div>
+                
                                     </div>
-                                     
-                                    <input type="text" id="foto-form-recorte" class="d-none">
-
+                                  </div>
                                 </div>
-                            </div> <!-- end card-body-->
-                        </div> <!-- end card-->
+                
+                
+                              </div>
+                            </div>
+                
+                
+                          </div>
+                        </div> <!-- end card-body-->
+                      </div> <!-- end card-->
                     </div> <!-- end col-->
-
+                
                     <div class="col-lg-6 col-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="header-title mb-3">Firma</h4>
-                                <hr>
-                                <div class="row">
-                                    <div class="accordion" id="accordionExample">
-                                        <div class="accordion-item">
-                                            <h2 class="accordion-header" id="headingOne">
-                                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo"
-                                                    aria-expanded="true" aria-controls="collapseTwo">
-                                                    Seleccionar archivo 
-                                                </button>
-                                            </h2>
-                                            <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingOne"
-                                                data-bs-parent="#accordionExample">
-                                                <div class="accordion-body">
-                                                    <div class="mb-3  col-12">
-                                                        <label for="formFile" class="form-label">Selecciona firma</label>
-                                                        <input class="form-control" type="file" accept="image/*" id="imagen_firma">
-                                                    </div>
-                                                    <div class="row mb-lg-3 mb-2 ">
-                                                        <div class="col-12 d-flex justify-content-start" id="toolsfirma">
-                                                            <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-                                                                <div class="btn-group me-2" role="group" aria-label="First group">
-                    
-                                                                    <button id="rotate-left" type="button" class="btn btn-primary"> <i
-                                                                            class="mdi mdi-rotate-left fs-3"></i></button>
-                                                                    <button id="rotate-right" type="button" class="btn btn-primary"><i
-                                                                            class="mdi mdi-rotate-right fs-3"></i></button>
-                                                                </div>
-                                                                <div class="btn-group me-2" role="group" aria-label="Second group">
-                                                                    <button type="button" id="zoom-in" class="btn btn-light"><i
-                                                                            class="ri-zoom-in-line fs-3"></i></button>
-                                                                    <button type="button" id="zoom-out" class="btn btn-light"><i
-                                                                            class="ri-zoom-out-line fs-3"></i></button>
-                                                                </div>
-                    
-                                                                <div class="btn-group" role="group" aria-label="Third group">
-                                                                    <button type="button" id="restart" class="btn btn-danger"><i
-                                                                            class="mdi mdi-rotate-3d-variant fs-3"></i></button>
-                                                                    <button type="button" id="crop" data-bs-dismiss="modal"
-                                                                        class="btn btn-success"><i
-                                                                            class="mdi mdi-check-bold fs-3"></i></button>
-                                                                </div>
-                                                            </div>
-                    
-                                                        </div>
-                                                        <div class="col-lg-8 col-12">
-                                                            <input type="text" class="form-control" id="b64">
-                                                        </div>
-                                                    </div>
-                    
-                                                    <div class="row">
-                                                        <div class="col-lg-6 col-md-6 col-12 text-center">
-                                                            <img style="width: 100%; height: 100%;object-fit: contain !important;" src="{{licencia.firma_file.url}}" id="firma_img_editor" alt=""
-                                                                class="img-fluid">
-                    
-                                                        </div>
-                                                        <div
-                                                            class="col-lg-6 col-md-6 col-12 mt-lg-0 mt-3 d-flex align-items-center justify-content-center  ">
-                                                            <div style="height: 49px; width: 205px;"
-                                                                class=" border border-1  border-secondary text-center overflow-hidden">
-                                                                <img src="{{licencia.firma_file.url}}" 
-                                                                    id="firma_preview_editor" style="width: 100%;" alt="">
-                    
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                      <div class="card">
+                        <div class="card-body">
+                          <h4 class="header-title mb-3">Firma</h4>
+                          <hr>
+                          <div class="row">
+                            <div class="accordion" id="accordionExample">
+                              <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingOne">
+                                  <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                    Vista previa
+                                  </button>
+                                </h2>
+                                <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                                  data-bs-parent="#accordionExample">
+                                  <div class="accordion-body">
+                                    
+                
+                
+                                    <div class="row">
+                
+                                      <div
+                                        class="col-lg-6 col-md-6 col-12 mt-lg-0 mt-3 d-flex align-items-center justify-content-center  ">
+                                        <div style="height: 49px; width: 205px;"
+                                          class=" border border-1  border-secondary text-center overflow-hidden">
+                                          <img src="{{licencia.firma_file.url}}" id="firma_preview_editor" style="width: 100%;" alt="">
+                
                                         </div>
-                                        
+                                      </div>
                                     </div>
+                                  </div>
                                 </div>
-
-
-                                <input type="text" id="firma-form-recorte" class="d-none">
-
-                            </div> <!-- end card-body-->
-                        </div> <!-- end card-->
+                              </div>
+                
+                            </div>
+                          </div>
+                
+                
+                
+                        </div> <!-- end card-body-->
+                      </div> <!-- end card-->
                     </div> <!-- end col-->
-                </div>
+                  </div>
                 <!-- end row-->
+
+                        <!-- Content -->
+        <div class="container" id="container-cropper" style="margin-top: 5rem;">
+            <div class="row">
+              <div class="col-md-9">
+                <!-- <h3>Demo:</h3> -->
+                <div class="docs-demo">
+                  <div class="img-container">
+                    <img
+                      src="https://static.vecteezy.com/system/resources/previews/000/439/863/original/vector-users-icon.jpg"
+                      alt="Picture">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <!-- <h3>Preview:</h3> -->
+                <div class="docs-preview clearfix">
+                  <div class="img-preview preview-lg border border-dark"></div>
+  
+                </div>
+  
+  
+              </div>
+            </div>
+  
+            <div class="row" id="actions">
+              <div class="col-md-9 docs-buttons">
+                <!-- <h3>Toolbar:</h3> -->
+                <div class="btn-group">
+                  <label class="btn btn-primary btn-upload" for="inputImage" title="Upload image file">
+                    <input type="file" class="sr-only" id="inputImage" name="file" accept="image/*">
+                    <span class="docs-tooltip" data-toggle="tooltip" title="Import image with Blob URLs">
+                      <span class="fa fa-folder"></span>
+                    </span>
+                  </label>
+                  <button type="button" class="btn btn-primary" data-method="reset" title="Reset">
+                    <span class="docs-tooltip" data-toggle="tooltip" title="cropper.reset()">
+                      <span class="fa fa-sync-alt"></span>
+                    </span>
+                  </button>
+  
+  
+                </div>
+   
+  
+                <div class="btn-group">
+                  <button type="button" class="btn btn-primary" data-method="zoom" data-option="0.1" title="Zoom In">
+                    <span class="docs-tooltip" data-toggle="tooltip" title="cropper.zoom(0.1)">
+                      <span class="fa fa-search-plus"></span>
+                    </span>
+                  </button>
+                  <button type="button" class="btn btn-primary" data-method="zoom" data-option="-0.1" title="Zoom Out">
+                    <span class="docs-tooltip" data-toggle="tooltip" title="cropper.zoom(-0.1)">
+                      <span class="fa fa-search-minus"></span>
+                    </span>
+                  </button>
+                </div>
+  
+                <div class="btn-group">
+                  <button type="button" class="btn btn-primary" data-method="move" data-option="-10"
+                    data-second-option="0" title="Move Left">
+                    <span class="docs-tooltip" data-toggle="tooltip" title="cropper.move(-10, 0)">
+                      <span class="fa fa-arrow-left"></span>
+                    </span>
+                  </button>
+                  <button type="button" class="btn btn-primary" data-method="move" data-option="10" data-second-option="0"
+                    title="Move Right">
+                    <span class="docs-tooltip" data-toggle="tooltip" title="cropper.move(10, 0)">
+                      <span class="fa fa-arrow-right"></span>
+                    </span>
+                  </button>
+                  <button type="button" class="btn btn-primary" data-method="move" data-option="0"
+                    data-second-option="-10" title="Move Up">
+                    <span class="docs-tooltip" data-toggle="tooltip" title="cropper.move(0, -10)">
+                      <span class="fa fa-arrow-up"></span>
+                    </span>
+                  </button>
+                  <button type="button" class="btn btn-primary" data-method="move" data-option="0" data-second-option="10"
+                    title="Move Down">
+                    <span class="docs-tooltip" data-toggle="tooltip" title="cropper.move(0, 10)">
+                      <span class="fa fa-arrow-down"></span>
+                    </span>
+                  </button>
+                </div>
+  
+                <div class="btn-group">
+                  <button type="button" class="btn btn-primary" data-method="rotate" data-option="-45"
+                    title="Rotate Left">
+                    <span class="docs-tooltip" data-toggle="tooltip" title="cropper.rotate(-45)">
+                      <span class="fa fa-undo-alt"></span>
+                    </span>
+                  </button>
+                  <button type="button" class="btn btn-primary" data-method="rotate" data-option="45"
+                    title="Rotate Right">
+                    <span class="docs-tooltip" data-toggle="tooltip" title="cropper.rotate(45)">
+                      <span class="fa fa-redo-alt"></span>
+                    </span>
+                  </button>
+                </div>
+  
+                <div class="btn-group">
+                  <button type="button" class="btn btn-primary" data-method="scaleX" data-option="-1"
+                    title="Flip Horizontal">
+                    <span class="docs-tooltip" data-toggle="tooltip" title="cropper.scaleX(-1)">
+                      <span class="fa fa-arrows-alt-h"></span>
+                    </span>
+                  </button>
+                  <button type="button" class="btn btn-primary" data-method="scaleY" data-option="-1"
+                    title="Flip Vertical">
+                    <span class="docs-tooltip" data-toggle="tooltip" title="cropper.scaleY(-1)">
+                      <span class="fa fa-arrows-alt-v"></span>
+                    </span>
+                  </button>
+                  <button type="button" class="btn btn-warning" data-method="enable" title="Enable">
+                    <span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="cropper.enable()">
+                      <span class="fa fa-unlock"></span>
+                    </span>
+                  </button>
+                </div>
+  
+   
+  
+                <div class="btn-group">
+                  <button type="button" class="btn btn-light" id="btnModoFirma" data-method="disable" title="Disable">
+                    Modo firma
+                  </button>
+                  <button type="button" class="btn btn-dark" id="btnModoFoto" data-method="enable" title="Enable">
+                    Modo foto
+                  </button>
+                </div>
+  
+                <div class="btn-group">
+                  <button type="button" id="guardarfotorecortada" class="btn btn-success" data-method="disable" title="Disable">
+                    <span class="docs-tooltip"  data-toggle="tooltip" title="">
+                      Guardar foto
+                    </span>
+                  </button>
+                  <button type="button" id="guardarfirmarecortada" class="btn btn-danger" data-method="enable" title="Enable">
+                    <span class="docs-tooltip"  data-toggle="tooltip" title="">
+                      Guardar firma
+                    </span>
+                  </button>
+                </div>
+  
+  
+  
+  
+                <!-- Show the cropped image in modal -->
+                <div class="modal fade docs-cropped" id="getCroppedCanvasModal" role="dialog" aria-hidden="true"
+                  aria-labelledby="getCroppedCanvasTitle" tabindex="-1">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="getCroppedCanvasTitle">Cropped</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body"></div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <a class="btn btn-primary" id="download" href="javascript:void(0);"
+                          download="cropped.jpg">Download</a>
+                      </div>
+                    </div>
+                  </div>
+                </div><!-- /.modal -->
+  
+  
+                <textarea class="form-control" id="putData"
+                  placeholder="Get data to here or set data with this value"></textarea>
+  
+              </div><!-- /.docs-buttons -->
+  
+              <div class="col-md-3 docs-toggles">
+                <!-- <h3>Toggles:</h3> -->
+                <div class="btn-group d-flex flex-nowrap" data-toggle="buttons">
+  
+                </div>
+  
+  
+  
+  
+  
+  
+              </div><!-- /.docs-toggles -->
+            </div>
+          </div>
                 <div class="row">
                     <div class="col-12 d-grid">
                         <button type="submit" id="btn_uplicencia" class="btn btn-lg btn-soft-primary"> Actualizar
@@ -755,41 +1128,9 @@
 
 <script src="{% static 'licencias/js/forms.js' %}"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.js"
-    integrity="sha512-9KkIqdfN7ipEW6B6k+Aq20PV31bjODg4AA52W+tYtAE0jE0kMx49bjJ3FgvS56wzmyfMUHbQ4Km2b7l9+Y/+Eg=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.js"></script>
 
-    <script>
-        // Función para convertir una imagen a base64
-function imageToBase64(img, callback) {
-    var canvas = document.createElement('canvas');
-    canvas.width = img.naturalWidth;
-    canvas.height = img.naturalHeight;
-    canvas.getContext('2d').drawImage(img, 0, 0);
-    var base64String = canvas.toDataURL();
-    callback(base64String);
-}
 
-// Función para manejar la carga de la imagen
-function handleImageLoad(img, inputId) {
-    imageToBase64(img, function(base64String) {
-        document.getElementById(inputId).value = base64String;
-    });
-}
 
-// Función para ejecutar cuando se carga la página
-window.onload = function() {
-    // Obtén las imágenes y los inputs
-    var firmaImg = document.getElementById('firma_img_editor');
-    var fotoImg = document.getElementById('foto_img_editor');
-    var firmaInput = 'b64';
-    var fotoInput = 'b64F';
-
-    // Maneja la carga de las imágenes
-    handleImageLoad(firmaImg, firmaInput);
-    handleImageLoad(fotoImg, fotoInput);
-};
-
-    </script>
 
 {% endblock %}
