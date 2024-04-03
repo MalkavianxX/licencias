@@ -575,45 +575,7 @@
 <script src="https://superal.github.io/canvas2image/canvas2image.js"></script>
 <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script>
-$(document).ready(function() {
-    $("#crear-imagen").click(function() {
-        // Crea un nuevo canvas para dibujar la imagen
-        var canvas = document.createElement("canvas");
-        canvas.width = $("#lic_anverso").width(); // Ancho del div
-        canvas.height = $("#lic_anverso").height(); // Alto del div
-        var ctx = canvas.getContext("2d");
 
-        // Carga las imágenes
-        var firmaImg = new Image();
-        firmaImg.crossOrigin = "anonymous"; // Nuevo: Configura el atributo crossOrigin
-        firmaImg.src = "{{licencia.firma_file.url}}";
-        var fotoImg = new Image();
-        fotoImg.crossOrigin = "anonymous"; // Nuevo: Configura el atributo crossOrigin
-        fotoImg.src = "{{licencia.foto_file.url}}";
-
-        // Espera a que las imágenes se carguen
-        Promise.all([new Promise((resolve) => firmaImg.onload = resolve), new Promise((resolve) => fotoImg.onload = resolve)]).then(function() {
-            // Dibuja las imágenes en el canvas
-            ctx.drawImage(firmaImg, 0, 0);
-            ctx.drawImage(fotoImg, 0, 0);
-
-            // Convierte el canvas en una imagen PNG
-            var dataURL = canvas.toDataURL("image/jpeg");
-
-            // Crea un enlace para descargar la imagen
-            var a = document.createElement("a");
-            a.href = dataURL;
-            a.download = "licencia.png";
-            a.click();
-        });
-    });
-});
-
-
-
-
-</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.0.272/jspdf.debug.js"></script>
 <script src="{% static 'licencias/js/licencia.js' %}"></script>
 <!-- App js -->
