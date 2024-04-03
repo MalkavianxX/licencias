@@ -1,6 +1,5 @@
 from django.http import JsonResponse
 from django.shortcuts import render
-import json
 from .models import Licencia, Folio, Asignaciones
 from django.utils import timezone
 from .recovery_fun import recovery_save, det_tipo_licencia
@@ -8,6 +7,64 @@ from django.forms.models import model_to_dict
 import base64
 import requests
 from django.http import FileResponse
+from django.views.decorators.csrf import csrf_exempt
+import base64
+from PIL import Image
+import io
+from django.core.files.base import ContentFile
+
+
+
+
+
+
+
+
+def base64_to_image(base64_data):
+    # Elimina el prefijo 'data:image/png;base64,' (o el formato correspondiente)
+    data = base64_data.split(',')[1].encode('utf-8')
+
+    # Decodifica el base64 y crea un objeto de imagen
+    buf = io.BytesIO(base64.b64decode(data))
+    img = Image.open(buf)
+
+    # Guarda la imagen en un objeto BytesIO
+    image_io = io.BytesIO()
+    img.save(image_io, format='PNG')
+
+    return ContentFile(image_io.getvalue(), 'image.png')
+
+@csrf_exempt
+def guardar_anverso(request):
+    if request.method == 'POST':
+        id_licencia = request.POST.get('idLicencia')
+        imagen = base64_to_image(request.POST.get('imagen'))
+
+        # Guardar la imagen en el modelo Licencia
+        try:
+            licencia = Licencia.objects.get(pk=id_licencia)
+            licencia.anverso_img.save('image.png', imagen, save=True)
+            return JsonResponse({'message': 'Imagen guardada correctamente'})
+        except Licencia.DoesNotExist:
+            return JsonResponse({'error': 'Licencia no encontrada'}, status=404)
+    else:
+        return JsonResponse({'error': 'Método no permitido'}, status=405)
+
+@csrf_exempt
+def guardar_reverso(request):
+    if request.method == 'POST':
+        id_licencia = request.POST.get('idLicencia')
+        imagen = base64_to_image(request.POST.get('imagen'))
+
+        # Guardar la imagen en el modelo Licencia
+        try:
+            licencia = Licencia.objects.get(pk=id_licencia)
+            licencia.reverso_img.save('image.png', imagen, save=True)
+            return JsonResponse({'message': 'Imagen guardada correctamente'})
+        except Licencia.DoesNotExist:
+            return JsonResponse({'error': 'Licencia no encontrada'}, status=404)
+    else:
+        return JsonResponse({'error': 'Método no permitido'}, status=405)
 
 def get_foto(request, image_id):
     # Obtén la licencia de la base de datos
@@ -34,13 +91,6 @@ def get_firma(request, image_id):
 
     # Crea una respuesta HTTP con la imagen
     return FileResponse(response.raw, content_type='image/jpeg')
-
-    # Devuelve la imagen como una respuesta HTTP
-    return FileResponse(img)
-def url_a_base64(url_imagen):
-    # Obtiene la imagen de la URL
-    with open(url_imagen, 'rb') as imagen_archivo:
-        return base64.b64encode(imagen_archivo.read()).decode('utf-8')
 
 
 # Create your views here.
@@ -150,7 +200,6 @@ def view_edit_licencia(request,id):
 
         })
 
-
 def fun_up_licencia(request):
     if request.method == 'POST':
         # Obtener el cuerpo del JSON
@@ -240,7 +289,6 @@ def fun_up_licencia(request):
    
     else:
         return JsonResponse(data= {'error': 'Método no permitido'}, status=400)
-    
 
 def view_mis_asignaciones(request):
     # Comprueba si el usuario es administrador o personal
@@ -274,8 +322,6 @@ def fun_Up_asignaciones(request):
     else:
         return JsonResponse(data= {'error': 'Método no permitido'}, status=400)
     
-
-
 def validar_licencia(request,XWOPSLT,FFTWRPTO):
     try:
         licencia = Licencia.objects.get(pk=XWOPSLT)  # Intenta obtener la instancia del modelo

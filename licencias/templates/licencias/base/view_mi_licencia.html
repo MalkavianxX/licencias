@@ -331,11 +331,11 @@
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end" >
                                     <!-- item-->
-                                    <a href="javascript:void(0);" id="exportar-anverso"  class="dropdown-item">Descargar imagen anverso</a>
-                                    <a href="javascript:void(0);" id="exportar-reverso" class="dropdown-item">Descargar imagen reverso</a>
-
-                                    <!-- item-->
+                                    
+                                    <a href="{{licencia.anverso_img.url}}" download="ANVERSO - {{licencia.datos_nombres}} {{licencia.datos_apellidos}}" id="exportar-anverso"  class="dropdown-item">Descargar imagen anverso</a>
+                                    <a href="{{licencia.reverso_img.url}}"  download="REVERSO - {{licencia.datos_nombres}} {{licencia.datos_apellidos}}" id="exportar-reverso" class="dropdown-item">Descargar imagen reverso</a>
                                     <a href="javascript:void(0);" id="exportarpdf" class="dropdown-item">Exportar licencia PDF</a>
+
                                     <a href="{% url 'view_edit_licencia' licencia.id %}" class="dropdown-item">Editar licencia</a>
 
                                 </div>
@@ -567,6 +567,7 @@
     <h1 id="numero">1872884-2</h1>
     <canvas id="qr"></canvas>
 </div>
+
 <!-- Vendor js -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
