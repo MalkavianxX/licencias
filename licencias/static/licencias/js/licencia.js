@@ -1,5 +1,33 @@
 var qr;
 
+$(document).ready(function() {
+  // Carga la imagen
+  var fotoImg = new Image();
+  var firmaImg = new Image();
+  var idLicencia = document.getElementById('id_licencia').value;
+  fotoImg.crossOrigin = "anonymous"; // Configura el atributo crossOrigin
+  fotoImg.src = "/licenciasget_foto/" + idLicencia;  // Usa la URL de la vista
+
+  firmaImg.crossOrigin = "anonymous"; // Configura el atributo crossOrigin
+  firmaImg.src = "/licenciasget_firma/" + idLicencia;  // Usa la URL de la vista
+
+  // Espera a que la imagen se cargue
+  fotoImg.onload = function() {
+      // Coloca la imagen en el elemento img con el id "foto"
+      var fotoElement = document.getElementById("foto");
+      var fotoSub = document.getElementById("foto-sub");
+
+      fotoElement.src = fotoImg.src;
+      fotoSub.src = fotoImg.src;
+
+  };
+  firmaImg.onload = function () {
+    var firmaElement = document.getElementById("firma");
+    firmaElement.src = firmaImg.src;
+
+    
+  }
+});
 
 window.onload = function () {
   let id_licencia = document.getElementById('id_licencia').value;
@@ -162,7 +190,6 @@ document.getElementById('exportar-anverso').addEventListener('click', function (
   }).finally(() => {
     setTimeout(function () {
       Swal.close();
-      mydiv.style.display = "none";
     }, 500); // Retrasa el cierre del modal 1 segundo
   });
 });

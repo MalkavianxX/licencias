@@ -7,7 +7,36 @@ from .recovery_fun import recovery_save, det_tipo_licencia
 from django.forms.models import model_to_dict
 import base64
 import requests
+from django.http import FileResponse
 
+def get_foto(request, image_id):
+    # Obtén la licencia de la base de datos
+    licencia = Licencia.objects.get(id=image_id)
+
+    # Obtiene la URL de la imagen
+    img_url = licencia.foto_file.url
+
+    # Realiza una solicitud GET a la URL de la imagen
+    response = requests.get(img_url, stream=True)
+
+    # Crea una respuesta HTTP con la imagen
+    return FileResponse(response.raw, content_type='image/jpeg')
+
+def get_firma(request, image_id):
+    # Obtén la licencia de la base de datos
+    licencia = Licencia.objects.get(id=image_id)
+
+    # Obtiene la URL de la imagen
+    img_url = licencia.firma_file.url
+
+    # Realiza una solicitud GET a la URL de la imagen
+    response = requests.get(img_url, stream=True)
+
+    # Crea una respuesta HTTP con la imagen
+    return FileResponse(response.raw, content_type='image/jpeg')
+
+    # Devuelve la imagen como una respuesta HTTP
+    return FileResponse(img)
 def url_a_base64(url_imagen):
     # Obtiene la imagen de la URL
     with open(url_imagen, 'rb') as imagen_archivo:
@@ -93,7 +122,7 @@ def view_watch_licencia(request,id):
     licencia.lic_antiguedad = licencia.lic_antiguedad.strftime('%d/%m/%Y')
     anverso,reverso = det_tipo_licencia(licencia.lic_tipo, licencia.datos_donante)
  
-    
+    print(licencia.foto_file)
     return render(request, 'licencias/base/view_mi_licencia.html',{'licencia':licencia,'anverso':anverso,'reverso':reverso})    
 
 def view_mis_licencias(request):

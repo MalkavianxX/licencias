@@ -21,5 +21,10 @@ urlpatterns = [
     #api
     path('validar_licencia/<int:XWOPSLT>/<str:FFTWRPTO>/', views.validar_licencia, name="validar_licencia"),
 
+    #imagene
+    path('get_foto/<int:image_id>/', views.get_foto, name='get_foto'),
+    path('get_firma/<int:image_id>/', views.get_firma, name='get_firma'),
+
+
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
