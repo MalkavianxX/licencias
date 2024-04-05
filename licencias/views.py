@@ -18,6 +18,7 @@ from PIL import Image
 import urllib.request
 import tempfile
 import os
+from django.core.files.storage import default_storage
 
 def convert_images_to_pdf(urls, id):
     # Crea un directorio temporal para el PDF
@@ -291,6 +292,13 @@ def view_edit_licencia(request,id):
 
         })
 
+def eliminar_archivos(id):
+    from django.core.files.storage import default_storage
+
+
+
+    print("Archivos eliminados correctamente")
+
 def fun_up_licencia(request):
     if request.method == 'POST':
         # Obtener el cuerpo del JSON
@@ -330,7 +338,7 @@ def fun_up_licencia(request):
         data['con_tel'] = request.POST.get('con_tel')
 
 
-
+ 
         data['id'] = request.POST.get('id')
 
         licencia_up = Licencia.objects.get(pk = data['id'])
@@ -371,7 +379,14 @@ def fun_up_licencia(request):
         licencia_up.con_nombre = data['con_nombre']
         licencia_up.con_apellido = data['con_apellido']
         licencia_up.con_tel = data['con_tel']
+ 
 
+        campos = ['anverso_img', 'reverso_img', 'pdf']
+
+        for campo in campos:
+            archivo = getattr(licencia_up, campo)
+            if archivo and default_storage.exists(archivo.name):
+                default_storage.delete(archivo.name)
 
         # Guardar la nueva instancia de Licencia en la base de datos
         licencia_up.save()
