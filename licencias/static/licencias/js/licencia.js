@@ -216,6 +216,7 @@ function exportarAnverso() {
         link_original.href = canvasRotado.toDataURL('image/jpeg', 0.8)
         link.click();
         console.log('Anverso exitoso');
+        window.location.reload();
       })
       .catch(error => {
         console.error('Error al guardar la imagen:', error);
@@ -275,6 +276,7 @@ function exportarLicenciaReverso() {
         link_original.href = canvasRotado.toDataURL('image/jpeg', 0.8);
         link.click();
         console.log('Revero exitoso');
+        window.location.reload();
       })
       .catch(error => {
 
