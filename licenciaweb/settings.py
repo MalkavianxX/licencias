@@ -79,6 +79,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'licenciaweb.wsgi.application'
 
+DATA_UPLOAD_MAX_MEMORY_SIZE = 5242880  # 5 MB
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases

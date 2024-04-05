@@ -51,8 +51,8 @@ class Licencia(models.Model):
     foto_file = models.ImageField(storage=BunnyStorage(),upload_to='fotos/')
     firma_file = models.ImageField(storage=BunnyStorage(),upload_to='firmas/')
 
-    anverso_img = models.ImageField(storage=BunnyStorage(),upload_to='anversos/')
-    reverso_img = models.ImageField(storage=BunnyStorage(),upload_to='reversos/')
+    anverso_img = models.ImageField(storage=BunnyStorage(),upload_to='anversos/',null=True, blank=True)
+    reverso_img = models.ImageField(storage=BunnyStorage(),upload_to='reversos/',null=True, blank=True)
     pdf = models.FileField(storage=BunnyStorage(), upload_to='pdfs/', null=True, blank=True)
 
 

@@ -13,15 +13,90 @@ from PIL import Image
 import io
 from django.core.files.base import ContentFile
 
+from reportlab.pdfgen import canvas
+from PIL import Image
+import urllib.request
+import tempfile
+import os
+
+def convert_images_to_pdf(urls, id):
+    # Crea un directorio temporal para el PDF
+    with tempfile.TemporaryDirectory() as pdf_tempdir:
+        # Crea una ruta de archivo en el directorio temporal para el PDF
+        pdf_path = os.path.join(pdf_tempdir, f'{id}.pdf')
+
+        # Crea un nuevo PDF
+        c = canvas.Canvas(pdf_path)
+
+        for url in urls:
+            # Crea un directorio temporal para la imagen
+            with tempfile.TemporaryDirectory() as img_tempdir:
+                # Crea una ruta de archivo en el directorio temporal para la imagen
+                img_path = os.path.join(img_tempdir, 'temp.jpeg')
+
+                # Descarga la imagen en el archivo temporal
+                urllib.request.urlretrieve(url, img_path)
+
+                # Abre la imagen y obtén sus dimensiones
+                img = Image.open(img_path)
+
+                # Rota la imagen 45 grados a la izquierda
+                img = img.rotate(-90, expand=True, resample=Image.BICUBIC)
+
+                # Guarda la imagen rotada en el archivo temporal con alta calidad
+                img.save(img_path, "jpeg", quality=95, optimize=True, progressive=True)
+
+                ancho, alto = img.size
+
+                # Ajusta el tamaño de la página al de la imagen
+                c.setPageSize((ancho, alto))
+
+                # Dibuja la imagen en el PDF
+                c.drawImage(img_path, 0, 0, width=ancho, height=alto)
+
+                # Agrega una nueva página para la siguiente imagen
+                c.showPage()
+
+        # Guarda el PDF
+        c.save()
+        # Lee el archivo PDF en modo binario
+        with open(pdf_path, "rb") as f:
+            file_data = f.read()
+        file_data = ContentFile(file_data)
+    
+        return file_data
 
 
 
+@csrf_exempt
+def toPDF(request):
+    if request.method != 'POST':
+        return JsonResponse({'error': 'Método no permitido'}, status=405)
 
+    id_licencia = request.POST.get('idLicencia')
+    licencia = Licencia.objects.filter(id=id_licencia).first()
+
+    if not licencia:
+        return JsonResponse({'error': 'Licencia no encontrada'}, status=404)
+    print("Existe la licenci")
+    if not licencia.anverso_img or not licencia.anverso_img.storage.exists(licencia.anverso_img.name):
+        return JsonResponse({'error': 'Licencia no tiene anverso'}, status=410)
+    print("Existe anverso")
+    if not licencia.reverso_img or not licencia.reverso_img.storage.exists(licencia.reverso_img.name):
+        return JsonResponse({'error': 'Licencia no tiene reverso'}, status=411)
+    print("Existe reverso")
+
+    #tood ok
+    nombre = "PDF-"+str(licencia.datos_nombres) + '-' + str(licencia.datos_apellidos) + '.pdf'
+    pdf = convert_images_to_pdf([licencia.anverso_img.url,licencia.reverso_img.url],licencia.id)
+    licencia.pdf.save(nombre, pdf, save=True)
+    
+    return JsonResponse({'message': 'Imagen importada correctamente', 'pdf_url': licencia.pdf.url})
 
 
 
 def base64_to_image(base64_data):
-    # Elimina el prefijo 'data:image/png;base64,' (o el formato correspondiente)
+    # Elimina el prefijo 'data:image/jpeg;base64,' (o el formato correspondiente)
     data = base64_data.split(',')[1].encode('utf-8')
 
     # Decodifica el base64 y crea un objeto de imagen
@@ -30,9 +105,9 @@ def base64_to_image(base64_data):
 
     # Guarda la imagen en un objeto BytesIO
     image_io = io.BytesIO()
-    img.save(image_io, format='PNG')
+    img.save(image_io, format='jpeg')
 
-    return ContentFile(image_io.getvalue(), 'image.png')
+    return ContentFile(image_io.getvalue(), 'image.jpeg')
 
 @csrf_exempt
 def guardar_anverso(request):
@@ -43,7 +118,7 @@ def guardar_anverso(request):
         # Guardar la imagen en el modelo Licencia
         try:
             licencia = Licencia.objects.get(pk=id_licencia)
-            licencia.anverso_img.save('image.png', imagen, save=True)
+            licencia.anverso_img.save('image.jpeg', imagen, save=True)
             return JsonResponse({'message': 'Imagen guardada correctamente'})
         except Licencia.DoesNotExist:
             return JsonResponse({'error': 'Licencia no encontrada'}, status=404)
@@ -59,7 +134,7 @@ def guardar_reverso(request):
         # Guardar la imagen en el modelo Licencia
         try:
             licencia = Licencia.objects.get(pk=id_licencia)
-            licencia.reverso_img.save('image.png', imagen, save=True)
+            licencia.reverso_img.save('image.jpeg', imagen, save=True)
             return JsonResponse({'message': 'Imagen guardada correctamente'})
         except Licencia.DoesNotExist:
             return JsonResponse({'error': 'Licencia no encontrada'}, status=404)
@@ -171,9 +246,25 @@ def view_watch_licencia(request,id):
     licencia.lic_expedicion = licencia.lic_expedicion.strftime('%d/%m/%Y')
     licencia.lic_antiguedad = licencia.lic_antiguedad.strftime('%d/%m/%Y')
     anverso,reverso = det_tipo_licencia(licencia.lic_tipo, licencia.datos_donante)
- 
+    if  licencia.anverso_img:
+        lic_anverso = licencia.anverso_img.url
+    else:
+        lic_anverso = ''    
+    if licencia.reverso_img:
+        lic_reverso = licencia.reverso_img.url
+    else:
+        lic_reverso = ''     
+    if licencia.pdf:
+        lic_pdf = licencia.pdf.url
+    else:
+        lic_pdf = ''    
+    exp = {
+        'anverso': lic_anverso,
+        'reverso': lic_reverso,
+        'pdf': lic_pdf
+    }    
     print(licencia.foto_file)
-    return render(request, 'licencias/base/view_mi_licencia.html',{'licencia':licencia,'anverso':anverso,'reverso':reverso})    
+    return render(request, 'licencias/base/view_mi_licencia.html',{'licencia':licencia,'anverso':anverso,'reverso':reverso,'expo':exp})    
 
 def view_mis_licencias(request):
     if request.user.is_superuser or request.user.is_staff:

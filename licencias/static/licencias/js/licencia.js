@@ -100,84 +100,68 @@ window.onload = function () {
   }
 
 }
-document.getElementById('exportar-reverso').addEventListener('click', function () {
+document.getElementById('exportar-reverso').addEventListener('click', function (event) {
+  event.preventDefault();
   var link = document.getElementById('exportar-reverso');
   if (link.getAttribute('href') === '') {
+    event.preventDefault();
     exportarLicenciaReverso(link);
   } else {
     console.log('El atributo href contiene algo');
-    link.click();
 
+    // Crear un nuevo enlace
+    var newLink = document.createElement('a');
+    newLink.href = link.getAttribute('href');
+    newLink.download = link.getAttribute('download');
+
+    // Simular un clic en el nuevo enlace
+    newLink.click();
   }
 });
 
 
 
 
-document.getElementById('exportar-anverso').addEventListener('click', function () {
+
+document.getElementById('exportar-anverso').addEventListener('click', function (event) {
+  event.preventDefault();
+
   var link = document.getElementById('exportar-anverso');
   if (link.getAttribute('href') === '') {
     exportarAnverso();
   } else {
-    link.click();
+    // Crear un nuevo enlace
+    var newLink = document.createElement('a');
+    newLink.href = link.getAttribute('href');
+    newLink.download = link.getAttribute('download');
+
+    // Simular un clic en el nuevo enlace
+    newLink.click();
   }
 });
 
-document.getElementById('exportarpdf').addEventListener('click', function () {
-  // Iniciar SweetAlert2
-  Swal.fire({
-    title: 'Exportando a PDF...',
-    html: 'Por favor espera',
-    timerProgressBar: true,
-    didOpen: () => {
-      Swal.showLoading()
-    }
-  });
-  let mydiv = document.getElementById('lic_anverso');
-  let mydiv2 = document.getElementById('lic_reverso');
-  mydiv.style.display = "block";
-  mydiv2.style.display = "block";
-  let nombre = document.getElementById('f_nombre').value + ' ' + document.getElementById('f_apellidos').value;
+document.getElementById('exportarpdf').addEventListener('click', function (event) {
+  event.preventDefault();
 
-  // Iniciar SweetAlert2
-  Swal.fire({
-    title: 'Exportando a PDF...',
-    html: 'Por favor espera',
-    timerProgressBar: true,
-    didOpen: () => {
-      Swal.showLoading()
-    }
-  });
+  var link = document.getElementById('exportarpdf');
+  if (link.getAttribute('href') === '') {
+    const idLicencia = document.getElementById('id_licencia').value
+    var formData = new FormData();
+    formData.append('idLicencia', idLicencia);
+    fetchPDF(formData);
+  } else {
+    // Crear un nuevo enlace
+    var newLink = document.createElement('a');
+    newLink.href = link.getAttribute('href');
+    newLink.download = link.getAttribute('download');
 
-  var pdf = new jsPDF('p', 'pt', 'a4');
-  var width = pdf.internal.pageSize.width;
-  var height = pdf.internal.pageSize.height;
+    // Simular un clic en el nuevo enlace
+    newLink.click();
+  }
 
-  html2canvas(document.querySelector("#lic_anverso"), { willReadFrequently: true }).then(canvas1 => {
-    pdf.addImage(canvas1.toDataURL("image/png"), 'PNG', 0, 0, width, height);
-    pdf.addPage();
-
-    html2canvas(document.querySelector("#lic_reverso"), { willReadFrequently: true }).then(canvas2 => {
-      pdf.addImage(canvas2.toDataURL("image/png"), 'PNG', 0, 0, width, height);
-      pdf.save(nombre);
-    }).finally(() => {
-      setTimeout(function () {
-        Swal.close();
-        mydiv.style.display = "none";
-        mydiv2.style.display = "none";
-      }, 500); // Retrasa el cierre del modal 1 segundo
-    });
-  });
 });
 
-
 function exportarAnverso() {
-  let mydiv = document.getElementById('lic_anverso');
-  mydiv.style.display = "block";
-  let nombre = document.getElementById('f_nombre').value + ' ' + document.getElementById('f_apellidos').value;
-  let link = document.createElement('a');
-  link.download = 'ANVERSO -' + nombre;
-
   // Iniciar SweetAlert2
   Swal.fire({
     title: 'Exportando anverso...',
@@ -187,6 +171,12 @@ function exportarAnverso() {
       Swal.showLoading()
     }
   });
+  let mydiv = document.getElementById('lic_anverso');
+  let nombre = document.getElementById('f_nombre').value + ' ' + document.getElementById('f_apellidos').value;
+  let link = document.createElement('a');
+  link.download = 'ANVERSO -' + nombre;
+
+
 
   html2canvas(document.querySelector("#lic_anverso")).then(canvas => {
     // Crear un nuevo canvas para rotar la imagen
@@ -207,8 +197,8 @@ function exportarAnverso() {
     ctxRotado.drawImage(canvas, -canvas.width / 2, -canvas.height / 2);
 
     // Descargar la imagen rotada
-    link.href = canvasRotado.toDataURL()
-    const imageData = canvasRotado.toDataURL();
+    link.href = canvasRotado.toDataURL('image/jpeg', 0.8)
+    const imageData = canvasRotado.toDataURL('image/jpeg', 0.8);
     const idLicencia = document.getElementById('id_licencia').value
 
     var formData = new FormData();
@@ -216,14 +206,14 @@ function exportarAnverso() {
     formData.append('imagen', imageData);
 
     // Enviar la imagen al servidor
-    fetch('/licenciasguardar_anverso', {
+    return fetch('/licenciasguardar_anverso', {
       method: 'POST',
       body: formData,
 
     })
       .then(response => response.json())
       .then(data => {
-        link.click();
+
       })
       .catch(error => {
         console.error('Error al guardar la imagen:', error);
@@ -231,17 +221,12 @@ function exportarAnverso() {
   }).finally(() => {
     setTimeout(function () {
       Swal.close();
+
     }, 500); // Retrasa el cierre del modal 1 segundo
   });
 }
 
 function exportarLicenciaReverso() {
-  let mydiv = document.getElementById('lic_reverso');
-  mydiv.style.display = "block";
-  let nombre = document.getElementById('f_nombre').value + ' ' + document.getElementById('f_apellidos').value;
-  let link = document.createElement('a');
-  link.download = 'REVERSO -' + nombre;
-
   // Iniciar SweetAlert2
   Swal.fire({
     title: 'Exportando imagen...',
@@ -251,6 +236,12 @@ function exportarLicenciaReverso() {
       Swal.showLoading();
     }
   });
+  let mydiv = document.getElementById('lic_reverso');
+  let nombre = document.getElementById('f_nombre').value + ' ' + document.getElementById('f_apellidos').value;
+  let link = document.createElement('a');
+  link.download = 'REVERSO -' + nombre;
+
+
 
   html2canvas(document.querySelector("#lic_reverso")).then(canvas => {
     var canvasRotado = document.createElement('canvas');
@@ -263,29 +254,171 @@ function exportarLicenciaReverso() {
     ctxRotado.rotate(-Math.PI / 2);
     ctxRotado.drawImage(canvas, -canvas.width / 2, -canvas.height / 2);
 
-    link.href = canvasRotado.toDataURL();
-    const imageData = canvasRotado.toDataURL();
+    link.href = canvasRotado.toDataURL('image/jpeg', 0.8);
+    const imageData = canvasRotado.toDataURL('image/jpeg', 0.8);
     const idLicencia = document.getElementById('id_licencia').value
 
     var formData = new FormData();
     formData.append('idLicencia', idLicencia);
     formData.append('imagen', imageData);
 
-    fetch('/licenciasguardar_reverso', {
+    return fetch('/licenciasguardar_reverso', {
       method: 'POST',
       body: formData,
     })
-    .then(response => response.json())
-    .then(data => {
-      link.click();
-    })
-    .catch(error => {
-      console.error('Error al guardar la imagen:', error);
-    });
+      .then(response => response.json())
+      .then(data => {
+
+      })
+      .catch(error => {
+
+        console.error('Error al guardar la imagen:', error);
+      });
   }).finally(() => {
     setTimeout(function () {
+
       Swal.close();
     }, 500);
   });
 }
 
+
+
+async function fetchPDF(formData) {
+  try {
+    Swal.fire({
+      title: 'Creando PDF...',
+      html: 'Por favor espera',
+      timerProgressBar: true,
+      didOpen: () => {
+        Swal.showLoading()
+      }
+    });
+
+    const response = await fetch('/licenciastoPDF', {
+      method: 'POST',
+      body: formData,
+    });
+
+    if (!response.ok) {
+      throw new Error(response.status);
+    }
+
+    const data = await response.json();
+
+    console.log("ok");
+    document.getElementById('exportarpdf').href = data.pdf_url;
+    Swal.update({
+      title: 'PDF exportado con éxito',
+    });
+    Swal.close();
+  } catch (error) {
+    if (error.message == "410") {
+      Swal.update({
+        title: 'No se encontró anverso...',
+        html: 'Creando anverso'
+
+      });
+      await expoAnversoLicFun();
+      fetchPDF(formData);
+    } else if (error.message == "411") {
+      Swal.update({
+        title: 'No se encontró reverso...',
+        html: 'Creando reverso',
+
+      });
+      await expoLicReversoFun();
+      fetchPDF(formData);
+    } else {
+      console.error('Error al guardar pdf:', error);
+    }
+  }
+}
+
+//********************************************************************** */
+function expoLicReversoFun() {
+  return new Promise((resolve, reject) => {
+
+    let link = document.getElementById('exportar-reverso');
+
+    html2canvas(document.querySelector("#lic_reverso")).then(canvas => {
+      var canvasRotado = document.createElement('canvas');
+      var ctxRotado = canvasRotado.getContext('2d');
+
+      canvasRotado.width = canvas.height;
+      canvasRotado.height = canvas.width;
+
+      ctxRotado.translate(canvas.height / 2, canvas.width / 2);
+      ctxRotado.rotate(-Math.PI / 2);
+      ctxRotado.drawImage(canvas, -canvas.width / 2, -canvas.height / 2);
+
+      link.href = canvasRotado.toDataURL('image/jpeg', 0.8);
+      const imageData = canvasRotado.toDataURL('image/jpeg', 0.8);
+      const idLicencia = document.getElementById('id_licencia').value
+
+      var formData = new FormData();
+      formData.append('idLicencia', idLicencia);
+      formData.append('imagen', imageData);
+
+      fetch('/licenciasguardar_reverso', {
+        method: 'POST',
+        body: formData,
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log('Reverso creado: ' + data);
+          resolve();
+
+        })
+        .catch(error => {
+          console.error('Error al guardar la imagen:', error);
+          reject(error);
+
+        });
+    });
+  });
+}
+
+function expoAnversoLicFun() {
+
+  return new Promise((resolve, reject) => {
+
+    let link = document.getElementById('exportar-anverso');
+
+    html2canvas(document.querySelector("#lic_anverso")).then(canvas => {
+      var canvasRotado = document.createElement('canvas');
+      var ctxRotado = canvasRotado.getContext('2d');
+
+      canvasRotado.width = canvas.height;
+      canvasRotado.height = canvas.width;
+
+      ctxRotado.translate(canvas.height / 2, canvas.width / 2);
+      ctxRotado.rotate(-Math.PI / 2);
+      ctxRotado.drawImage(canvas, -canvas.width / 2, -canvas.height / 2);
+
+      link.href = canvasRotado.toDataURL('image/jpeg', 0.8);
+      const imageData = canvasRotado.toDataURL('image/jpeg', 0.8);
+      const idLicencia = document.getElementById('id_licencia').value
+
+      var formData = new FormData();
+      formData.append('idLicencia', idLicencia);
+      formData.append('imagen', imageData);
+
+      fetch('/licenciasguardar_anverso', {
+        method: 'POST',
+        body: formData,
+      })
+        .then(response => response.json())
+        .then(data => {
+
+          console.log('Anverso creado: ' + data);
+          resolve();
+        })
+        .catch(error => {
+
+          console.error('Error al guardar la imagen:', error);
+          reject(error);
+        });
+    });
+  });
+}

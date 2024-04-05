@@ -26,7 +26,8 @@ urlpatterns = [
     path('get_firma/<int:image_id>/', views.get_firma, name='get_firma'),
     path('guardar_anverso', views.guardar_anverso, name="guardar_anverso"),
     path('guardar_reverso', views.guardar_reverso, name="guardar_reverso"),
- 
+     path('toPDF', views.toPDF, name="toPDF"),
+
 
 
 ]
