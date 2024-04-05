@@ -104,8 +104,8 @@ document.getElementById('exportar-reverso').addEventListener('click', function (
   event.preventDefault();
   var link = document.getElementById('exportar-reverso');
   if (link.getAttribute('href') === '') {
-    event.preventDefault();
-    exportarLicenciaReverso(link);
+    
+    exportarLicenciaReverso();
   } else {
     console.log('El atributo href contiene algo');
 
@@ -162,6 +162,7 @@ document.getElementById('exportarpdf').addEventListener('click', function (event
 });
 
 function exportarAnverso() {
+  link_original = document.getElementById('exportar-anverso');
   // Iniciar SweetAlert2
   Swal.fire({
     title: 'Exportando anverso...',
@@ -171,14 +172,14 @@ function exportarAnverso() {
       Swal.showLoading()
     }
   });
-  let mydiv = document.getElementById('lic_anverso');
-  let nombre = document.getElementById('f_nombre').value + ' ' + document.getElementById('f_apellidos').value;
-  let link = document.createElement('a');
-  link.download = 'ANVERSO -' + nombre;
+
 
 
 
   html2canvas(document.querySelector("#lic_anverso")).then(canvas => {
+    let nombre = document.getElementById('f_nombre').value + ' ' + document.getElementById('f_apellidos').value;
+    let link = document.createElement('a');
+    link.download = 'ANVERSO -' + nombre;
     // Crear un nuevo canvas para rotar la imagen
     var canvasRotado = document.createElement('canvas');
     var ctxRotado = canvasRotado.getContext('2d');
@@ -209,11 +210,12 @@ function exportarAnverso() {
     return fetch('/licenciasguardar_anverso', {
       method: 'POST',
       body: formData,
-
     })
       .then(response => response.json())
       .then(data => {
-
+        link_original.href = canvasRotado.toDataURL('image/jpeg', 0.8)
+        link.click();
+        console.log('Anverso exitoso');
       })
       .catch(error => {
         console.error('Error al guardar la imagen:', error);
@@ -228,6 +230,8 @@ function exportarAnverso() {
 
 function exportarLicenciaReverso() {
   // Iniciar SweetAlert2
+  link_original = document.getElementById('exportar-reverso');
+
   Swal.fire({
     title: 'Exportando imagen...',
     html: 'Por favor espera',
@@ -236,14 +240,14 @@ function exportarLicenciaReverso() {
       Swal.showLoading();
     }
   });
-  let mydiv = document.getElementById('lic_reverso');
-  let nombre = document.getElementById('f_nombre').value + ' ' + document.getElementById('f_apellidos').value;
-  let link = document.createElement('a');
-  link.download = 'REVERSO -' + nombre;
+
 
 
 
   html2canvas(document.querySelector("#lic_reverso")).then(canvas => {
+    let nombre = document.getElementById('f_nombre').value + ' ' + document.getElementById('f_apellidos').value;
+    let link = document.createElement('a');
+    link.download = 'REVERSO -' + nombre;
     var canvasRotado = document.createElement('canvas');
     var ctxRotado = canvasRotado.getContext('2d');
 
@@ -268,7 +272,9 @@ function exportarLicenciaReverso() {
     })
       .then(response => response.json())
       .then(data => {
-
+        link_original.href = canvasRotado.toDataURL('image/jpeg', 0.8);
+        link.click();
+        console.log('Revero exitoso');
       })
       .catch(error => {
 

@@ -381,16 +381,16 @@ def fun_up_licencia(request):
         licencia_up.con_tel = data['con_tel']
  
 
-        campos = ['anverso_img', 'reverso_img', 'pdf']
-
-        for campo in campos:
-            archivo = getattr(licencia_up, campo)
-            if archivo and default_storage.exists(archivo.name):
-                default_storage.delete(archivo.name)
+        if licencia_up.anverso_img:
+            licencia_up.anverso_img.delete()
+        if licencia_up.reverso_img:
+            licencia_up.reverso_img.delete()
+        if licencia_up.pdf:
+            licencia_up.pdf.delete()
 
         # Guardar la nueva instancia de Licencia en la base de datos
         licencia_up.save()
-        print("ok")
+
         return JsonResponse(data= {'mensaje': 'Datos recibidos correctamente'})
    
     else:

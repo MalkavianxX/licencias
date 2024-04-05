@@ -23,7 +23,7 @@
 
         background-image: url("{% static 'licencias/img/B-choferB/anverso/anverso.jpg' %}");
         background-size: cover;
-        /* Asegura que la imagen de fondo cubra todo el div */ 
+        /* Asegura que la imagen de fondo cubra todo el div */
         position: relative;
         width: 651px;
         height: 1004px;
@@ -194,7 +194,7 @@
         top: 266px;
         left: 42px;
         width: 38%;
-      
+
     }
 
     #firma {
@@ -321,21 +321,50 @@
             <input type="text" id="img_reverso" value="{{reverso}}" class="d-none">
             <input type="text" id="id_licencia" value="{{licencia.id}}" class="d-none">
             <div class="row justify-content-center">
-                <div class="col-lg-5 col-md-12 col-12"  >
+                <div class="col-lg-5 col-md-12 col-12">
                     <div class="card">
-                        <div class="card-header d-flex justify-content-between align-items-center text-primary" style="background-color: #d3d9fd;">
-                            <h4 class="header-title" >Licencia</h4>
+                        <div class="card-header d-flex justify-content-between align-items-center text-primary"
+                            style="background-color: #d3d9fd;">
+                            <h4 class="header-title">Licencia</h4>
                             <div class="dropdown">
-                                <a  href="#" class="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown" aria-expanded="false">
+                                <a href="#" class="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
                                     <i class="mdi mdi-dots-vertical"></i>
                                 </a>
-                                <div class="dropdown-menu dropdown-menu-end" >
+                                <div class="dropdown-menu dropdown-menu-end">
                                     <!-- item-->
-                                    
-                                    <a href="{{expo.anverso}}" target="_blank" download="ANVERSO - {{licencia.datos_nombres}} {{licencia.datos_apellidos}}" id="exportar-anverso"  class="dropdown-item">Descargar imagen anverso</a>
-                                    <a href="{{expo.reverso}}"  target="_blank" download="REVERSO - {{licencia.datos_nombres}} {{licencia.datos_apellidos}}" id="exportar-reverso" class="dropdown-item">Descargar imagen reverso</a>
-                                    <a href="{{expo.pdf}}" id="exportarpdf" download="PDF - {{licencia.datos_nombres}} {{licencia.datos_apellidos}}" class="dropdown-item">Exportar licencia PDF</a>
-                                    <a href="{% url 'view_edit_licencia' licencia.id %}" class="dropdown-item">Editar licencia</a>
+
+                                    <a  href="{{expo.anverso}}" 
+                                        target="_blank"
+                                        download="ANVERSO - {{licencia.datos_nombres}} {{licencia.datos_apellidos}}"
+                                        id="exportar-anverso" 
+                                        class="dropdown-item">
+                                        {% if licencia.anverso_img %}
+                                            <i class="uil uil-image-check fw-bold text-success"></i> 
+                                        {% endif %}
+                                        Descargar imagen anverso
+                                    </a>
+                                    <a  href="{{expo.reverso}}" 
+                                        target="_blank"
+                                        download="REVERSO - {{licencia.datos_nombres}} {{licencia.datos_apellidos}}"
+                                        id="exportar-reverso" 
+                                        class="dropdown-item">
+                                        {% if licencia.reverso_img %}
+                                            <i class="uil uil-image-check fw-bold text-success"></i> 
+                                        {% endif %}
+                                        Descargar imagen reverso
+                                    </a>
+                                    <a  href="{{expo.pdf}}" 
+                                        id="exportarpdf"
+                                        download="PDF - {{licencia.datos_nombres}} {{licencia.datos_apellidos}}"
+                                        class="dropdown-item">
+                                        {% if licencia.pdf %}
+                                            <i class="uil uil-file-check fw-bold text-success"></i> 
+                                        {% endif %}
+                                        Exportar licencia PDF
+                                    </a>
+                                    <a href="{% url 'view_edit_licencia' licencia.id %}" class="dropdown-item">Editar
+                                        licencia</a>
 
                                 </div>
                             </div>
@@ -343,70 +372,83 @@
                         <div class="card-body pt-0">
                             <div class="row">
                                 <div class="col-lg-4 text-center mb-2">
-                                    <img src="{{licencia.foto_file.url}}" id="f_foto" class="img-fluid rounded  align-self-center" alt="">
+                                    <img src="{{licencia.foto_file.url}}" id="f_foto"
+                                        class="img-fluid rounded  align-self-center" alt="">
                                 </div>
                                 <div class="col-lg-8">
                                     <div class="mb-1">
                                         <label for="tipo_lic" class="form-label">Tipo de licencia</label>
-                                        <input type="text" readonly class="form-control" id="f_tipo_lic" value="{{licencia.lic_tipo}}">
+                                        <input type="text" readonly class="form-control" id="f_tipo_lic"
+                                            value="{{licencia.lic_tipo}}">
                                     </div>
                                     <div class="mb-1">
                                         <label for="tipo_lic" class="form-label">Numero de licencia</label>
-                                        <input type="text" readonly class="form-control" id="f_folio" value="{{licencia.folio}}">
+                                        <input type="text" readonly class="form-control" id="f_folio"
+                                            value="{{licencia.folio}}">
                                     </div>
                                     <div class="mb-1">
                                         <label for="tipo_lic" class="form-label">Fecha expedicion</label>
-                                        <input type="text" readonly class="form-control" id="f_expedicion" value="{{licencia.lic_expedicion}}">
+                                        <input type="text" readonly class="form-control" id="f_expedicion"
+                                            value="{{licencia.lic_expedicion}}">
                                     </div>
                                     <div class="mb-1">
                                         <label for="tipo_lic" class="form-label">Fecha vencimiento</label>
-                                        <input type="text" readonly class="form-control" id="f_vencimiento" value="{{licencia.lic_valido_temp}}">
+                                        <input type="text" readonly class="form-control" id="f_vencimiento"
+                                            value="{{licencia.lic_valido_temp}}">
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <label for="tipo_lic" class="form-label">Nombre</label>
 
                                     <div class="mb-1 input-group">
-                                        <input type="text" id="f_nombre" value="{{licencia.datos_nombres}}" class="form-control">
-                                        <input type="text" id="f_apellidos" value="{{licencia.datos_apellidos}}" class="form-control">
+                                        <input type="text" id="f_nombre" value="{{licencia.datos_nombres}}"
+                                            class="form-control">
+                                        <input type="text" id="f_apellidos" value="{{licencia.datos_apellidos}}"
+                                            class="form-control">
                                     </div>
                                     <div class="mb-1">
                                         <label for="tipo_lic" class="form-label">CURP</label>
-                                        <input type="text" readonly class="form-control" id="f_curp" value="{{licencia.datos_curp}}">
+                                        <input type="text" readonly class="form-control" id="f_curp"
+                                            value="{{licencia.datos_curp}}">
                                     </div>
                                     <div class="mb-1">
                                         <label for="tipo_lic" class="form-label">Fecha de nacimiento</label>
-                                        <input type="text" readonly class="form-control" id="f_nacimiento" value="{{licencia.datos_nacimiento}}">
+                                        <input type="text" readonly class="form-control" id="f_nacimiento"
+                                            value="{{licencia.datos_nacimiento}}">
                                     </div>
                                     <label for="row" class="form-label">Direccion</label>
 
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <div class="form-floating mb-3">
-                                                <input type="text" readonly value="{{licencia.direc_calle}}" class="form-control" id="f_calle" >
+                                                <input type="text" readonly value="{{licencia.direc_calle}}"
+                                                    class="form-control" id="f_calle">
                                                 <label for="floatingInput">Calle</label>
-                                              </div>
+                                            </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-floating mb-3">
-                                                <input type="text" readonly class="form-control" value="{{licencia.direc_colonia}}" id="f_colonia" >
+                                                <input type="text" readonly class="form-control"
+                                                    value="{{licencia.direc_colonia}}" id="f_colonia">
                                                 <label for="floatingInput">Colonia</label>
                                             </div>
                                         </div>
-                                        
+
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <div class="form-floating mb-3">
-                                                <input type="text" readonly value="{{licencia.direc_ciudad}}" class="form-control" id="f_ciudad" >
+                                                <input type="text" readonly value="{{licencia.direc_ciudad}}"
+                                                    class="form-control" id="f_ciudad">
                                                 <label for="floatingInput">Ciudad</label>
-                                              </div>
+                                            </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-floating mb-3">
-                                                <input type="text" readonly class="form-control" value="{{licencia.direc_estado}}" id="f_estado" >
+                                                <input type="text" readonly class="form-control"
+                                                    value="{{licencia.direc_estado}}" id="f_estado">
                                                 <label for="floatingInput">Estado</label>
-                                              </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -416,15 +458,18 @@
                 </div>
                 <div class="col-lg-5 col-md-12 col-12">
                     <div class="card">
-                        <div class="card-header d-flex justify-content-between align-items-center text-primary " style="background-color: #d3d9fd;">
+                        <div class="card-header d-flex justify-content-between align-items-center text-primary "
+                            style="background-color: #d3d9fd;">
                             <h4 class="header-title">Reverso</h4>
                             <div class="dropdown">
-                                <a href="#" class="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown" aria-expanded="false">
+                                <a href="#" class="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
                                     <i class="mdi mdi-dots-vertical"></i>
                                 </a>
-                                <div class="dropdown-menu dropdown-menu-end" >
+                                <div class="dropdown-menu dropdown-menu-end">
                                     <!-- item-->
-                                    <a href="{% url 'view_edit_licencia' licencia.id %}" class="dropdown-item">Editar licencia</a>
+                                    <a href="{% url 'view_edit_licencia' licencia.id %}" class="dropdown-item">Editar
+                                        licencia</a>
 
                                     <!-- item-->
 
@@ -433,47 +478,54 @@
                         </div>
                         <div class="card-body pt-0">
                             <div class="row">
- 
+
                                 <div class="col-12">
                                     <div class="row">
                                         <div class="col-lg-4">
                                             <div class="mb-2">
                                                 <label for="tipo_lic" class="form-label">Oficina emisora</label>
-                                                <input type="text" readonly class="form-control" id="f_oficina" value="{{licencia.lic_emisora}}">
+                                                <input type="text" readonly class="form-control" id="f_oficina"
+                                                    value="{{licencia.lic_emisora}}">
                                             </div>
                                         </div>
                                         <div class="col-lg-4">
                                             <div class="mb-1">
                                                 <label for="tipo_lic" class="form-label">Fecha de antiguedad</label>
-                                                <input type="text" readonly class="form-control" id="f_antiguedad" value="{{licencia.lic_antiguedad}}">
+                                                <input type="text" readonly class="form-control" id="f_antiguedad"
+                                                    value="{{licencia.lic_antiguedad}}">
                                             </div>
                                         </div>
                                         <div class="col-lg-4">
                                             <div class="mb-1">
                                                 <label for="tipo_lic" class="form-label">Sexo</label>
-                                                <input type="text" readonly class="form-control" id="f_tipo_lic" value="{{licencia.datos_sexo}}">
+                                                <input type="text" readonly class="form-control" id="f_tipo_lic"
+                                                    value="{{licencia.datos_sexo}}">
                                             </div>
                                         </div>
                                         <div class="col-lg-4">
                                             <div class="mb-2">
                                                 <label for="tipo_lic" class="form-label">Tipo sanguineo</label>
-                                                <input type="text" readonly class="form-control" id="f_sangre" value="{{licencia.datos_sangre}}">
+                                                <input type="text" readonly class="form-control" id="f_sangre"
+                                                    value="{{licencia.datos_sangre}}">
                                             </div>
                                         </div>
                                         <div class="col-lg-4">
                                             <div class="mb-1">
                                                 <label for="tipo_lic" class="form-label">Donador de organos</label>
                                                 {% if licencia.datos_donante %}
-                                                <input type="text" readonly class="form-control" id="f_organos" value="SI">
+                                                <input type="text" readonly class="form-control" id="f_organos"
+                                                    value="SI">
                                                 {% else %}
-                                                <input type="text" readonly class="form-control" id="f_organos" value="NO">
+                                                <input type="text" readonly class="form-control" id="f_organos"
+                                                    value="NO">
                                                 {% endif %}
                                             </div>
                                         </div>
                                         <div class="col-lg-4">
                                             <div class="mb-1">
                                                 <label for="tipo_lic" class="form-label">Restricciones</label>
-                                                <input type="text" readonly class="form-control" id="f_restricciones" value="{{licencia.datos_restriacciones}}">
+                                                <input type="text" readonly class="form-control" id="f_restricciones"
+                                                    value="{{licencia.datos_restriacciones}}">
                                             </div>
                                         </div>
                                         <div class="col-12">
@@ -482,38 +534,42 @@
                                             <div class="row">
                                                 <div class="col-lg-6">
                                                     <div class="form-floating mb-3">
-                                                        <input type="text" readonly value="{{licencia.con_nombre}}" class="form-control" id="f_cnombre" >
+                                                        <input type="text" readonly value="{{licencia.con_nombre}}"
+                                                            class="form-control" id="f_cnombre">
                                                         <label for="floatingInput">Nombre</label>
-                                                      </div>
+                                                    </div>
                                                 </div>
                                                 <div class="col-lg-6">
                                                     <div class="form-floating mb-3">
-                                                        <input type="text" readonly class="form-control" value="{{licencia.con_tel}}" id="f_cnumero" >
+                                                        <input type="text" readonly class="form-control"
+                                                            value="{{licencia.con_tel}}" id="f_cnumero">
                                                         <label for="floatingInput">Telefono</label>
                                                     </div>
                                                 </div>
                                             </div>
-                                          
+
                                         </div>
                                         <div class="col-12">
                                             <div class="mb-1">
-                                                <label for="tipo_lic" class="form-label">Esta licencia autoriza conducir</label>
-                                                <input type="text" readonly class="form-control" id="f_autoriza" value="">
+                                                <label for="tipo_lic" class="form-label">Esta licencia autoriza
+                                                    conducir</label>
+                                                <input type="text" readonly class="form-control" id="f_autoriza"
+                                                    value="">
                                             </div>
                                         </div>
                                         <div class="col-12 text-center mt-3">
                                             <canvas class="img-fluid" id="qr-vs"></canvas>
                                         </div>
                                     </div>
-                           
+
                                 </div>
-                          
+
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row"   >
+            <div class="row">
                 <div class="col-12">
                     <div class="d-flex justify-content-between">
 
@@ -521,21 +577,21 @@
                     </div>
                 </div>
             </div>
-  
-        
-        
+
+
+
         </div>
 
-        
-                                      
+
+
     </div>
 </div>
-</div> 
+</div>
 
-<div id="lic_anverso"   class="B-choferB-anverso">
-    <img src=""  id="firma" alt="">
+<div id="lic_anverso" class="B-choferB-anverso">
+    <img src="" id="firma" alt="">
 
-    <img src="" id="foto"  alt="">
+    <img src="" id="foto" alt="">
     <h1 id="numlicencia">{{licencia.folio}}</h1>
     <h1 id="nombre">{{licencia.datos_nombres}} {{licencia.datos_apellidos}}</h1>
     <h1 id="curp">{{licencia.datos_curp}}</h1>
@@ -547,7 +603,7 @@
     <h1 id="vencimiento">{{licencia.lic_valido_temp}}</h1>
     <img src="" id="foto-sub" alt="">
 
-</div> 
+</div>
 <div id="lic_reverso" class="reverso-no">
     <h1 id="oficina">{{licencia.lic_emisora}}</h1>
     <h1 id="antiguedad">{{licencia.lic_antiguedad}}</h1>
@@ -555,7 +611,7 @@
     <h1 id="sanguineo">{{licencia.datos_sangre}}</h1>
     {% if licencia.datos_donante %}
     <h1 id="donador">SI</h1>
-    {% else %} 
+    {% else %}
     <h1 id="donador">NO</h1>
     {% endif %}
     <h1 id="restriccion">{{ licencia.datos_restriacciones}}</h1>
