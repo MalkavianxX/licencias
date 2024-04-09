@@ -450,12 +450,17 @@ function recopilarDatos() {
         for (let input of form_contacto.elements) formData.append(input.id, input.value);
 
         // Convertir los blobs a objetos File
-        var fotoFile = new File([fotocropped], "foto.png", {type: "image/png"});
-        var firmaFile = new File([firmarecortada], "firma.png", {type: "image/png"});
+        if (fotocropped !== null){
+          var fotoFile = new File([fotocropped], "foto.png", {type: "image/png"});
+          formData.append('foto_file', fotoFile);
+
+        }
+        if (firmarecortada !== null){
+          var firmaFile = new File([firmarecortada], "firma.png", {type: "image/png"});
+          formData.append('firma_file', firmaFile);
+        }
 
         // Añadir los objetos File al FormData
-        formData.append('foto_file', fotoFile);
-        formData.append('firma_file', firmaFile);
 
         try {
             let id_licencia = document.getElementById('id_licencia').value;
