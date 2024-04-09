@@ -19,7 +19,7 @@ import urllib.request
 import tempfile
 import os
 from django.core.files.storage import default_storage
-
+from datetime import datetime
 def convert_images_to_pdf(urls, id):
     # Crea un directorio temporal para el PDF
     with tempfile.TemporaryDirectory() as pdf_tempdir:
@@ -235,12 +235,15 @@ def fun_save_licencia(request):
 
 def view_watch_licencia(request,id):
     licencia = Licencia.objects.get(pk=id)
-    suma = int(licencia.lic_expedicion.strftime('%Y')) + int(licencia.lic_valido)
-    if suma > 2029:
+    ano_actual = int(datetime.today().strftime('%Y'))
+    ano_lic = int(licencia.lic_valido)
+    
+    if ano_lic == 88:
         licencia.lic_valido_temp = "PERMANENTE"
     else:
-        licencia.lic_valido_temp = licencia.lic_expedicion.strftime('%d') +'/'+ licencia.lic_expedicion.strftime('%m') +'/'+ str(suma)
+        licencia.lic_valido_temp = licencia.lic_expedicion.strftime('%d') +'/'+ licencia.lic_expedicion.strftime('%m') +'/'+ str(ano_actual + ano_lic)
 
+    print(licencia.lic_valido_temp)
     licencia.lic_valido = licencia.lic_expedicion.strftime('%d') +'/'+ licencia.lic_expedicion.strftime('%m') +'/'+ str()
 
     licencia.datos_nacimiento = licencia.datos_nacimiento.strftime('%d/%m/%Y')
