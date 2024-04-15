@@ -434,7 +434,7 @@ def fun_Up_asignaciones(request):
 def validar_licencia(request,XWOPSLT,FFTWRPTO):
     try:
         licencia = Licencia.objects.get(pk=XWOPSLT)  # Intenta obtener la instancia del modelo
-        data = model_to_dict(licencia, exclude=["foto_file", "firma_file"])  # Conviértelo a un diccionario
+        data = model_to_dict(licencia, exclude=["foto_file", "firma_file","anverso_img","reverso_img","pdf",])  # Conviértelo a un diccionario
         data['folio'] = licencia.folio.texto  # Agrega el atributo 'texto' del objeto 'Folio' asociado
         data['lic_expedicion'] = licencia.lic_expedicion.strftime('%d/%m/%Y')
         data['valido'] = licencia.lic_expedicion.strftime('%d') +'/'+ licencia.lic_expedicion.strftime('%m') +'/'+ str(int(licencia.lic_expedicion.strftime('%Y')) + int(licencia.lic_valido))
