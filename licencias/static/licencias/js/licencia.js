@@ -104,7 +104,7 @@ document.getElementById('exportar-reverso').addEventListener('click', function (
   event.preventDefault();
   var link = document.getElementById('exportar-reverso');
   if (link.getAttribute('href') === '') {
-    
+
     exportarLicenciaReverso();
   } else {
     console.log('El atributo href contiene algo');
@@ -320,6 +320,7 @@ async function fetchPDF(formData) {
       title: 'PDF exportado con éxito',
     });
     Swal.close();
+    window.location.reload();
   } catch (error) {
     if (error.message == "410") {
       Swal.update({
@@ -391,7 +392,7 @@ function expoAnversoLicFun() {
 
   return new Promise((resolve, reject) => {
 
-    let link = document.getElementById('exportar-anverso');
+    let link = document.getElementById('exportar-anverso'); 
 
     html2canvas(document.querySelector("#lic_anverso")).then(canvas => {
       var canvasRotado = document.createElement('canvas');

@@ -91,7 +91,7 @@ def toPDF(request):
     nombre = "PDF-"+str(licencia.datos_nombres) + '-' + str(licencia.datos_apellidos) + '.pdf'
     pdf = convert_images_to_pdf([licencia.anverso_img.url,licencia.reverso_img.url],licencia.id)
     licencia.pdf.save(nombre, pdf, save=True)
-    
+                                      
     return JsonResponse({'message': 'Imagen importada correctamente', 'pdf_url': licencia.pdf.url})
 
 
@@ -191,7 +191,7 @@ def fun_save_licencia(request):
             folio = nuevo_folio,
             datos_nombres=data['datos_nombres'],
             datos_apellidos=data['datos_apellidos'],
-            datos_curp=data['datos_curp'],
+            datos_curp=data['datos_curp'].upper(),
             datos_sangre=data['datos_sangre'],
             datos_sexo=data['datos_sexo'],
             datos_nacionalidad=data['datos_nacionalidad'],
