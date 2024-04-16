@@ -235,15 +235,15 @@ def fun_save_licencia(request):
 
 def view_watch_licencia(request,id):
     licencia = Licencia.objects.get(pk=id)
-    ano_actual = int(datetime.today().strftime('%Y'))
+    ano_actual = int(licencia.lic_expedicion.strftime('%Y'))
     ano_lic = int(licencia.lic_valido)
-    
+    print("ano lic: ",ano_lic)
     if ano_lic == 88:
         licencia.lic_valido_temp = "PERMANENTE"
     else:
         licencia.lic_valido_temp = licencia.lic_expedicion.strftime('%d') +'/'+ licencia.lic_expedicion.strftime('%m') +'/'+ str(ano_actual + ano_lic)
 
-    print(licencia.lic_valido_temp)
+    print("tiempo de validacion: ",licencia.lic_valido_temp)
     licencia.lic_valido = licencia.lic_expedicion.strftime('%d') +'/'+ licencia.lic_expedicion.strftime('%m') +'/'+ str()
 
     licencia.datos_nacimiento = licencia.datos_nacimiento.strftime('%d/%m/%Y')
@@ -286,6 +286,15 @@ def view_edit_licencia(request,id):
     licencia.datos_nacimiento = licencia.datos_nacimiento.strftime('%Y-%m-%d')
     licencia.lic_expedicion = licencia.lic_expedicion.strftime('%Y-%m-%d')
     licencia.lic_antiguedad = licencia.lic_antiguedad.strftime('%Y-%m-%d')
+    valido = int(licencia.lic_valido)
+    
+    if valido == 3:
+        licencia.lic_valido_str = "3 años"
+    elif valido == 5:
+        licencia.lic_valido_str = "5 años"
+    else:
+        licencia.lic_valido_str = "PERMANENTE"  
+    print(licencia.lic_valido_str ) 
     anverso,reverso = det_tipo_licencia(licencia.lic_tipo, licencia.datos_donante)
  
     return render(request, "licencias/base/view_edit_licencia.html",{
@@ -335,7 +344,7 @@ def fun_up_licencia(request):
         data['lic_antiguedad'] = request.POST.get('lic_antiguedad')
         data['lic_tipo'] = request.POST.get('lic_tipo')
         data['lic_valido'] = request.POST.get('lic_valido')
-
+        print("Nueva venciinon:" ,request.POST.get('lic_valido'))
         data['con_nombre'] = request.POST.get('con_nombre')
         data['con_apellido'] = request.POST.get('con_apellido')
         data['con_tel'] = request.POST.get('con_tel')
