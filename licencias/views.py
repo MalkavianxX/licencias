@@ -394,11 +394,11 @@ def fun_up_licencia(request):
  
 
         if licencia_up.anverso_img:
-            licencia_up.anverso_img.delete()
+            licencia_up.anverso_img.delete(save=True)
         if licencia_up.reverso_img:
-            licencia_up.reverso_img.delete()
+            licencia_up.reverso_img.delete(save=True)
         if licencia_up.pdf:
-            licencia_up.pdf.delete()
+            licencia_up.pdf.delete(save=True)
 
         # Guardar la nueva instancia de Licencia en la base de datos
         licencia_up.save()
