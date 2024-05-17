@@ -90,8 +90,8 @@ DATABASES = {
         'NAME': 'licenciasweb',
         'USER': 'root',
         'PASSWORD': 'Rmpv54321',
-        'HOST': 'postgresql-156478-0.cloudclusters.net',  # Puedes cambiar esto según tu configuración de PostgreSQL
-        'PORT': '19998',       # Puerto predeterminado de PostgreSQL
+        'HOST': 'postgresql-172484-0.cloudclusters.net',  # Puedes cambiar esto según tu configuración de PostgreSQL
+        'PORT': '10058',       # Puerto predeterminado de PostgreSQL
     }
 }
 
