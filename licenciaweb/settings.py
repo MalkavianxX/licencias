@@ -88,8 +88,8 @@ DATA_UPLOAD_MAX_MEMORY_SIZE = 5242880  # 5 MB
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'turixdata',
-        'USER': 'root',
+        'NAME': 'licencias',
+        'USER': 'rooter',
         'PASSWORD': 'Rmpv54321',
         'HOST': 'postgresql-174165-0.cloudclusters.net',  
         'PORT': '10004',        
