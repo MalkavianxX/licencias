@@ -89,10 +89,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'licencias',
-        'USER': 'rooter',
-        'PASSWORD': 'Rmpv54321',
-        'HOST': 'postgresql-174165-0.cloudclusters.net',  
-        'PORT': '10004',        
+        'USER': 'doadmin',
+        'PASSWORD': 'AVNS_dPFD0isl6DjKxw4mGox',
+        'HOST': 'db-postgresql-nyc3-85485-do-user-17223122-0.k.db.ondigitalocean.com',  
+        'PORT': '25060',        
     }
 }
 
