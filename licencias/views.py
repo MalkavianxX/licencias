@@ -444,6 +444,18 @@ def validar_licencia(request,numerolicencia,expedicion):
     try:
         folio = Folio.objects.get(pk = numerolicencia)
         licencia = Licencia.objects.get(folio = folio)  # Intenta obtener la instancia del modelo
+        id = licencia.id
+        data = {
+            'id':id
+        }
+        return JsonResponse(data)  # Retorna los datos como una respuesta JSON
+    except Licencia.DoesNotExist as e:
+        return JsonResponse({'error': str(e)}, status=404)
+
+def validar_licencia_id(request,id):
+    try:
+        folio = Folio.objects.get(pk = id)
+        licencia = Licencia.objects.get(folio = folio)  # Intenta obtener la instancia del modelo
         data = model_to_dict(licencia, exclude=["foto_file", "firma_file","anverso_img","reverso_img","pdf",])  # Conviértelo a un diccionario
         data['folio'] = licencia.folio.texto  # Agrega el atributo 'texto' del objeto 'Folio' asociado
         data['lic_expedicion'] = licencia.lic_expedicion.strftime('%d/%m/%Y')
