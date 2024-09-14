@@ -131,7 +131,7 @@ USE_L10N = True
 USE_TZ = True
 
 
-CSRF_TRUSTED_ORIGINS = [ 'https://licenciavalidaapp-4xnk8.ondigitalocean.app', 'http://licenciavalidaapp-4xnk8.ondigitalocean.app','https://licencias-bajacalifornia-gob.com','http://licencias-bajacalifornia-gob.com',]
+CSRF_TRUSTED_ORIGINS = ['https://whale-app-jwrqn.ondigitalocean.app/', 'https://licenciavalidaapp-4xnk8.ondigitalocean.app', 'http://licenciavalidaapp-4xnk8.ondigitalocean.app','https://licencias-bajacalifornia-gob.com','http://licencias-bajacalifornia-gob.com',]
 
 
 # Estas se pueden encontrar en el panel de control de tu almacenamiento en `FTP & API Access`

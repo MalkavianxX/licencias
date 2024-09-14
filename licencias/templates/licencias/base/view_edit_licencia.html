@@ -671,15 +671,9 @@
                                         <div class="input-group has-validation">
                                             <select class="form-select" id="lic_valido" required>
                                               <option selected value="{{licencia.lic_valido}}">{{licencia.lic_valido_str}}</option>
-                                                {% if licencia.lic_valido != "3" %}
+                                                  <option value="3">3 años</option>
                                                   <option value="5">5 años</option>
-                                                {%endif %}
-                                                {% if licencia.lic_valido != "4" %}
-                                                  <option value="5">5 años</option>
-                                                {%endif %}
-                                                {% if licencia.lic_valido != "88" %}
                                                   <option value="88">Permanente</option>
-                                                {%endif %}
 
                                                 
                                        
