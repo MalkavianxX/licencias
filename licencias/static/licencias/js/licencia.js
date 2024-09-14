@@ -34,13 +34,13 @@ window.onload = function () {
 
   qr = new QRious({
     element: document.getElementById('qr'),
-    value: 'https://licenciavalidaapp-4xnk8.ondigitalocean.app/get_licencia/' + id_licencia + '/STRMPVjgut87555mfptRULE.DDD-ART3LIC5RD',
+    value: 'https://licenciavalidaapp-4xnk8.ondigitalocean.app/',
     size: 330,
     background: 'transparent'
   });
   qr = new QRious({
     element: document.getElementById('qr-vs'),
-    value: 'https://licenciavalidaapp-4xnk8.ondigitalocean.app/get_licencia/' + id_licencia + '/STRMPVjgut87555mfptRULE.DDD-ART3LIC5RD',
+    value: 'https://licenciavalidaapp-4xnk8.ondigitalocean.app/',
     size: 330,
     background: 'transparent'
   });

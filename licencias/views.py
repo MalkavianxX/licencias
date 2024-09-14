@@ -440,9 +440,10 @@ def fun_Up_asignaciones(request):
     else:
         return JsonResponse(data= {'error': 'Método no permitido'}, status=400)
     
-def validar_licencia(request,XWOPSLT,FFTWRPTO):
+def validar_licencia(request,numerolicencia,expedicion):
     try:
-        licencia = Licencia.objects.get(pk=XWOPSLT)  # Intenta obtener la instancia del modelo
+        folio = Folio.objects.get(pk = numerolicencia)
+        licencia = Licencia.objects.get(folio = folio)  # Intenta obtener la instancia del modelo
         data = model_to_dict(licencia, exclude=["foto_file", "firma_file","anverso_img","reverso_img","pdf",])  # Conviértelo a un diccionario
         data['folio'] = licencia.folio.texto  # Agrega el atributo 'texto' del objeto 'Folio' asociado
         data['lic_expedicion'] = licencia.lic_expedicion.strftime('%d/%m/%Y')
