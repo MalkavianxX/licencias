@@ -454,7 +454,7 @@ def validar_licencia(request,numerolicencia,expedicion):
 
 def validar_licencia_id(request,id):
     try:
-        folio = Folio.objects.get(pk = id)
+        folio = Folio.objects.get(texto = id)
         licencia = Licencia.objects.get(folio = folio)  # Intenta obtener la instancia del modelo
         data = model_to_dict(licencia, exclude=["foto_file", "firma_file","anverso_img","reverso_img","pdf",])  # Conviértelo a un diccionario
         data['folio'] = licencia.folio.texto  # Agrega el atributo 'texto' del objeto 'Folio' asociado
