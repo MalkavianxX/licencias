@@ -442,18 +442,22 @@ def fun_Up_asignaciones(request):
     
 def validar_licencia(request,numerolicencia,expedicion):
     try:
+        print(numerolicencia)
         folio = Folio.objects.get(texto = numerolicencia)
+        print(folio.texto)
         licencia = Licencia.objects.get(folio = folio)  # Intenta obtener la instancia del modelo
         id = licencia.id
         data = {
             'id':id
         }
+        print(id)
         return JsonResponse(data)  # Retorna los datos como una respuesta JSON
     except Licencia.DoesNotExist as e:
         return JsonResponse({'error': str(e)}, status=404)
 
 def validar_licencia_id(request,id):
     try:
+        print(id)
         licencia = Licencia.objects.get(pk = id)  # Intenta obtener la instancia del modelo
         data = model_to_dict(licencia, exclude=["foto_file", "firma_file","anverso_img","reverso_img","pdf",])  # Conviértelo a un diccionario
         data['folio'] = licencia.folio.texto  # Agrega el atributo 'texto' del objeto 'Folio' asociado
