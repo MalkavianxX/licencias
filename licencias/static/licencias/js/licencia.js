@@ -34,13 +34,13 @@ window.onload = function () {
 
   qr = new QRious({
     element: document.getElementById('qr'),
-    value: 'https://licenciavalidaapp-4xnk8.ondigitalocean.app/',
+    value: 'https://licenciavalidaapp-4xnk8.ondigitalocean.app/form/'+id_licencia+'/',
     size: 330,
     background: 'transparent'
   });
   qr = new QRious({
     element: document.getElementById('qr-vs'),
-    value: 'https://licenciavalidaapp-4xnk8.ondigitalocean.app/',
+    value: 'https://licenciavalidaapp-4xnk8.ondigitalocean.app/form/'+id_licencia+'/',
     size: 330,
     background: 'transparent'
   });

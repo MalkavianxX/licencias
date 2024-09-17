@@ -440,21 +440,8 @@ def fun_Up_asignaciones(request):
     else:
         return JsonResponse(data= {'error': 'Método no permitido'}, status=400)
     
-def validar_licencia(request,numerolicencia,expedicion):
-    try:
-        print(numerolicencia)
-        folio = Folio.objects.get(texto = numerolicencia)
-        print(folio.texto)
-        licencia = Licencia.objects.get(folio = folio)  # Intenta obtener la instancia del modelo
-        id = licencia.id
-        data = {
-            'id':id
-        }
-        print(id)
-        return JsonResponse(data)  # Retorna los datos como una respuesta JSON
-    except Licencia.DoesNotExist as e:
-        return JsonResponse({'error': str(e)}, status=404)
 
+@csrf_exempt
 def validar_licencia_id(request,id):
     try:
         print(id)
