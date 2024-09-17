@@ -34,13 +34,13 @@ window.onload = function () {
 
   qr = new QRious({
     element: document.getElementById('qr'),
-    value: '127.0.0.1:5000/form/'+id_licencia+'/d948ded55ea1b2b3f0b6e17ef5de09f3af38e1a8/',
+    value: 'https://licenciavalidaapp-4xnk8.ondigitalocean.app/form/'+id_licencia+'/d948ded55ea1b2b3f0b6e17ef5de09f3af38e1a8/',
     size: 330,
     background: 'transparent'
   });
   qr = new QRious({
     element: document.getElementById('qr-vs'),
-    value: '127.0.0.1:5000/form/'+id_licencia+'/d948ded55ea1b2b3f0b6e17ef5de09f3af38e1a8/',
+    value: 'https://licenciavalidaapp-4xnk8.ondigitalocean.app/form/'+id_licencia+'/d948ded55ea1b2b3f0b6e17ef5de09f3af38e1a8/',
     size: 330,
     background: 'transparent'
   });
