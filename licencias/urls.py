@@ -18,8 +18,6 @@ urlpatterns = [
     path('fun_up_licencia', views.fun_up_licencia, name="fun_up_licencia"),
     path('fun_Up_asignaciones', views.fun_Up_asignaciones, name="fun_Up_asignaciones"),
 
-    #api
-    path('validar_licencia/<str:numerolicencia>/<str:expedicion>/', views.validar_licencia, name="validar_licencia"),
 
     #imagene
     path('get_foto/<int:image_id>/', views.get_foto, name='get_foto'),
