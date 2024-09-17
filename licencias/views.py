@@ -20,51 +20,44 @@ import tempfile
 import os
 from django.core.files.storage import default_storage
 from datetime import datetime
+from io import BytesIO
+
 def convert_images_to_pdf(urls, id):
-    # Crea un directorio temporal para el PDF
+    # Crea un directorio temporal único para todo el proceso
     with tempfile.TemporaryDirectory() as pdf_tempdir:
-        # Crea una ruta de archivo en el directorio temporal para el PDF
         pdf_path = os.path.join(pdf_tempdir, f'{id}.pdf')
 
-        # Crea un nuevo PDF
-        c = canvas.Canvas(pdf_path)
+        # Crea un nuevo PDF con un tamaño de página fijo
+        c = canvas.Canvas(pdf_path, pagesize=(8.5*72, 11*72))  # Tamaño carta
 
-        for url in urls:
-            # Crea un directorio temporal para la imagen
-            with tempfile.TemporaryDirectory() as img_tempdir:
-                # Crea una ruta de archivo en el directorio temporal para la imagen
-                img_path = os.path.join(img_tempdir, 'temp.jpeg')
+        # Itera sobre las dos primeras imágenes
+        for i, url in enumerate(urls[:2]):
+            # Descarga la imagen en memoria
+            response = urllib.request.urlopen(url)
+            img = Image.open(BytesIO(response.read()))
 
-                # Descarga la imagen en el archivo temporal
-                urllib.request.urlretrieve(url, img_path)
+            # Rota la imagen si es necesario (aquí puedes agregar lógica para decidir si rotar)
+            # img = img.rotate(-90, expand=True, resample=Image.BICUBIC)
 
-                # Abre la imagen y obtén sus dimensiones
-                img = Image.open(img_path)
+            # Ajusta el tamaño de la imagen si es necesario (manteniendo la proporción)
+            img.thumbnail((c._pagesize[0], c._pagesize[1]), Image.ANTIALIAS)
 
-                # Rota la imagen 45 grados a la izquierda
-                img = img.rotate(-90, expand=True, resample=Image.BICUBIC)
+            # Dibuja la imagen en el PDF
+            buffer = BytesIO()
+            img.save(buffer, format="JPEG", quality=95)
+            c.drawImage(buffer, 0, c._pagesize[1] - img.size[1], width=img.size[0], height=img.size[1])
 
-                # Guarda la imagen rotada en el archivo temporal con alta calidad
-                img.save(img_path, "jpeg", quality=95, optimize=True, progressive=True)
-
-                ancho, alto = img.size
-
-                # Ajusta el tamaño de la página al de la imagen
-                c.setPageSize((ancho, alto))
-
-                # Dibuja la imagen en el PDF
-                c.drawImage(img_path, 0, 0, width=ancho, height=alto)
-
-                # Agrega una nueva página para la siguiente imagen
-                c.showPage()
+            # Avanza a la siguiente página
+            c.showPage()
 
         # Guarda el PDF
         c.save()
+
         # Lee el archivo PDF en modo binario
         with open(pdf_path, "rb") as f:
             file_data = f.read()
         file_data = ContentFile(file_data)
-    
+
         return file_data
 
 

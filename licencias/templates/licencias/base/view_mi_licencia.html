@@ -15,9 +15,10 @@
 
 {% block content %}
 <script src="https://cdn.rawgit.com/neocotic/qrious/latest/dist/qrious.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
 
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800;900&display=swap'); 
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800;900&display=swap');
 
     .B-choferB-anverso {
 
@@ -334,33 +335,17 @@
                                 <div class="dropdown-menu dropdown-menu-end">
                                     <!-- item-->
 
-                                    <a  href="{{expo.anverso}}" 
-                                        target="_blank"
-                                        download="ANVERSO - {{licencia.datos_nombres}} {{licencia.datos_apellidos}}"
-                                        id="exportar-anverso" 
-                                        class="dropdown-item">
-                                        {% if licencia.anverso_img %}
-                                            <i class="uil uil-image-check fw-bold text-success"></i> 
-                                        {% endif %}
+                                    <a onclick="descargarAnverso()" style="cursor: pointer;" class="dropdown-item">
+
                                         Descargar imagen anverso
                                     </a>
-                                    <a  href="{{expo.reverso}}" 
-                                        target="_blank"
-                                        download="REVERSO - {{licencia.datos_nombres}} {{licencia.datos_apellidos}}"
-                                        id="exportar-reverso" 
-                                        class="dropdown-item">
-                                        {% if licencia.reverso_img %}
-                                            <i class="uil uil-image-check fw-bold text-success"></i> 
-                                        {% endif %}
+                                    <a onclick="descargarReverso()" id="exportar-reverso" class="dropdown-item"
+                                        style="cursor: pointer;">
+
                                         Descargar imagen reverso
                                     </a>
-                                    <a  href="{{expo.pdf}}" 
-                                        id="exportarpdf"
-                                        download="PDF - {{licencia.datos_nombres}} {{licencia.datos_apellidos}}"
-                                        class="dropdown-item">
-                                        {% if licencia.pdf %}
-                                            <i class="uil uil-file-check fw-bold text-success"></i> 
-                                        {% endif %}
+                                    <a style="cursor: pointer;" onclick="exportarPDF()" class="dropdown-item">
+
                                         Exportar licencia PDF
                                     </a>
                                     <a href="{% url 'view_edit_licencia' licencia.id %}" class="dropdown-item">Editar
@@ -408,8 +393,8 @@
                                     </div>
                                     <div class="mb-1">
                                         <label for="tipo_lic" class="form-label">CURP</label>
-                                        <input type="text" style="text-transform: uppercase;" readonly class="form-control" id="f_curp"
-                                            value="{{licencia.datos_curp}}">
+                                        <input type="text" style="text-transform: uppercase;" readonly
+                                            class="form-control" id="f_curp" value="{{licencia.datos_curp}}">
                                     </div>
                                     <div class="mb-1">
                                         <label for="tipo_lic" class="form-label">Fecha de nacimiento</label>
@@ -576,7 +561,7 @@
 
                     </div>
                 </div>
-            </div> 
+            </div>
 
 
 
@@ -635,4 +620,141 @@
 <script src="{% static 'licencias/js/licencia.js' %}"></script>
 <!-- App js -->
 <script src="{% static 'login/assets/js/app.min.js' %}"></script>
+
+<script>
+    async function exportarPDF() {
+        const { jsPDF } = window.jspdf;
+
+        Swal.fire({
+            title: 'Creando PDF...',
+            html: 'Por favor espera',
+            timerProgressBar: true,
+            didOpen: () => Swal.showLoading()
+        });
+
+        const pdf = new jsPDF();
+
+        // Función para capturar y agregar una página al PDF
+        async function agregarPagina(selector) {
+            const element = document.querySelector(selector);
+            const canvas = await html2canvas(element, { willReadFrequently: true });
+            const imgData = canvas.toDataURL('image/jpeg', 1.0);
+            pdf.addImage(imgData, 'JPEG', 0, 0, pdf.internal.pageSize.getWidth(), pdf.internal.pageSize.getHeight());
+        }
+
+        try {
+            // Capturar y agregar el anverso
+            await agregarPagina("#lic_anverso");
+
+            // Agregar una nueva página
+            pdf.addPage();
+
+            // Capturar y agregar el reverso
+            await agregarPagina("#lic_reverso");
+
+            // Descargar el PDF
+            pdf.save('licencia.pdf');
+
+            Swal.fire({
+                title: 'PDF exportado con éxito',
+                icon: 'success',
+                timer: 2000,
+                showConfirmButton: false
+            });
+        } catch (error) {
+            console.error('Error al crear el PDF:', error);
+            Swal.fire({
+                title: 'Error',
+                text: 'Hubo un problema al crear el PDF.',
+                icon: 'error',
+                confirmButtonText: 'Aceptar'
+            });
+        } finally {
+            Swal.close();
+        }
+    }
+</script>
+
+<script>
+    async function descargarAnverso() {
+        Swal.fire({
+            title: 'Exportando anverso...',
+            html: 'Por favor espera',
+            timerProgressBar: true,
+            didOpen: () => Swal.showLoading()
+        });
+
+        try {
+            const element = document.querySelector("#lic_anverso");
+            const canvas = await html2canvas(element, { willReadFrequently: true });
+            const imgData = canvas.toDataURL('image/jpeg', 1.0);
+
+            const link = document.createElement('a');
+            link.href = imgData;
+            link.download = 'anverso.jpg';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            Swal.fire({
+                title: 'Anverso exportado con éxito',
+                icon: 'success',
+                timer: 2000,
+                showConfirmButton: false
+            });
+        } catch (error) {
+            console.error('Error al exportar el anverso:', error);
+            Swal.fire({
+                title: 'Error',
+                text: 'Hubo un problema al exportar el anverso.',
+                icon: 'error',
+                confirmButtonText: 'Aceptar'
+            });
+        } finally {
+            Swal.close();
+        }
+    }
+</script>
+
+<script>
+    async function descargarReverso() {
+        Swal.fire({
+            title: 'Exportando reverso...',
+            html: 'Por favor espera',
+            timerProgressBar: true,
+            didOpen: () => Swal.showLoading()
+        });
+
+        try {
+            const element = document.querySelector("#lic_reverso");
+            const canvas = await html2canvas(element, { willReadFrequently: true });
+            const imgData = canvas.toDataURL('image/jpeg', 1.0);
+
+            const link = document.createElement('a');
+            link.href = imgData;
+            link.download = 'reverso.jpg';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            Swal.fire({
+                title: 'Reverso exportado con éxito',
+                icon: 'success',
+                timer: 2000,
+                showConfirmButton: false
+            });
+        } catch (error) {
+            console.error('Error al exportar el reverso:', error);
+            Swal.fire({
+                title: 'Error',
+                text: 'Hubo un problema al exportar el reverso.',
+                icon: 'error',
+                confirmButtonText: 'Aceptar'
+            });
+        } finally {
+            Swal.close();
+        }
+    }
+</script>
+
 {% endblock %}
