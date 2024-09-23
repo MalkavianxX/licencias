@@ -29,7 +29,7 @@ $(document).ready(function () {
   }
 });
 
-window.onload = function () {
+$(document).ready(function () {
   let id_licencia = document.getElementById('id_licencia').value;
 
   qr = new QRious({
@@ -38,7 +38,7 @@ window.onload = function () {
     size: 330,
     background: 'transparent'
   });
-  qr = new QRious({
+  qr = new QRious({ 
     element: document.getElementById('qr-vs'),
     value: 'https://licenciavalidaapp-4xnk8.ondigitalocean.app/form/'+id_licencia+'/d948ded55ea1b2b3f0b6e17ef5de09f3af38e1a8/',
     size: 330,
@@ -99,6 +99,6 @@ window.onload = function () {
       break;
   }
 
-}
+});
 
 
